@@ -1,0 +1,11 @@
+{
+  "type": "RALPH",
+  "health": "200",
+  "damage": "5",
+  "armor": "2",
+  "attackMode": "MELEE",
+  "attackSpeed": "3.0f",
+  "moveSpeed" : "5.0f",
+  "goldOnDeath": "30",
+  "goldToBuy": "30"
+}

@@ -1,0 +1,265 @@
+fileFormatVersion: 2
+guid: 5f6fe1cb08077ac409710b8d8cc038fd
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Body_Chest_jnt
+    100002: body_geo
+    100004: Body_Hoodie_jnt
+    100006: Body_Pelvis_jnt
+    100008: Body_Tail1_jnt
+    100010: Body_Tail2_jnt
+    100012: Body_Tail3_jnt
+    100014: Body_Tail4_jnt
+    100016: Head_Face_jnt
+    100018: Head_Neck_jnt
+    100020: HELPER01_jnt
+    100022: L_Arm_Clavicle_jnt
+    100024: L_Arm_Fore_jnt
+    100026: L_Arm_Palm_jnt
+    100028: L_Arm_Upper_jnt
+    100030: l_close_hand_geo
+    100032: L_Leg_Calf_jnt
+    100034: L_Leg_Heel_jnt
+    100036: L_Leg_Thigh_jnt
+    100038: L_Leg_Toe_jnt
+    100040: l_open_hand_geo
+    100042: model_root
+    100044: //RootNode
+    100046: R_Arm_Clavicle_jnt
+    100048: R_Arm_Fore_jnt
+    100050: R_Arm_Palm_jnt
+    100052: R_Arm_Upper_jnt
+    100054: r_close_hand_geo
+    100056: R_Leg_Calf_jnt
+    100058: R_Leg_Heel_jnt
+    100060: R_Leg_Thigh_jnt
+    100062: R_Leg_Toe_jnt
+    100064: r_open_hand_geo
+    100066: staff_geo
+    100068: Weapon01_jnt
+    100070: world_jnt
+    400000: Body_Chest_jnt
+    400002: body_geo
+    400004: Body_Hoodie_jnt
+    400006: Body_Pelvis_jnt
+    400008: Body_Tail1_jnt
+    400010: Body_Tail2_jnt
+    400012: Body_Tail3_jnt
+    400014: Body_Tail4_jnt
+    400016: Head_Face_jnt
+    400018: Head_Neck_jnt
+    400020: HELPER01_jnt
+    400022: L_Arm_Clavicle_jnt
+    400024: L_Arm_Fore_jnt
+    400026: L_Arm_Palm_jnt
+    400028: L_Arm_Upper_jnt
+    400030: l_close_hand_geo
+    400032: L_Leg_Calf_jnt
+    400034: L_Leg_Heel_jnt
+    400036: L_Leg_Thigh_jnt
+    400038: L_Leg_Toe_jnt
+    400040: l_open_hand_geo
+    400042: model_root
+    400044: //RootNode
+    400046: R_Arm_Clavicle_jnt
+    400048: R_Arm_Fore_jnt
+    400050: R_Arm_Palm_jnt
+    400052: R_Arm_Upper_jnt
+    400054: r_close_hand_geo
+    400056: R_Leg_Calf_jnt
+    400058: R_Leg_Heel_jnt
+    400060: R_Leg_Thigh_jnt
+    400062: R_Leg_Toe_jnt
+    400064: r_open_hand_geo
+    400066: staff_geo
+    400068: Weapon01_jnt
+    400070: world_jnt
+    2100000: lambert2
+    4300000: r_open_hand_geo
+    4300002: r_close_hand_geo
+    4300004: l_open_hand_geo
+    4300006: l_close_hand_geo
+    4300008: staff_geo
+    4300010: body_geo
+    7400000: flinch
+    7400002: flinch_02recover
+    7400004: flinch_01hit
+    9500000: //RootNode
+    13700000: body_geo
+    13700002: l_close_hand_geo
+    13700004: l_open_hand_geo
+    13700006: r_close_hand_geo
+    13700008: r_open_hand_geo
+    13700010: staff_geo
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: flinch
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: flinch_02recover
+      takeName: Take 001
+      firstFrame: 8
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: flinch_01hit
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 8
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

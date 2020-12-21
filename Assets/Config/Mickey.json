@@ -1,0 +1,11 @@
+{
+  "type": "MICKEY",
+  "health": "100",
+  "damage": "10",
+  "armor": "5",
+  "attackMode": "RANGED",
+  "attackSpeed": "2.0f",
+  "moveSpeed" : "5.0f",
+  "goldOnDeath": "20",
+  "goldToBuy": "20"
+}
