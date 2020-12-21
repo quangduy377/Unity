@@ -5,19 +5,10 @@ using UnityEngine;
 
 public class DragHero : MonoBehaviour
 {
-    private Vector3 mOffset;
+    /*private Vector3 mOffset;
     private float zCoord;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     void OnMouseDown()
     {
         zCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -34,5 +25,22 @@ public class DragHero : MonoBehaviour
     void OnMouseDrag()
     {
         transform.position = GetMouseWorldPos() + mOffset;    
+    }*/
+    private MeshRenderer mesh;
+    private Rigidbody rigidbody;
+
+    void Start()
+    {
+        mesh = GetComponent<MeshRenderer>();
+        rigidbody = GetComponent<Rigidbody>();
+
+    }
+    void OnMouseDown()
+    {
+        Debug.Log("down");
+    }
+    void OnMouseUp()
+    {
+        Debug.Log("up");
     }
 }

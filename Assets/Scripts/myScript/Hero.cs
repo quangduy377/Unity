@@ -7,14 +7,14 @@ public class Hero : MonoBehaviour
    public class HeroData
     {
         public string type;
-        public int health;
-        public int damage;
-        public int armor;
+        public float health;
+        public float damage;
+        public float armor;
         public string attackMode;
         public float attackSpeed;
         public float moveSpeed;
-        public int goldOnDeath;
-        public int goldToBuy;
+        public float goldOnDeath;
+        public float goldToBuy;
     }
 
     public GameObject wall;
@@ -37,7 +37,7 @@ public class Hero : MonoBehaviour
 
     private HeroData dataEnemy;
     private GameObject enemyObject;
-
+    private const float delayAttack=0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +70,8 @@ public class Hero : MonoBehaviour
             if (dataEnemy != null)
             {
                 //deduct its health
-                dataEnemy.health -= dataHero.damage;
+                dataEnemy.health -=  dataHero.damage * dataHero.attackSpeed *delayAttack;
+                Debug.Log("Health:" + dataEnemy.health);
             }
             //if the enemy health falls below zero, we exterminate it, and can move to find another enemy
             if (dataEnemy.health <= 0)
@@ -93,7 +94,6 @@ public class Hero : MonoBehaviour
             enemyObject = other.gameObject;
             //now attack the enemy
             dataEnemy = other.gameObject.GetComponent<Hero>().getHeroData();
-
         }
         Debug.Log("On collision called");
     }
@@ -112,5 +112,4 @@ public class Hero : MonoBehaviour
         return dataHero;
     }
     
-    //helloadjoadjoasfoasofjsoaf
 }
