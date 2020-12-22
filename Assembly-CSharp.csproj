@@ -69,7 +69,9 @@
     <Compile Include="Assets\Scripts\HeroSelection\DragHero.cs" />
     <Compile Include="Assets\Scripts\Utils\Physics\MathfExtensions.cs" />
     <Compile Include="Assets\Scripts\Utils\Physics\PhysicsUtils.cs" />
+    <Compile Include="Assets\Scripts\myScript\GoldLoader.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero.cs" />
+    <Compile Include="Assets\Scripts\myScript\HeroSelection.cs" />
     <Compile Include="Assets\Scripts\myScript\LoadConfig.cs" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_AlphaBlend.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Additive.shader" />

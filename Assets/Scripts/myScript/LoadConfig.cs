@@ -25,11 +25,12 @@ public class LoadConfig : MonoBehaviour
     public class Player
     {
         public string type;
-        public int health;
+        public float health;
         public int damage;
         public int armor;
         public string attackMode;
         public float attackSpeed;
+
         public int goldOnDeath;
         public int goldToBuy;
     }

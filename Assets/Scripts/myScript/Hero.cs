@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
@@ -8,13 +10,13 @@ public class Hero : MonoBehaviour
     {
         public string type;
         public float health;
-        public float damage;
-        public float armor;
+        public int damage;
+        public int armor;
         public string attackMode;
         public float attackSpeed;
         public float moveSpeed;
-        public float goldOnDeath;
-        public float goldToBuy;
+        public int goldOnDeath;
+        public int goldToBuy;
     }
 
     public GameObject wall;
@@ -37,7 +39,11 @@ public class Hero : MonoBehaviour
 
     private HeroData dataEnemy;
     private GameObject enemyObject;
-    private const float delayAttack=0.01f;
+    //private const float delayAttack=0.01f;
+    private GoldLoader goldAmountText;
+
+    //indicate if one of the team hits the wall of the opponent
+    private bool hitTheWall;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +52,7 @@ public class Hero : MonoBehaviour
         teams[0]="LEFT" ;
         teams[1]="RIGHT";
         enemy = getEnemy();
-
+        hitTheWall = false;
 
         //load data of the hero
         string data = heroData.text;
@@ -56,12 +62,18 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (hitWall())
+        {
+            Debug.Log("hit the wall");
+            Destroy(gameObject);
+        }
         //only move the character when it's allowed
         if (moveable)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,
-            new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z),
-            dataHero.moveSpeed * Time.deltaTime);
+            new Vector3(wall.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z),
+            dataHero.moveSpeed*Time.deltaTime);
+            //GetComponent<Rigidbody>().velocity = new Vector3(gameObject.transform.position.x * Time.deltaTime, gameObject.transform.position.y * Time.deltaTime, gameObject.transform.position.z*Time.deltaTime);
         }
         //it is attacking
         else
@@ -70,18 +82,22 @@ public class Hero : MonoBehaviour
             if (dataEnemy != null)
             {
                 //deduct its health
-                dataEnemy.health -=  dataHero.damage * dataHero.attackSpeed *delayAttack;
+                dataEnemy.health -=  (dataHero.damage * dataHero.attackSpeed *Time.deltaTime);
                 Debug.Log("Health:" + dataEnemy.health);
             }
             //if the enemy health falls below zero, we exterminate it, and can move to find another enemy
+            //and we need to add the gold we achieve by killing it
             if (dataEnemy.health <= 0)
             {
                 Destroy(enemyObject);
+                //now you need to move to find another opponent
                 moveable = !moveable;
-            }
-                
+                //add gold collected
+                addGoldCollected(dataEnemy.goldOnDeath);
 
+            }
         }
+        
         
     }
     void OnCollisionEnter(Collision other)
@@ -94,8 +110,12 @@ public class Hero : MonoBehaviour
             enemyObject = other.gameObject;
             //now attack the enemy
             dataEnemy = other.gameObject.GetComponent<Hero>().getHeroData();
+            //need to make them face to face literally
+
+            
         }
-        Debug.Log("On collision called");
+
+
     }
     string getEnemy()
     {
@@ -111,5 +131,34 @@ public class Hero : MonoBehaviour
     {
         return dataHero;
     }
+
+    void addGoldCollected(int gold)
+    {
+        goldAmountText = FindObjectOfType<GoldLoader>();
+        goldAmountText.addGold(gold);
+    }
     
+    bool hitWall()
+    {
+        //Wall at the right
+        if (wall.transform.position.x < 0)
+        {
+            if (transform.position.x - 1.5f <= wall.transform.position.x)
+            {
+                return true;
+            }
+            return false;
+        }
+        //Wall at the left otherwise
+        else
+        {
+            if (transform.position.x + 1.5f >= wall.transform.position.x)
+            {
+                return true;
+            }
+            return false;
+        }
+
+    }
+
 }
