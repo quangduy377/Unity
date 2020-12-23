@@ -48,8 +48,16 @@ public class Hero : MonoBehaviour
     //MESH
     private NavMeshAgent agent;
 
+    //enemy Id to chase after
+    private int enemyId;
+
+    //enemies to chase after
+    private GameObject[] enemies;
+
+    //current chasing enemy
+    private GameObject currentEnemy;
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         moveable = true;
@@ -69,32 +77,51 @@ public class Hero : MonoBehaviour
         else if (dataHero.type.Equals("RALPH"))
         {
             PlayerPrefs.SetInt("RALPH_goldToBuy", dataHero.goldToBuy);
-
         }
-        agent.SetDestination(wall.transform.position);
-
+        //initially reach the random enemy
+        enemies = GameObject.FindGameObjectsWithTag(enemy);
+        enemyId = findRandomEnemy();
+        currentEnemy = enemies[enemyId];
+        agent.SetDestination(enemies[enemyId].transform.position);
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+        
         if (hitWall())
         {
             Debug.Log("hit the wall");
             Destroy(gameObject);
         }
+        
         //only move the character when it's allowed
         if (moveable)
         {
-           
             agent.isStopped = false;
-                  
+            //check if he reach the destination
+            if (agent.remainingDistance <= 0)
+            {
+                //find another object to attack
+                enemies = GameObject.FindGameObjectsWithTag(enemy);
+                enemyId = findRandomEnemy();
+                if (enemyId < 0)
+                {
+                    agent.SetDestination(wall.transform.position);
+                }
+                else
+                {
+                    agent.SetDestination(enemies[enemyId].transform.position);
+                }
+            }
+
         }
         //it is attacking
         if(!moveable)
         {
-            //JUST ADDED, NEED TEST
+            //stop moving
             agent.isStopped = true ;
+
             //we received information about the enemy, we can now attack them
             if (dataEnemy != null)
             {
@@ -113,23 +140,23 @@ public class Hero : MonoBehaviour
                 addGoldCollected(dataEnemy.goldOnDeath);
 
                 Debug.Log("DIE!!!");
+                
             }
         }
     }
-    void OnCollisionEnter(Collision other)
+    public void OnCollisionEnter(Collision other)
     {
         //it is an impact, stop moving, and attack the enemy
         if (other.transform.name.Equals(enemy))
         {
             moveable = false;
             //get the information of the enemy
-            enemyObject = other.gameObject;
-            //now attack the enemy
             dataEnemy = other.gameObject.GetComponent<Hero>().getHeroData();
             //need to make them face to face literally, PENDINGGGG
+            
         }
     }
-    string getEnemy()
+    public string getEnemy()
     {
         if (team.Equals(teams[0]))
         {
@@ -139,18 +166,18 @@ public class Hero : MonoBehaviour
             return teams[0];
     }
 
-    HeroData getHeroData()
+    public HeroData getHeroData()
     {
         return dataHero;
     }
 
-    void addGoldCollected(int gold)
+    public void addGoldCollected(int gold)
     {
         goldAmountText = FindObjectOfType<GoldLoader>();
         goldAmountText.addGold(gold);
     }
     
-    bool hitWall()
+    public bool hitWall()
     {
         //Wall at the right
         if (wall.transform.position.x < 0)
@@ -174,5 +201,31 @@ public class Hero : MonoBehaviour
     public float getMovespeed()
     {
         return dataHero.moveSpeed;
+    }
+    public int findRandomEnemy()
+    {
+        Debug.Log("Inside find randomenemy");
+        //identify enemy objects
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemy);
+        Debug.Log("Number of enemies team " + team + "found:" + enemies.Length);
+        //we don't have any enemies to fight
+        if (enemies.Length == 0)
+        {
+            return -1;
+        }
+        int randomId = UnityEngine.Random.Range(0, enemies.Length);
+        Debug.Log("Team "+team+"found enemy index" + randomId);
+        return randomId;
+    }
+
+    public bool reachDestination()
+    {
+        
+        if(Math.Abs(Math.Abs(agent.transform.position.x)- Math.Abs(currentEnemy.transform.position.x)) <= 2.5f)
+        {
+            Debug.Log("Reach destination");
+            return true;    
+        }
+        return false;
     }
 }
