@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
@@ -43,20 +44,35 @@ public class Hero : MonoBehaviour
     private GoldLoader goldAmountText;
 
     //indicate if one of the team hits the wall of the opponent
-    private bool hitTheWall;
+
+    //MESH
+    private NavMeshAgent agent;
+
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         moveable = true;
         teams = new string[2];
         teams[0]="LEFT" ;
         teams[1]="RIGHT";
         enemy = getEnemy();
-        hitTheWall = false;
 
         //load data of the hero
         string data = heroData.text;
         dataHero = JsonUtility.FromJson<HeroData>(data);
+
+        if (dataHero.type.Equals ("MICKEY"))
+        {
+            PlayerPrefs.SetInt("MICKEY_goldToBuy", dataHero.goldToBuy);
+        }
+        else if (dataHero.type.Equals("RALPH"))
+        {
+            PlayerPrefs.SetInt("RALPH_goldToBuy", dataHero.goldToBuy);
+
+        }
+        agent.SetDestination(wall.transform.position);
+
     }
 
     // Update is called once per frame
@@ -70,14 +86,15 @@ public class Hero : MonoBehaviour
         //only move the character when it's allowed
         if (moveable)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position,
-            new Vector3(wall.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z),
-            dataHero.moveSpeed*Time.deltaTime);
-            //GetComponent<Rigidbody>().velocity = new Vector3(gameObject.transform.position.x * Time.deltaTime, gameObject.transform.position.y * Time.deltaTime, gameObject.transform.position.z*Time.deltaTime);
+           
+            agent.isStopped = false;
+                  
         }
         //it is attacking
-        else
+        if(!moveable)
         {
+            //JUST ADDED, NEED TEST
+            agent.isStopped = true ;
             //we received information about the enemy, we can now attack them
             if (dataEnemy != null)
             {
@@ -95,10 +112,9 @@ public class Hero : MonoBehaviour
                 //add gold collected
                 addGoldCollected(dataEnemy.goldOnDeath);
 
+                Debug.Log("DIE!!!");
             }
         }
-        
-        
     }
     void OnCollisionEnter(Collision other)
     {
@@ -110,12 +126,8 @@ public class Hero : MonoBehaviour
             enemyObject = other.gameObject;
             //now attack the enemy
             dataEnemy = other.gameObject.GetComponent<Hero>().getHeroData();
-            //need to make them face to face literally
-
-            
+            //need to make them face to face literally, PENDINGGGG
         }
-
-
     }
     string getEnemy()
     {
@@ -158,7 +170,9 @@ public class Hero : MonoBehaviour
             }
             return false;
         }
-
     }
-
+    public float getMovespeed()
+    {
+        return dataHero.moveSpeed;
+    }
 }

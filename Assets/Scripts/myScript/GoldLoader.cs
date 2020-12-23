@@ -49,4 +49,8 @@ public class GoldLoader : MonoBehaviour
     {
         currentGold += gold;
     }
+    public int getCurrentGold()
+    {
+        return currentGold;
+    }
 }

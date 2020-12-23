@@ -73,6 +73,8 @@
     <Compile Include="Assets\Scripts\myScript\Hero.cs" />
     <Compile Include="Assets\Scripts\myScript\HeroSelection.cs" />
     <Compile Include="Assets\Scripts\myScript\LoadConfig.cs" />
+    <Compile Include="Assets\Scripts\myScript\LoadKillingGold.cs" />
+    <Compile Include="Assets\Scripts\myScript\Test.cs" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_AlphaBlend.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Additive.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Multiply.shader" />
