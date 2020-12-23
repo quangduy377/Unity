@@ -34,5 +34,5 @@ public class LoadConfig : MonoBehaviour
         public int goldOnDeath;
         public int goldToBuy;
     }
-
+    //comment in loadConfig
 }
