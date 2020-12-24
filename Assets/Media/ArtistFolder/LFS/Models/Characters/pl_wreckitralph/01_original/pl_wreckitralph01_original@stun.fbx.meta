@@ -1,281 +1,100 @@
 fileFormatVersion: 2
 guid: a0027cf93264dae4d8daf023771b9a39
 ModelImporter:
-  serializedVersion: 25
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: b_cloth_jnt
-  - first:
-      1: 100002
-    second: body_belly_jnt
-  - first:
-      1: 100004
-    second: body_chest_jnt
-  - first:
-      1: 100006
-    second: body_geo
-  - first:
-      1: 100008
-    second: body_pelvis_jnt
-  - first:
-      1: 100010
-    second: button_jnt
-  - first:
-      1: 100012
-    second: f_cloth_jnt
-  - first:
-      1: 100014
-    second: head_face_jnt
-  - first:
-      1: 100016
-    second: head_neck_jnt
-  - first:
-      1: 100018
-    second: HELPER01_jnt
-  - first:
-      1: 100020
-    second: l_arm_clavicle_jnt
-  - first:
-      1: 100022
-    second: l_arm_fore_jnt
-  - first:
-      1: 100024
-    second: l_arm_forearm_twist_jnt
-  - first:
-      1: 100026
-    second: l_arm_palm_jnt
-  - first:
-      1: 100028
-    second: l_arm_upper_jnt
-  - first:
-      1: 100030
-    second: l_close_hand_geo
-  - first:
-      1: 100032
-    second: l_leg_calf_jnt
-  - first:
-      1: 100034
-    second: l_leg_heel_jnt
-  - first:
-      1: 100036
-    second: l_leg_tight_jnt
-  - first:
-      1: 100038
-    second: l_leg_toe_jnt
-  - first:
-      1: 100040
-    second: l_open_hand_geo
-  - first:
-      1: 100042
-    second: model_root
-  - first:
-      1: 100044
-    second: //RootNode
-  - first:
-      1: 100046
-    second: r_arm_clavicle_jnt
-  - first:
-      1: 100048
-    second: r_arm_fore_jnt
-  - first:
-      1: 100050
-    second: r_arm_forearm_twist_jnt
-  - first:
-      1: 100052
-    second: r_arm_palm_jnt
-  - first:
-      1: 100054
-    second: r_arm_upper_jnt
-  - first:
-      1: 100056
-    second: r_close_hand_geo
-  - first:
-      1: 100058
-    second: r_leg_calf_jnt
-  - first:
-      1: 100060
-    second: r_leg_heel_jnt
-  - first:
-      1: 100062
-    second: r_leg_tight_jnt
-  - first:
-      1: 100064
-    second: r_leg_toe_jnt
-  - first:
-      1: 100066
-    second: r_open_hand_geo
-  - first:
-      1: 100068
-    second: strap_front_jnt
-  - first:
-      1: 100070
-    second: Tie_jnt
-  - first:
-      1: 100072
-    second: world_jnt
-  - first:
-      1: 100074
-    second: cherry_geo
-  - first:
-      4: 400000
-    second: b_cloth_jnt
-  - first:
-      4: 400002
-    second: body_belly_jnt
-  - first:
-      4: 400004
-    second: body_chest_jnt
-  - first:
-      4: 400006
-    second: body_geo
-  - first:
-      4: 400008
-    second: body_pelvis_jnt
-  - first:
-      4: 400010
-    second: button_jnt
-  - first:
-      4: 400012
-    second: f_cloth_jnt
-  - first:
-      4: 400014
-    second: head_face_jnt
-  - first:
-      4: 400016
-    second: head_neck_jnt
-  - first:
-      4: 400018
-    second: HELPER01_jnt
-  - first:
-      4: 400020
-    second: l_arm_clavicle_jnt
-  - first:
-      4: 400022
-    second: l_arm_fore_jnt
-  - first:
-      4: 400024
-    second: l_arm_forearm_twist_jnt
-  - first:
-      4: 400026
-    second: l_arm_palm_jnt
-  - first:
-      4: 400028
-    second: l_arm_upper_jnt
-  - first:
-      4: 400030
-    second: l_close_hand_geo
-  - first:
-      4: 400032
-    second: l_leg_calf_jnt
-  - first:
-      4: 400034
-    second: l_leg_heel_jnt
-  - first:
-      4: 400036
-    second: l_leg_tight_jnt
-  - first:
-      4: 400038
-    second: l_leg_toe_jnt
-  - first:
-      4: 400040
-    second: l_open_hand_geo
-  - first:
-      4: 400042
-    second: model_root
-  - first:
-      4: 400044
-    second: //RootNode
-  - first:
-      4: 400046
-    second: r_arm_clavicle_jnt
-  - first:
-      4: 400048
-    second: r_arm_fore_jnt
-  - first:
-      4: 400050
-    second: r_arm_forearm_twist_jnt
-  - first:
-      4: 400052
-    second: r_arm_palm_jnt
-  - first:
-      4: 400054
-    second: r_arm_upper_jnt
-  - first:
-      4: 400056
-    second: r_close_hand_geo
-  - first:
-      4: 400058
-    second: r_leg_calf_jnt
-  - first:
-      4: 400060
-    second: r_leg_heel_jnt
-  - first:
-      4: 400062
-    second: r_leg_tight_jnt
-  - first:
-      4: 400064
-    second: r_leg_toe_jnt
-  - first:
-      4: 400066
-    second: r_open_hand_geo
-  - first:
-      4: 400068
-    second: strap_front_jnt
-  - first:
-      4: 400070
-    second: Tie_jnt
-  - first:
-      4: 400072
-    second: world_jnt
-  - first:
-      4: 400074
-    second: cherry_geo
-  - first:
-      21: 2100000
-    second: pl_wreckitralph01_original
-  - first:
-      43: 4300000
-    second: body_geo
-  - first:
-      43: 4300002
-    second: l_open_hand_geo
-  - first:
-      43: 4300004
-    second: r_open_hand_geo
-  - first:
-      43: 4300006
-    second: r_close_hand_geo
-  - first:
-      43: 4300008
-    second: l_close_hand_geo
-  - first:
-      43: 4300010
-    second: cherry_geo
-  - first:
-      74: 7400000
-    second: stun
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: body_geo
-  - first:
-      137: 13700002
-    second: l_close_hand_geo
-  - first:
-      137: 13700004
-    second: l_open_hand_geo
-  - first:
-      137: 13700006
-    second: r_close_hand_geo
-  - first:
-      137: 13700008
-    second: r_open_hand_geo
-  - first:
-      137: 13700010
-    second: cherry_geo
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: b_cloth_jnt
+    100002: body_belly_jnt
+    100004: body_chest_jnt
+    100006: body_geo
+    100008: body_pelvis_jnt
+    100010: button_jnt
+    100012: cherry_geo
+    100014: f_cloth_jnt
+    100016: head_face_jnt
+    100018: head_neck_jnt
+    100020: HELPER01_jnt
+    100022: l_arm_clavicle_jnt
+    100024: l_arm_fore_jnt
+    100026: l_arm_forearm_twist_jnt
+    100028: l_arm_palm_jnt
+    100030: l_arm_upper_jnt
+    100032: l_close_hand_geo
+    100034: l_leg_calf_jnt
+    100036: l_leg_heel_jnt
+    100038: l_leg_tight_jnt
+    100040: l_leg_toe_jnt
+    100042: l_open_hand_geo
+    100044: model_root
+    100046: //RootNode
+    100048: r_arm_clavicle_jnt
+    100050: r_arm_fore_jnt
+    100052: r_arm_forearm_twist_jnt
+    100054: r_arm_palm_jnt
+    100056: r_arm_upper_jnt
+    100058: r_close_hand_geo
+    100060: r_leg_calf_jnt
+    100062: r_leg_heel_jnt
+    100064: r_leg_tight_jnt
+    100066: r_leg_toe_jnt
+    100068: r_open_hand_geo
+    100070: strap_front_jnt
+    100072: Tie_jnt
+    100074: world_jnt
+    400000: b_cloth_jnt
+    400002: body_belly_jnt
+    400004: body_chest_jnt
+    400006: body_geo
+    400008: body_pelvis_jnt
+    400010: button_jnt
+    400012: cherry_geo
+    400014: f_cloth_jnt
+    400016: head_face_jnt
+    400018: head_neck_jnt
+    400020: HELPER01_jnt
+    400022: l_arm_clavicle_jnt
+    400024: l_arm_fore_jnt
+    400026: l_arm_forearm_twist_jnt
+    400028: l_arm_palm_jnt
+    400030: l_arm_upper_jnt
+    400032: l_close_hand_geo
+    400034: l_leg_calf_jnt
+    400036: l_leg_heel_jnt
+    400038: l_leg_tight_jnt
+    400040: l_leg_toe_jnt
+    400042: l_open_hand_geo
+    400044: model_root
+    400046: //RootNode
+    400048: r_arm_clavicle_jnt
+    400050: r_arm_fore_jnt
+    400052: r_arm_forearm_twist_jnt
+    400054: r_arm_palm_jnt
+    400056: r_arm_upper_jnt
+    400058: r_close_hand_geo
+    400060: r_leg_calf_jnt
+    400062: r_leg_heel_jnt
+    400064: r_leg_tight_jnt
+    400066: r_leg_toe_jnt
+    400068: r_open_hand_geo
+    400070: strap_front_jnt
+    400072: Tie_jnt
+    400074: world_jnt
+    2100000: pl_wreckitralph01_original
+    4300000: body_geo
+    4300002: l_open_hand_geo
+    4300004: r_open_hand_geo
+    4300006: r_close_hand_geo
+    4300008: l_close_hand_geo
+    4300010: cherry_geo
+    7400000: stun
+    9500000: //RootNode
+    13700000: body_geo
+    13700002: cherry_geo
+    13700004: l_close_hand_geo
+    13700006: l_open_hand_geo
+    13700008: r_close_hand_geo
+    13700010: r_open_hand_geo
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -291,7 +110,14 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'body_pelvis_jnt' has translation animation
+      that will be discarded.\n\t'body_pelvis_jnt' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'body_belly_jnt' has translation
+      animation that will be discarded.\n\t'body_chest_jnt' has translation animation
+      that will be discarded.\n\t'head_neck_jnt' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -307,7 +133,6 @@ ModelImporter:
     - serializedVersion: 16
       name: stun
       takeName: Take 001
-      internalID: 7400000
       firstFrame: 1
       lastFrame: 44
       wrapMode: 0
@@ -347,19 +172,18 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
+    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    skinWeightsMode: 0
-    maxBonesPerVertex: 4
-    minBoneWeight: 0.001
-    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.006
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -368,13 +192,365 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 3
-    human: []
-    skeleton: []
+    serializedVersion: 2
+    human:
+    - boneName: world_jnt
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_leg_tight_jnt
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_leg_tight_jnt
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_leg_calf_jnt
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_leg_calf_jnt
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_leg_heel_jnt
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_leg_heel_jnt
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: body_belly_jnt
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: body_chest_jnt
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: head_face_jnt
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_arm_clavicle_jnt
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_arm_clavicle_jnt
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_arm_upper_jnt
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_arm_upper_jnt
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_arm_fore_jnt
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_arm_fore_jnt
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_arm_palm_jnt
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_arm_palm_jnt
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: l_leg_toe_jnt
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: r_leg_toe_jnt
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: pl_wreckitralph01_original@stun(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: model_root
+      parentName: pl_wreckitralph01_original@stun(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: r_open_hand_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: r_close_hand_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: l_close_hand_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: cherry_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: l_open_hand_geo
+      parentName: model_root
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: world_jnt
+      parentName: pl_wreckitralph01_original@stun(Clone)
+      position: {x: 0.017387912, y: 0.07487004, z: 0.268759}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: body_pelvis_jnt
+      parentName: world_jnt
+      position: {x: -0.41686195, y: -0.017387992, z: -0.2327031}
+      rotation: {x: -0.000000009701277, y: 0.000000009701279, z: -0, w: 1}
+      scale: {x: 1.000001, y: 1.000001, z: 1}
+    - name: body_belly_jnt
+      parentName: body_pelvis_jnt
+      position: {x: -0.21279506, y: 4.629334e-10, z: 0.00891243}
+      rotation: {x: -1.7763566e-15, y: -0.000000048506386, z: -4.705739e-16, w: 1}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000004}
+    - name: body_chest_jnt
+      parentName: body_belly_jnt
+      position: {x: -0.2709347, y: 0.00000007808909, z: -0.012262798}
+      rotation: {x: 0.000000009650076, y: 0.10260683, z: 9.954172e-10, w: 0.99472207}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000006}
+    - name: head_neck_jnt
+      parentName: body_chest_jnt
+      position: {x: -0.27663672, y: -0.0000000010933612, z: 4.8047005e-10}
+      rotation: {x: -0.0054914756, y: 0.1322335, z: 0.05313152, w: 0.98977834}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head_face_jnt
+      parentName: head_neck_jnt
+      position: {x: -0.07141775, y: 0.0000000017421737, z: 8.6594926e-11}
+      rotation: {x: 0.000010836869, y: -0.23309356, z: -0.053414557, w: 0.9709863}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000002}
+    - name: r_arm_clavicle_jnt
+      parentName: body_chest_jnt
+      position: {x: -0.1049822, y: 0.150648, z: -0.10496177}
+      rotation: {x: -0.07255394, y: 0.07255395, z: 0.7033747, w: -0.7033747}
+      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000002}
+    - name: r_arm_upper_jnt
+      parentName: r_arm_clavicle_jnt
+      position: {x: -0.24423061, y: -2.9909623e-17, z: 0}
+      rotation: {x: -0.019511845, y: -0.008520732, z: -0.023995636, w: 0.9994853}
+      scale: {x: 0.9999998, y: 1.000001, z: 1.0000012}
+    - name: r_arm_fore_jnt
+      parentName: r_arm_upper_jnt
+      position: {x: -0.30484927, y: -7.6374254e-17, z: -1.6256202e-17}
+      rotation: {x: 0.0014583968, y: 0.039073687, z: 0.014598298, w: 0.9991286}
+      scale: {x: 1.0000055, y: 1.000004, z: 0.9999996}
+    - name: r_arm_palm_jnt
+      parentName: r_arm_fore_jnt
+      position: {x: -0.21834698, y: -1.5830348e-17, z: 5.0896135e-17}
+      rotation: {x: 0.000000012965754, y: 0.000000014901158, z: 0.0000000013887981,
+        w: 1}
+      scale: {x: 1.0000019, y: 1.0000012, z: 1.0000005}
+    - name: r_arm_forearm_twist_jnt
+      parentName: r_arm_fore_jnt
+      position: {x: -0.09, y: -1.5830348e-17, z: 5.0896135e-17}
+      rotation: {x: -0.000013066404, y: 0.00000006705522, z: 0.00000008554502, w: 1}
+      scale: {x: 1.0000021, y: 1.0000021, z: 1.0000004}
+    - name: Tie_jnt
+      parentName: r_arm_clavicle_jnt
+      position: {x: -0.096089765, y: -0.11732259, z: 0.14993648}
+      rotation: {x: -0.0000000037252899, y: 0.00000001862645, z: -1, w: -0.0000000027939675}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000007}
+    - name: l_arm_clavicle_jnt
+      parentName: body_chest_jnt
+      position: {x: -0.1510703, y: -0.17596537, z: -0.09273096}
+      rotation: {x: -0.072553955, y: -0.07255395, z: 0.7033747, w: 0.7033747}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: l_arm_upper_jnt
+      parentName: l_arm_clavicle_jnt
+      position: {x: -0.2442308, y: 0, z: 0}
+      rotation: {x: 0.014356022, y: 0.003839573, z: 0.023625491, w: 0.9996105}
+      scale: {x: 1, y: 1.0000001, z: 1.0000002}
+    - name: l_arm_fore_jnt
+      parentName: l_arm_upper_jnt
+      position: {x: -0.30484927, y: 2.0125711e-17, z: -1.5987211e-17}
+      rotation: {x: -0.0014318462, y: 0.039978765, z: -0.014409703, w: 0.9990957}
+      scale: {x: 1.0000025, y: 1.0000029, z: 1.0000005}
+    - name: l_arm_palm_jnt
+      parentName: l_arm_fore_jnt
+      position: {x: -0.21834712, y: 2.6356672e-16, z: 6.791631e-17}
+      rotation: {x: 0.000000113146584, y: 0.0000000074505797, z: 0.000000010394159,
+        w: 1}
+      scale: {x: 1.0000012, y: 1.0000008, z: 0.9999998}
+    - name: l_arm_forearm_twist_jnt
+      parentName: l_arm_fore_jnt
+      position: {x: -0.108, y: 2.6356672e-16, z: 6.791631e-17}
+      rotation: {x: 0.000009527746, y: -0.000000014901161, z: 0.00000012882526, w: 1}
+      scale: {x: 1.0000001, y: 0.9999999, z: 0.99999994}
+    - name: b_cloth_jnt
+      parentName: body_chest_jnt
+      position: {x: -0.057742327, y: -0.031730477, z: -0.33584502}
+      rotation: {x: -0.07255398, y: -0.07255397, z: 0.7033747, w: 0.7033747}
+      scale: {x: 1, y: 1.0000001, z: 1.0000004}
+    - name: strap_front_jnt
+      parentName: body_chest_jnt
+      position: {x: -0.19197346, y: 0.20324689, z: 0.21539992}
+      rotation: {x: -0.2885764, y: -0.021866536, z: 0.60827, w: 0.7390895}
+      scale: {x: 1, y: 0.99999976, z: 1.0000001}
+    - name: button_jnt
+      parentName: body_belly_jnt
+      position: {x: -0.07236126, y: 0.24093994, z: 0.26123062}
+      rotation: {x: 0.000000034299198, y: 0.000000020579517, z: 0.7071068, w: 0.7071068}
+      scale: {x: 0.9999999, y: 0.9999998, z: 1}
+    - name: f_cloth_jnt
+      parentName: body_pelvis_jnt
+      position: {x: -0.005067745, y: -0.17497714, z: 0.21741036}
+      rotation: {x: -0.0000000034299208, y: -0.000000017149599, z: 0.7071068, w: 0.7071068}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1.0000001}
+    - name: l_leg_tight_jnt
+      parentName: body_pelvis_jnt
+      position: {x: 0.0363816, y: -0.19231915, z: -0.03605591}
+      rotation: {x: -0.04889772, y: 0.00000077262115, z: 0.99880385, w: 0.00000008988133}
+      scale: {x: 1, y: 1.0000006, z: 1.0000004}
+    - name: l_leg_calf_jnt
+      parentName: l_leg_tight_jnt
+      position: {x: -0.18312941, y: 0.000000012927206, z: 0.010835912}
+      rotation: {x: -0.000000010553922, y: -0.1284946, z: 0.00000027841244, w: 0.99171025}
+      scale: {x: 0.99999964, y: 1, z: 0.9999998}
+    - name: l_leg_heel_jnt
+      parentName: l_leg_calf_jnt
+      position: {x: -0.22669743, y: 0.000000021125071, z: 0.0075111976}
+      rotation: {x: -0.0000012049408, y: 0.7172146, z: -0.00000093671144, w: 0.6968524}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000006}
+    - name: l_leg_toe_jnt
+      parentName: l_leg_heel_jnt
+      position: {x: -0.27460697, y: -6.808599e-17, z: -1.06581415e-16}
+      rotation: {x: -0.000000022408296, y: 0.00000005960463, z: -0.00000001964815,
+        w: 1}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000001}
+    - name: r_leg_tight_jnt
+      parentName: body_pelvis_jnt
+      position: {x: 0.03638146, y: 0.1923192, z: -0.03605592}
+      rotation: {x: -0.078387685, y: -0.00000041200272, z: 0.99692297, w: -0.00000008864651}
+      scale: {x: 0.99999994, y: 0.9999998, z: 1.0000006}
+    - name: r_leg_calf_jnt
+      parentName: r_leg_tight_jnt
+      position: {x: -0.18344966, y: -1.3421308e-15, z: 2.2382097e-16}
+      rotation: {x: 0.000000009623443, y: -0.14136614, z: -0.00000014507717, w: 0.9899574}
+      scale: {x: 1.0000006, y: 1.0000001, z: 0.9999998}
+    - name: r_leg_heel_jnt
+      parentName: r_leg_calf_jnt
+      position: {x: -0.22682185, y: -7.116425e-18, z: -5.8619775e-17}
+      rotation: {x: 0.00000028564494, y: 0.7055765, z: 0.00000016619818, w: 0.7086339}
+      scale: {x: 1.0000008, y: 1.0000005, z: 1.0000006}
+    - name: r_leg_toe_jnt
+      parentName: r_leg_heel_jnt
+      position: {x: -0.27460697, y: -5.376652e-17, z: -1.438849e-16}
+      rotation: {x: -0.000000039296207, y: -0, z: 0.000000044816524, w: 1}
+      scale: {x: 1.0000002, y: 0.99999976, z: 0.9999998}
+    - name: HELPER01_jnt
+      parentName: world_jnt
+      position: {x: -0, y: 6.61854e-17, z: 0}
+      rotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -382,7 +558,6 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.6
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1

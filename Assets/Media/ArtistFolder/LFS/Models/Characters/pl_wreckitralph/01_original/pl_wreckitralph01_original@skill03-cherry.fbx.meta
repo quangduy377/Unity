@@ -1,284 +1,100 @@
 fileFormatVersion: 2
 guid: 1d5be1794632d994f99fed5e19da88ca
 ModelImporter:
-  serializedVersion: 25
-  internalIDToNameTable:
-  - first:
-      1: 100000
-    second: b_cloth_jnt
-  - first:
-      1: 100002
-    second: body_belly_jnt
-  - first:
-      1: 100004
-    second: body_chest_jnt
-  - first:
-      1: 100006
-    second: body_geo
-  - first:
-      1: 100008
-    second: body_pelvis_jnt
-  - first:
-      1: 100010
-    second: button_jnt
-  - first:
-      1: 100012
-    second: cherry_geo
-  - first:
-      1: 100014
-    second: f_cloth_jnt
-  - first:
-      1: 100016
-    second: head_face_jnt
-  - first:
-      1: 100018
-    second: head_neck_jnt
-  - first:
-      1: 100020
-    second: HELPER01_jnt
-  - first:
-      1: 100022
-    second: l_arm_clavicle_jnt
-  - first:
-      1: 100024
-    second: l_arm_fore_jnt
-  - first:
-      1: 100026
-    second: l_arm_forearm_twist_jnt
-  - first:
-      1: 100028
-    second: l_arm_palm_jnt
-  - first:
-      1: 100030
-    second: l_arm_upper_jnt
-  - first:
-      1: 100032
-    second: l_close_hand_geo
-  - first:
-      1: 100034
-    second: l_leg_calf_jnt
-  - first:
-      1: 100036
-    second: l_leg_heel_jnt
-  - first:
-      1: 100038
-    second: l_leg_tight_jnt
-  - first:
-      1: 100040
-    second: l_leg_toe_jnt
-  - first:
-      1: 100042
-    second: l_open_hand_geo
-  - first:
-      1: 100044
-    second: model_root
-  - first:
-      1: 100046
-    second: //RootNode
-  - first:
-      1: 100048
-    second: r_arm_clavicle_jnt
-  - first:
-      1: 100050
-    second: r_arm_fore_jnt
-  - first:
-      1: 100052
-    second: r_arm_forearm_twist_jnt
-  - first:
-      1: 100054
-    second: r_arm_palm_jnt
-  - first:
-      1: 100056
-    second: r_arm_upper_jnt
-  - first:
-      1: 100058
-    second: r_close_hand_geo
-  - first:
-      1: 100060
-    second: r_leg_calf_jnt
-  - first:
-      1: 100062
-    second: r_leg_heel_jnt
-  - first:
-      1: 100064
-    second: r_leg_tight_jnt
-  - first:
-      1: 100066
-    second: r_leg_toe_jnt
-  - first:
-      1: 100068
-    second: r_open_hand_geo
-  - first:
-      1: 100070
-    second: strap_front_jnt
-  - first:
-      1: 100072
-    second: Tie_jnt
-  - first:
-      1: 100074
-    second: world_jnt
-  - first:
-      4: 400000
-    second: b_cloth_jnt
-  - first:
-      4: 400002
-    second: body_belly_jnt
-  - first:
-      4: 400004
-    second: body_chest_jnt
-  - first:
-      4: 400006
-    second: body_geo
-  - first:
-      4: 400008
-    second: body_pelvis_jnt
-  - first:
-      4: 400010
-    second: button_jnt
-  - first:
-      4: 400012
-    second: cherry_geo
-  - first:
-      4: 400014
-    second: f_cloth_jnt
-  - first:
-      4: 400016
-    second: head_face_jnt
-  - first:
-      4: 400018
-    second: head_neck_jnt
-  - first:
-      4: 400020
-    second: HELPER01_jnt
-  - first:
-      4: 400022
-    second: l_arm_clavicle_jnt
-  - first:
-      4: 400024
-    second: l_arm_fore_jnt
-  - first:
-      4: 400026
-    second: l_arm_forearm_twist_jnt
-  - first:
-      4: 400028
-    second: l_arm_palm_jnt
-  - first:
-      4: 400030
-    second: l_arm_upper_jnt
-  - first:
-      4: 400032
-    second: l_close_hand_geo
-  - first:
-      4: 400034
-    second: l_leg_calf_jnt
-  - first:
-      4: 400036
-    second: l_leg_heel_jnt
-  - first:
-      4: 400038
-    second: l_leg_tight_jnt
-  - first:
-      4: 400040
-    second: l_leg_toe_jnt
-  - first:
-      4: 400042
-    second: l_open_hand_geo
-  - first:
-      4: 400044
-    second: model_root
-  - first:
-      4: 400046
-    second: //RootNode
-  - first:
-      4: 400048
-    second: r_arm_clavicle_jnt
-  - first:
-      4: 400050
-    second: r_arm_fore_jnt
-  - first:
-      4: 400052
-    second: r_arm_forearm_twist_jnt
-  - first:
-      4: 400054
-    second: r_arm_palm_jnt
-  - first:
-      4: 400056
-    second: r_arm_upper_jnt
-  - first:
-      4: 400058
-    second: r_close_hand_geo
-  - first:
-      4: 400060
-    second: r_leg_calf_jnt
-  - first:
-      4: 400062
-    second: r_leg_heel_jnt
-  - first:
-      4: 400064
-    second: r_leg_tight_jnt
-  - first:
-      4: 400066
-    second: r_leg_toe_jnt
-  - first:
-      4: 400068
-    second: r_open_hand_geo
-  - first:
-      4: 400070
-    second: strap_front_jnt
-  - first:
-      4: 400072
-    second: Tie_jnt
-  - first:
-      4: 400074
-    second: world_jnt
-  - first:
-      21: 2100000
-    second: pl_wreckitralph01_original
-  - first:
-      43: 4300000
-    second: body_geo
-  - first:
-      43: 4300002
-    second: l_open_hand_geo
-  - first:
-      43: 4300004
-    second: r_open_hand_geo
-  - first:
-      43: 4300006
-    second: r_close_hand_geo
-  - first:
-      43: 4300008
-    second: l_close_hand_geo
-  - first:
-      43: 4300010
-    second: cherry_geo
-  - first:
-      74: 7400000
-    second: skill03-cherry_01eat
-  - first:
-      74: 7400002
-    second: skill03-cherry_02recover
-  - first:
-      95: 9500000
-    second: //RootNode
-  - first:
-      137: 13700000
-    second: body_geo
-  - first:
-      137: 13700002
-    second: cherry_geo
-  - first:
-      137: 13700004
-    second: l_close_hand_geo
-  - first:
-      137: 13700006
-    second: l_open_hand_geo
-  - first:
-      137: 13700008
-    second: r_close_hand_geo
-  - first:
-      137: 13700010
-    second: r_open_hand_geo
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: b_cloth_jnt
+    100002: body_belly_jnt
+    100004: body_chest_jnt
+    100006: body_geo
+    100008: body_pelvis_jnt
+    100010: button_jnt
+    100012: cherry_geo
+    100014: f_cloth_jnt
+    100016: head_face_jnt
+    100018: head_neck_jnt
+    100020: HELPER01_jnt
+    100022: l_arm_clavicle_jnt
+    100024: l_arm_fore_jnt
+    100026: l_arm_forearm_twist_jnt
+    100028: l_arm_palm_jnt
+    100030: l_arm_upper_jnt
+    100032: l_close_hand_geo
+    100034: l_leg_calf_jnt
+    100036: l_leg_heel_jnt
+    100038: l_leg_tight_jnt
+    100040: l_leg_toe_jnt
+    100042: l_open_hand_geo
+    100044: model_root
+    100046: //RootNode
+    100048: r_arm_clavicle_jnt
+    100050: r_arm_fore_jnt
+    100052: r_arm_forearm_twist_jnt
+    100054: r_arm_palm_jnt
+    100056: r_arm_upper_jnt
+    100058: r_close_hand_geo
+    100060: r_leg_calf_jnt
+    100062: r_leg_heel_jnt
+    100064: r_leg_tight_jnt
+    100066: r_leg_toe_jnt
+    100068: r_open_hand_geo
+    100070: strap_front_jnt
+    100072: Tie_jnt
+    100074: world_jnt
+    400000: b_cloth_jnt
+    400002: body_belly_jnt
+    400004: body_chest_jnt
+    400006: body_geo
+    400008: body_pelvis_jnt
+    400010: button_jnt
+    400012: cherry_geo
+    400014: f_cloth_jnt
+    400016: head_face_jnt
+    400018: head_neck_jnt
+    400020: HELPER01_jnt
+    400022: l_arm_clavicle_jnt
+    400024: l_arm_fore_jnt
+    400026: l_arm_forearm_twist_jnt
+    400028: l_arm_palm_jnt
+    400030: l_arm_upper_jnt
+    400032: l_close_hand_geo
+    400034: l_leg_calf_jnt
+    400036: l_leg_heel_jnt
+    400038: l_leg_tight_jnt
+    400040: l_leg_toe_jnt
+    400042: l_open_hand_geo
+    400044: model_root
+    400046: //RootNode
+    400048: r_arm_clavicle_jnt
+    400050: r_arm_fore_jnt
+    400052: r_arm_forearm_twist_jnt
+    400054: r_arm_palm_jnt
+    400056: r_arm_upper_jnt
+    400058: r_close_hand_geo
+    400060: r_leg_calf_jnt
+    400062: r_leg_heel_jnt
+    400064: r_leg_tight_jnt
+    400066: r_leg_toe_jnt
+    400068: r_open_hand_geo
+    400070: strap_front_jnt
+    400072: Tie_jnt
+    400074: world_jnt
+    2100000: pl_wreckitralph01_original
+    4300000: body_geo
+    4300002: l_open_hand_geo
+    4300004: r_open_hand_geo
+    4300006: r_close_hand_geo
+    4300008: l_close_hand_geo
+    4300010: cherry_geo
+    7400000: skill03-cherry_01eat
+    7400002: skill03-cherry_02recover
+    13700000: body_geo
+    13700002: cherry_geo
+    13700004: l_close_hand_geo
+    13700006: l_open_hand_geo
+    13700008: r_close_hand_geo
+    13700010: r_open_hand_geo
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -316,7 +132,6 @@ ModelImporter:
     - serializedVersion: 16
       name: skill03-cherry_01eat
       takeName: Take 001
-      internalID: 7400000
       firstFrame: 1
       lastFrame: 18
       wrapMode: 0
@@ -345,7 +160,6 @@ ModelImporter:
     - serializedVersion: 16
       name: skill03-cherry_02recover
       takeName: Take 001
-      internalID: 7400002
       firstFrame: 19
       lastFrame: 42
       wrapMode: 0
@@ -385,19 +199,18 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
+    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
-    skinWeightsMode: 0
-    maxBonesPerVertex: 4
-    minBoneWeight: 0.001
-    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.006
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -406,11 +219,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
   importAnimation: 1
   copyAvatar: 1
   humanDescription:
-    serializedVersion: 3
+    serializedVersion: 2
     human:
     - boneName: world_jnt
       humanName: Hips
@@ -771,7 +583,6 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.6
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
