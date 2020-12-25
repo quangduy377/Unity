@@ -4,7 +4,7 @@
   "damage": "10",
   "armor": "5",
   "attackMode": "RANGED",
-  "attackSpeed": "5.0f",
+  "attackSpeed": "2.0f",
   "moveSpeed": "10.0f",
   "goldOnDeath": "20",
   "goldToBuy": "20"

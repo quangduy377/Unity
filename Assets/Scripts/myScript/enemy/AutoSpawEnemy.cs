@@ -19,7 +19,7 @@ public class AutoSpawEnemy : MonoBehaviour
     private int playerId;
     void Start()
     {
-        timeCount = 0.1f;
+        timeCount = 2.0f;
         currentTimeRemaining = timeCount;
     }
 
@@ -60,6 +60,8 @@ public class AutoSpawEnemy : MonoBehaviour
                 return;
             Debug.Log("Mickey selected");
             GameObject mickeyClone = Instantiate(mickeyEnemyPrefab, respawn, transform.rotation) as GameObject;
+            mickeyClone.GetComponent<NavMeshAgent>().speed = 5.0f;
+
             mickeyClone.transform.eulerAngles = new Vector3(mickeyClone.transform.eulerAngles.x, mickeyClone.transform.eulerAngles.y + rotation, mickeyClone.transform.eulerAngles.z);
             //assign back the name, so we make sure enemy can detect it and attack
             mickeyClone.transform.name = "ENEMY";
@@ -73,6 +75,9 @@ public class AutoSpawEnemy : MonoBehaviour
             if (!buySuccessfully(-PlayerPrefs.GetInt("RALPH_goldToBuy")))
                 return;
             GameObject ralphClone = Instantiate(ralphEnemyPrefab, respawn, transform.rotation) as GameObject;
+            ralphClone.GetComponent<NavMeshAgent>().speed = 5.0f;
+
+
             ralphClone.transform.eulerAngles = new Vector3(ralphClone.transform.eulerAngles.x, ralphClone.transform.eulerAngles.y + rotation, ralphClone.transform.eulerAngles.z);
             //since we bought a RALPh, we must deduct the money we have in the pocket
             ralphClone.transform.name = "ENEMY";

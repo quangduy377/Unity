@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     
     private GameObject[] targetAllies;
-    private GameObject targetWall;
+    private GameObject targetBuilding;
 
     private string usTag;
     private string targetTag;
@@ -31,32 +31,41 @@ public class Enemy : MonoBehaviour
 
     private GoldLoader[] goldAmountText;
 
+    private float timeInterval;
+
     private void Start()
     {
         string data = file.text;        
         enemy = JsonUtility.FromJson<HeroData>(data);
-
         moveable = true;
-        Debug.Log("new enemy has just spawn");
+        identifyTags();
+        //get all enemies to attack. REMEMBER we are enemies
+        targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        //findTargetAttack();
+        AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
+        agent.speed = enemy.moveSpeed;
+    }
+
+    private GameObject behindBuilding;
+    void identifyTags()
+    {
+        //remember we are enemies
         if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
         {
             usTag = "LEFT";
             targetTag = "RIGHT";
             Debug.Log("insdie ENEMY, enemies on the LEFT");
-            targetWall = GameObject.Find("RightWall");
+            targetBuilding = GameObject.Find("TeamRight");
+
         }
         else
         {
             usTag = "RIGHT";
             targetTag = "LEFT";
             Debug.Log("insdie ENEMY, enemies on the RIGHT");
-            targetWall = GameObject.Find("LeftWall");
-
+            targetBuilding = GameObject.Find("TeamLeft");
         }
-        //get all enemies to attack. REMEMBER we are enemies
-        targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        findTargetAttack();
     }
 
     // Update is called once per frame
@@ -67,28 +76,30 @@ public class Enemy : MonoBehaviour
         //if it is moving
         if (moveable)
         {   
-
             agent.isStopped = false;
             //check if he reach the destination
             if (agent.remainingDistance <= 0)
             {
                 //find another object to attack
-                findTargetAttack();
+                //findTargetAttack();
+                AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
+
             }
         }
         else
         {
             //stop moving
             agent.isStopped = true;
-
-
             //we received information about the enemy, we can now attack them
             if (dataTarget != null)
             {
-                //deduct its health
-                dataTarget.health -= (enemy.damage * enemy.attackSpeed * Time.deltaTime);
-                //dataEnemy.health += dataEnemy.armor;
-                Debug.Log("Health attacked by players:" + dataTarget.health);
+                //attackPlayer(1 / enemy.attackSpeed);
+                AttackEnemyPlayer.attack(ref timeInterval, ref dataTarget, enemy, 1 / enemy.attackSpeed);
+            }
+            else
+            {
+                //that enemy no longer exists, should return
+                moveable = true;
             }
             //if the enemy health falls below zero, we exterminate it, and can move to find another enemy
             //and we need to add the gold we achieve by killing it
@@ -97,14 +108,14 @@ public class Enemy : MonoBehaviour
                 Destroy(target);
                 //now you need to move to find another opponent
                 moveable = !moveable;
-                findTargetAttack();
+                //findTargetAttack();
+                AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
                 //add gold collected
-                addGoldCollected(dataTarget.goldOnDeath);
+                //addGoldCollected(dataTarget.goldOnDeath);
+                AddGold.addGold(dataTarget.goldOnDeath, "Enemy");
                 Debug.Log("player DIE!!!");
             }
         }
-
-
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -118,74 +129,21 @@ public class Enemy : MonoBehaviour
             dataTarget = target.GetComponent<Hero>().getHeroData();
             //need to make them face to face literally, PENDINGGGG
         }
-    }
-    public void addGoldCollected(int gold)
-    {
-        goldAmountText = FindObjectsOfType<GoldLoader>();
-        for (int i = 0; i < goldAmountText.Length; i++)
+        //if hit our ally, spread the ally out
+        else if(collision.transform.tag.Equals(usTag))
         {
-            if (goldAmountText[i].type.Equals("Enemy"))
-            {
-                goldAmountText[i].addGold(gold);
-                break;
-            }
+            float range = Random.Range(-1.0f, 1.0f);
+            collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x
+                , collision.gameObject.transform.position.y, collision.gameObject.transform.position.z + range);
         }
     }
     public HeroData getHeroData()
     {
         return enemy;
     }
-
-    public bool hitWall()
-    {
-        //Wall at the right
-        if (targetWall.transform.tag=="RIGHT")
-        {
-            if (transform.position.x - 1.5f <= targetWall.transform.position.x)
-            {
-                return true;
-            }
-            return false;
-        }
-        //Wall at the left otherwise
-        else
-        {
-            if (transform.position.x + 1.5f >= targetWall.transform.position.x)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
     public float getMovespeed()
     {
         return enemy.moveSpeed;
-    }
-
-    void findTargetAttack() {
-        int randomId = -10;
-        randomId = findRanDomIdTarget();
-        //return to ally wall. Remmeber we are enemies
-        if (randomId == -1)
-        {
-            //we now attack the target wall
-            Debug.Log("inside Enemy, now go to the wall");
-            agent.SetDestination(targetWall.transform.position);
-        }
-        else
-        {
-            Debug.Log("inside Enemy, now found player id "+randomId);
-
-            //else we still have targets to take down. REMEMBER WE ARE ENEMIES
-            agent.SetDestination(targetAllies[randomId].transform.position);
-        }
-    }
-    int findRanDomIdTarget() {
-        //remember we are enemies. This is we are looking for players
-        targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
-        if (targetAllies.Length == 0)
-            return -1;
-        return UnityEngine.Random.Range(0, targetAllies.Length);
     }
 
     

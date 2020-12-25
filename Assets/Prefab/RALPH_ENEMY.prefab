@@ -84,7 +84,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,7 +255,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -677,7 +677,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -977,7 +977,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1095,6 +1095,7 @@ GameObject:
   - component: {fileID: 402773161468413982}
   - component: {fileID: -1442923563372195144}
   - component: {fileID: 3250459323343339535}
+  - component: {fileID: -2566894804908025243}
   m_Layer: 0
   m_Name: RALPH_ENEMY
   m_TagString: ENEMY
@@ -1164,8 +1165,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: -1.74, y: 2.49, z: 1.79}
+  m_Center: {x: 0, y: 1.1, z: 0.3}
 --- !u!195 &-1442923563372195144
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1202,6 +1203,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   file: {fileID: 4900000, guid: 944a6aaae450a0c44a61dc294d123418, type: 3}
   teamloader: {fileID: 4900000, guid: f0d0ba31962204d46a0ce5b2a29f99b7, type: 3}
+--- !u!114 &-2566894804908025243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152354068196916971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2703954fc8012674c85c740d3f9c7c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6152354068196916973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1294,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1583,7 +1596,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
+  - {fileID: 2100000, guid: a63c6b077ed583f4ebd36b44bb3df784, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

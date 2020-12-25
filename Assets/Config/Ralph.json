@@ -4,7 +4,7 @@
   "damage": "5",
   "armor": "2",
   "attackMode": "MELEE",
-  "attackSpeed": "5.0f",
+  "attackSpeed": "2.0f",
   "moveSpeed": "10.0f",
   "goldOnDeath": "30",
   "goldToBuy": "30"

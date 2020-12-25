@@ -6,18 +6,22 @@ using UnityEngine.AI;
 public class Test : MonoBehaviour
 {
     // Start is called before the first frame update
-    private NavMeshAgent nav;
-    public GameObject wall;
+    //private NavMeshAgent nav;
+    //public GameObject wall;
+    private float twoSec;
     void Start()
     {
-        nav = GetComponent<NavMeshAgent>();
-        nav.SetDestination(wall.transform.position);
-
+        twoSec = 5.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Mickey test pos:" + gameObject.transform.position);
+        if (twoSec < 0)
+        {
+            Debug.Log("end of 5 sec");
+            return;
+        }
+        twoSec -= Time.deltaTime;
     }
 }

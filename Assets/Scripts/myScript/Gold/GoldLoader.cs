@@ -23,8 +23,37 @@ public class GoldLoader : MonoBehaviour
         string data = file.text;
         originalGold = JsonUtility.FromJson<GoldData>(data);
         currentGold = originalGold.basicGold;
-        //find a player box to render
-        goldAmount = GetComponent<Text>();
+        //find an appropriate box to render money
+        //this is a player
+        if (originalGold.type.Equals("Player"))
+        {
+            //get the box on the left please
+            if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
+            {
+                goldAmount = GameObject.Find("playerGoldAmount").GetComponent<Text>();
+            }
+            //get the box on the right please
+            else
+            {
+                goldAmount = GameObject.Find("enemyGoldAmount").GetComponent<Text>();
+
+            }
+        }
+        //this is an enemy
+        else
+        {
+            //get the box on the left please
+            if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+            {
+                goldAmount = GameObject.Find("playerGoldAmount").GetComponent<Text>();
+            }
+            //get the box on the right please
+            else
+            {
+                goldAmount = GameObject.Find("enemyGoldAmount").GetComponent<Text>();
+            }
+        }
+
     }
 
     // Update is called once per frame

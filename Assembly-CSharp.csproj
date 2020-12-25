@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\myScript\Gold\GoldData.cs" />
     <Compile Include="Assets\Scripts\myScript\Gold\GoldLoader.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\Hero.cs" />
+    <Compile Include="Assets\Scripts\myScript\Hero\HeroAttackBuilding.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\HeroData.cs" />
     <Compile Include="Assets\Scripts\myScript\HeroSelection\HeroSelection.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\LoadTeamSide.cs" />
@@ -82,6 +83,10 @@
     <Compile Include="Assets\Scripts\myScript\Tower\TowerHandler.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\AutoSpawEnemy.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\Enemy.cs" />
+    <Compile Include="Assets\Scripts\myScript\enemy\EnemyAttackBuilding.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\AddGold.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\AttackEnemyPlayer.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\AttackTower.cs" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_AlphaBlend.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Additive.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Multiply.shader" />
