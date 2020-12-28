@@ -8,8 +8,6 @@ public class GoldLoader : MonoBehaviour
 {
     private Text goldAmount;
     private GoldData originalGold;
-    public TextAsset file;
-
     //original gold of player
     private int currentGold;
     
@@ -20,8 +18,14 @@ public class GoldLoader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string data = file.text;
-        originalGold = JsonUtility.FromJson<GoldData>(data);
+        if (type.Equals("Player"))
+        {
+            originalGold = JsonUtility.FromJson<GoldData>(GameLoader.Instance.PlayerGold.text);
+        }
+        else
+        {
+            originalGold = JsonUtility.FromJson<GoldData>(GameLoader.Instance.EnemyGold.text);
+        }
         currentGold = originalGold.basicGold;
         //find an appropriate box to render money
         //this is a player

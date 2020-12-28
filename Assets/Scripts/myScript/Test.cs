@@ -1,27 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Test : MonoBehaviour
+public class test : MonoBehaviour
 {
-    // Start is called before the first frame update
-    //private NavMeshAgent nav;
-    //public GameObject wall;
-    private float twoSec;
+    public class Student
+    {
+        public int age;
+        public string name;
+    }
     void Start()
     {
-        twoSec = 5.0f;
+        Student t = new Student();
+        t.age = 10;
+        t.name = "Duy";
+
+        Type type = typeof(Student);
+        PropertyInfo[] properties = type.GetProperties();
+        foreach (PropertyInfo property in properties)
+        {
+            Debug.Log("property name: " + property.Name);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (twoSec < 0)
-        {
-            Debug.Log("end of 5 sec");
-            return;
-        }
-        twoSec -= Time.deltaTime;
+        
     }
 }

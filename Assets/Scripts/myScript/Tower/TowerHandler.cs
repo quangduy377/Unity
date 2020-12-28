@@ -4,33 +4,22 @@ using UnityEngine;
 
 public class TowerHandler : MonoBehaviour
 {
-    public TextAsset file;
     private float currentHp;
     private TowerData towerData;
-    private bool isAttacked;
-    private int damageToTower;
-    private float attackSpeed;
-    private List<GameObject> enemies = new List<GameObject>();
-
-
-    private string[] teams = new string[] { "LEFT", "RIGHT" } ;
     public string team;
-
-    private float oneSec;
-
-    private string attackerType;
-
-    private float timeCounter;
-    private float interval;
     // Start is called before the first frame update
     void Start()
     {
-        string data = file.text;
-        towerData = JsonUtility.FromJson<TowerData>(data);
+       
+        if (team.Equals("RIGHT"))
+        {
+            towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.RightTower.text);
+        }
+        else
+        {
+            towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.LeftTower.text);
+        }
         currentHp = towerData.health;
-        oneSec = 1.0f;
-        interval = 0;
-        timeCounter = 0;
     }
     // Update is called once per frame
     void Update()

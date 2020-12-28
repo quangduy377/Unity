@@ -1128,8 +1128,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6152354068196916971}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 94aa05bb0c27ef3429a73006796052a7, type: 3}
-  m_Controller: {fileID: 9100000, guid: bc25cd4c1381efc478e1c21826174d1b, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 8771703e607b77d4189a22d4a63b2451, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1191bd265310d0c41963f76a42fd2bca, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1162,7 +1162,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6152354068196916971}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: -1.74, y: 2.49, z: 1.79}
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e8b95b817add444bd5165da3a633d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 4900000, guid: 944a6aaae450a0c44a61dc294d123418, type: 3}
+  type: Ralph
   teamloader: {fileID: 4900000, guid: f0d0ba31962204d46a0ce5b2a29f99b7, type: 3}
 --- !u!114 &-2566894804908025243
 MonoBehaviour:

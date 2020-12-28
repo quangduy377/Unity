@@ -8,8 +8,7 @@ public class LoadTeamSide : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string data = file.text;
-        TeamConfig team = JsonUtility.FromJson<TeamConfig>(data);
+        TeamConfig team = JsonUtility.FromJson<TeamConfig>(GameLoader.Instance.TeamSelection.text);
         PlayerPrefs.SetString("playerSide", team.playerSide);
         PlayerPrefs.SetString("enemySide", team.enemySide);
     }

@@ -8,14 +8,12 @@ public class GameOver : MonoBehaviour
     public GameObject image;
     public GameObject text;
     // Start is called before the first frame update
-    private bool enemyBuildingExploded;
 
     private TowerHandler[] towers;
-    private TowerHandler tower;
-
+    private bool destroyAll;
     void Start()
     {
-        enemyBuildingExploded = false;
+        destroyAll = false;
         //Debug.Log("Run gameover"+image.enabled);
         towers = FindObjectsOfType<TowerHandler>();
     }
@@ -27,11 +25,13 @@ public class GameOver : MonoBehaviour
         if (Lost(PlayerPrefs.GetString("playerSide")))
         {
             text.GetComponent<Text>().text = "YOU LOST";
+            removeAllObject();
         }
         //enemy lost
         else if(Lost(PlayerPrefs.GetString("enemySide")))
         {
             text.GetComponent<Text>().text = "YOU WON";
+            removeAllObject();
         }
     }
     bool Lost(string team)
@@ -49,5 +49,14 @@ public class GameOver : MonoBehaviour
             }
         }
         return false;
+    }
+    void removeAllObject()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("enemySide"));
+        for (int i = 0; i < players.Length; i++)
+            Destroy(players[i]);
+        for (int i = 0; i < enemies.Length; i++)
+            Destroy(enemies[i]);
     }
 }

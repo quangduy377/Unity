@@ -10,7 +10,6 @@ public class EnemyAttackBuilding : MonoBehaviour
     private TowerHandler tower;
     private bool attack;
     private float timeInterval;
-    private float currentHpBuilding;
     private NavMeshAgent agent;
     void Start()
     {
@@ -42,10 +41,24 @@ public class EnemyAttackBuilding : MonoBehaviour
 
             AttackTower.attackBuilding(ref timeInterval, 1 / enemy.attackSpeed, tower, enemy);
 
-            //attackBuilding(1 / enemy.attackSpeed);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    //
+    private void OnTriggerEnter(Collider other)
+    {
+        //detect if we hit the building
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        {
+            if (other.transform.name == "TeamRight")
+                attack = true;
+        }
+        else if (PlayerPrefs.GetString("enemySide").Equals("RIGHT"))
+        {
+            if (other.transform.name == "TeamLeft")
+                attack = true;
+        }
+    }
+    /*private void OnCollisionEnter(Collision collision)
     {
         //detect if we hit the building
         if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
@@ -58,5 +71,5 @@ public class EnemyAttackBuilding : MonoBehaviour
             if (collision.transform.name == "TeamLeft")
                 attack = true;
         }
-    }
+    }*/
 }

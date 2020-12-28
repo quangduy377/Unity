@@ -7,60 +7,45 @@ using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
-   
-
-    private GameObject enemyWall;
-    //LEFT OR RIGHT
-    private string team; 
-
-
-    private string enemy;
-
-    // ['LEFT','RIGHT']
-    private string[] teams = new string[] {"LEFT","RIGHT"}; 
+    private Vector3 size;
     private bool moveable;
-
-    // passing a file data
-    public TextAsset heroData; 
-
+    public string character;
     //store original data of a hero
     private HeroData dataHero;
-    private GameObject heroObject;
 
     private HeroData dataEnemy;
     private GameObject enemyObject;
-    //private const float delayAttack=0.01f;
-    private GoldLoader[] goldAmountText;
-    private int indicator;
-
-    //indicate if one of the team hits the wall of the opponent
-
     //MESH
     private NavMeshAgent agent;
-
-    //enemy Id to chase after
-    private int enemyId;
 
     //enemies to chase after
     private GameObject[] enemies;
 
-    //current chasing enemy
-    private GameObject currentEnemy;
-    // Start is called before the first frame update
-
-    private string enemyTag;
     private GameObject targetBuilding;
 
     private float timeInterval;
 
+    private Animator anim;
     public void Start()
     {
-        string data = heroData.text;
-        dataHero = JsonUtility.FromJson<HeroData>(data);
+        anim = GetComponent<Animator>();
+        size = new Vector3(0.75f, 0.75f, 0.75f);
+        if (character.Equals("Mickey"))
+        {
+            dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
+            Debug.Log("Ally Mickey level:" + dataHero.level);
+
+        }
+        else if(character.Equals("Ralph"))
+        {
+            dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
+            Debug.Log("Ally Ralph level:" + dataHero.level);
+
+        }
+
         moveable = true;
 
         timeInterval = 0;
-        team = PlayerPrefs.GetString("playerSide");
         agent = GetComponent<NavMeshAgent>();
         //we are on the left
         if (PlayerPrefs.GetString("playerSide") == "LEFT")
@@ -83,8 +68,6 @@ public class Hero : MonoBehaviour
         {
             PlayerPrefs.SetInt("RALPH_goldToBuy", dataHero.goldToBuy);
         }
-        //initially reach the random enemy
-        //findTargetAttack();
         AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, enemies, PlayerPrefs.GetString("enemySide"));
 
         agent.speed = dataHero.moveSpeed;
@@ -93,7 +76,13 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-   
+        if (dataHero.health <= 0)
+        {
+            //we are death, make it real
+            anim.SetBool("dead", true);
+            Destroy(gameObject);
+            return;
+        }
         //only move the character when it's allowed
         if (moveable)
         {
@@ -125,19 +114,22 @@ public class Hero : MonoBehaviour
             //and we need to add the gold we achieve by killing it
             if (dataEnemy.health <= 0)
             {
-                Destroy(enemyObject);
+                //Destroy(enemyObject);
                 //now you need to move to find another opponent
                 moveable = !moveable;
                 //findTargetAttack();
                 AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, enemies, PlayerPrefs.GetString("enemySide"));
                 //add gold collected
                 AddGold.addGold(dataEnemy.goldOnDeath, "Player");
+                Debug.Log("players just add " + dataEnemy.goldOnDeath + " gold");
                 //addGoldCollected(dataEnemy.goldOnDeath);
                 Debug.Log("enemy DIE!!!");
+                //change animation
+                anim.SetBool("enemyDead", true);
             }
         }
     }
-    public void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         Debug.Log("collision");
         //it is an impact, stop moving, and attack the enemy
@@ -149,13 +141,38 @@ public class Hero : MonoBehaviour
 
             dataEnemy = enemyObject.GetComponent<Enemy>().getHeroData();
             //need to make them face to face literally, PENDINGGGG
+            anim.SetBool("attacking", true);
         }
         //we need to have allies spread out
-        else if(other.transform.tag.Equals(PlayerPrefs.GetString("playerSide")))
+        else if (other.transform.tag.Equals(PlayerPrefs.GetString("playerSide")))
         {
-            float range = UnityEngine.Random.Range(-1.0f, 1.0f);
-            other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x
-                , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
+            //must be the same type
+            if (PlayerPrefs.GetInt("combine") == 1 && (gameObject.GetComponent<Hero>().getHeroData().type.Equals(other.GetComponent<Hero>().getHeroData().type)))
+            {
+                int levelHero = gameObject.GetComponent<Hero>().getHeroData().level;
+                int levelDraggedHero = other.GetComponent<Hero>().getHeroData().level;
+                //only the same level can be combined
+                if ( levelDraggedHero==levelHero )
+                {
+                    increaseAttributes();
+                    Destroy(other.gameObject);
+                    Debug.Log("combine!");
+                    Debug.Log("new Attributes");
+                    Debug.Log(gameObject.GetComponent<Hero>().getHeroData().health);
+                    Debug.Log(gameObject.GetComponent<Hero>().getHeroData().damage);
+                    PlayerPrefs.SetInt("combine", 0);
+                    anim.SetBool("merge", true);
+                    anim.SetBool("merge", false);
+
+                }
+            }
+            else
+            {
+                float range = UnityEngine.Random.Range(-0.5f, 0.5f);
+                other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x + range
+                    , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
+            }
+
         }
     }
 
@@ -164,34 +181,23 @@ public class Hero : MonoBehaviour
     {
         return dataHero;
     }
-
-    /*public void addGoldCollected(int gold)
-    {
-        goldAmountText = FindObjectsOfType<GoldLoader>();
-        for(int i = 0; i < goldAmountText.Length; i++)
-        {
-            if (goldAmountText[i].type.Equals("Player"))
-            {
-                goldAmountText[i].addGold(gold);
-                break;
-            }
-        }
-    }*/
     public float getMovespeed()
     {
         return dataHero.moveSpeed;
     }
 
-    /*public static void addGold(int gold, string name)
+    public void increaseAttributes()
     {
-        GoldLoader[] goldAmountText = FindObjectsOfType<GoldLoader>();
-        for(int i = 0; i < goldAmountText.Length; i++)
-        {
-            if (goldAmountText[i].type.Equals(name))
-            {
-                goldAmountText[i].addGold(gold);
-                break;
-            }
-        }
-    }*/
+        //increase original attributes
+        Enhanced newAttributes = JsonUtility.FromJson<Enhanced>(GameLoader.Instance.EnhanceScale.text);
+        dataHero.health *= newAttributes.health;
+        dataHero.damage *= newAttributes.damage;
+        dataHero.armor *= newAttributes.armor;
+        dataHero.attackSpeed *= newAttributes.attackSpeed;
+        dataHero.goldOnDeath *= newAttributes.goldOnDeath;
+        //remember to increase level
+        dataHero.level++;
+        //increase the size of it
+        gameObject.transform.localScale = dataHero.level*size;
+    }
 }

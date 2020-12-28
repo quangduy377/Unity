@@ -12,7 +12,6 @@ public class HeroAttackBuilding : MonoBehaviour
     private TowerHandler tower;
     private bool attack;
     private float timeInterval;
-    private float currentHpBuilding;
 
     void Start()
     {
@@ -40,10 +39,11 @@ public class HeroAttackBuilding : MonoBehaviour
             AttackTower.attackBuilding(ref timeInterval, 1 / player.attackSpeed, tower, player);
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         //detect if we hit the building
-        if (collision.transform.name == "TeamLeft" || collision.transform.name == "TeamRight")
+        if ((other.transform.name.Equals("TeamLeft") && PlayerPrefs.GetString("playerSide").Equals("RIGHT")) 
+            || (other.transform.name.Equals("TeamRight")&& PlayerPrefs.GetString("playerSide").Equals("LEFT")))
         {
             attack = true;
         }

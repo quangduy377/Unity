@@ -13,13 +13,11 @@ public class AttackEnemyPlayer
         if (randomId == -1)
         {
             //we now attack the target wall
-            //agent.SetDestination(targetBuilding.transform.position);
             player.GetComponent<NavMeshAgent>().SetDestination(targetBuilding.transform.position);
         }
         else
         {
             //else we still have targets to take down. REMEMBER WE ARE ENEMIES
-            //agent.SetDestination(enemies[randomId].transform.position);
             player.GetComponent<NavMeshAgent>().SetDestination(enemies[randomId].transform.position);
         }
     }
@@ -38,7 +36,7 @@ public class AttackEnemyPlayer
         float enemyHp = dataEnemy.health;
         if (enemyHp <= 0)
             return;
-        int enemyArmor = dataEnemy.armor;
+        float enemyArmor = dataEnemy.armor;
         //remember we are player
         float playerDamage = dataHero.damage;
         //now make an attack

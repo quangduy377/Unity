@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class AutoSpawEnemy : MonoBehaviour
 {
-    //spawn enemy after timeCount interval, in this case 2.0f
     private float timeCount;
     private float currentTimeRemaining;
 
@@ -15,11 +14,9 @@ public class AutoSpawEnemy : MonoBehaviour
 
     public GameObject mickeyEnemyPrefab;
     public GameObject ralphEnemyPrefab;
-    /// ///////////////////////////////////////
-    private int playerId;
     void Start()
     {
-        timeCount = 2.0f;
+        timeCount = 1.0f;
         currentTimeRemaining = timeCount;
     }
 
@@ -43,14 +40,14 @@ public class AutoSpawEnemy : MonoBehaviour
         {
             //we need to find the left wall
             wall = GameObject.Find("LeftWall");
-            respawn = new Vector3(wall.transform.position.x - 3.0f, wall.transform.position.y + 2.0f, wall.transform.position.z);
+            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.89f,6.06f));
             rotation = -90;
         }
         //WE ARE ENEMIES
         else if (PlayerPrefs.GetString("enemySide") == "RIGHT")
         {
             wall = GameObject.Find("RightWall");
-            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z);
+            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.31f,3.79f));
             rotation = 90;
         }
         //MICKEY
@@ -66,9 +63,7 @@ public class AutoSpawEnemy : MonoBehaviour
             //assign back the name, so we make sure enemy can detect it and attack
             mickeyClone.transform.name = "ENEMY";
             mickeyClone.transform.tag = PlayerPrefs.GetString("enemySide");
-            Debug.Log("respawed Mickey");
-            //since we bought a mickey, we must deduct the money we have in the pocket
-            //deductMoney(-PlayerPrefs.GetInt("MICKEY_goldToBuy"));
+            Debug.Log("respawed Mickey");         
         }
         else
         {
@@ -76,20 +71,18 @@ public class AutoSpawEnemy : MonoBehaviour
                 return;
             GameObject ralphClone = Instantiate(ralphEnemyPrefab, respawn, transform.rotation) as GameObject;
             ralphClone.GetComponent<NavMeshAgent>().speed = 5.0f;
-
-
             ralphClone.transform.eulerAngles = new Vector3(ralphClone.transform.eulerAngles.x, ralphClone.transform.eulerAngles.y + rotation, ralphClone.transform.eulerAngles.z);
             //since we bought a RALPh, we must deduct the money we have in the pocket
             ralphClone.transform.name = "ENEMY";
             ralphClone.tag = PlayerPrefs.GetString("enemySide");
             Debug.Log("respawed RALPH");
-            //deductMoney(-PlayerPrefs.GetInt("RALPH_goldToBuy"));
         }
     }
     public bool buySuccessfully(int money)
     {
         int totalMoney = 0;
         GoldLoader[] goldData = FindObjectsOfType<GoldLoader>();
+
         for (int i = 0; i < goldData.Length; i++)
         {
             if (goldData[i].type == "Enemy")

@@ -6,5 +6,5 @@ public class TowerData
 {
     public string type;
     public float health;
-    public int armor;
+    public float armor;
 }

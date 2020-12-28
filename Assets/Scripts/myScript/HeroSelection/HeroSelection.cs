@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class HeroSelection : MonoBehaviour
 {
-    private Vector3 mOffset;
-    private float zCoord;
-
-    //public GameObject mickeyrespawnPlace;
-    //public GameObject ralphrespawnPlace;
 
     private GameObject wall;
     public GameObject mickeyPrefab;
@@ -23,14 +18,14 @@ public class HeroSelection : MonoBehaviour
         {
             //we need to find the left wall
             wall = GameObject.Find("LeftWall");
-            respawn = new Vector3(wall.transform.position.x - 3.0f, wall.transform.position.y + 2.0f, wall.transform.position.z);
+            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.89f, 6.06f));
             rotation = -90;
             Debug.Log("player team is on the left");
         }
         else if (PlayerPrefs.GetString("playerSide") == "RIGHT")
         {
             wall = GameObject.Find("RightWall");
-            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y + 2.0f, wall.transform.position.z);
+            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.31f, 3.79f));
             rotation = 90;
         }
     }
@@ -46,9 +41,6 @@ public class HeroSelection : MonoBehaviour
         mickeyClone.transform.name = "ALLY";
         mickeyClone.transform.tag = PlayerPrefs.GetString("playerSide");
         Debug.Log("Mickey selected, with respawn place:"+mickeyClone.transform.position);
-
-        //since we bought a mickey, we must deduct the money we have in the pocket
-        //deductMoney(-PlayerPrefs.GetInt("MICKEY_goldToBuy"));
     }
     public void RalphSelected()
     {
@@ -62,7 +54,6 @@ public class HeroSelection : MonoBehaviour
         ralphClone.transform.name = "ALLY";
         ralphClone.transform.tag = PlayerPrefs.GetString("playerSide");
         Debug.Log("Ralph selected, with respawn place:" + ralphClone.transform.position);
-        //deductMoney(-PlayerPrefs.GetInt("RALPH_goldToBuy"));
     }
 
     //decrease the amount of money we have in budget

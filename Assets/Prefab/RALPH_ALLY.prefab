@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 7897983390244314575}
   - component: {fileID: 5560518438966677521}
   - component: {fileID: -223038708535924665}
+  - component: {fileID: -2006398522792684684}
   m_Layer: 0
   m_Name: RALPH_ALLY
   m_TagString: ALLY
@@ -1271,8 +1272,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7897983388995447516}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 92000ce6ba974f6488d83fd8382122af, type: 3}
-  m_Controller: {fileID: 9100000, guid: 09cb4b0c82c25cb499dd34bca4019661, type: 2}
+  m_Avatar: {fileID: 9000000, guid: a0027cf93264dae4d8daf023771b9a39, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1191bd265310d0c41963f76a42fd2bca, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1305,7 +1306,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7897983388995447516}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: -1.74, y: 2.49, z: 1.79}
@@ -1322,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537ea11362ddc234aa43673262b812e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroData: {fileID: 4900000, guid: 944a6aaae450a0c44a61dc294d123418, type: 3}
+  character: Ralph
 --- !u!195 &5560518438966677521
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1355,6 +1356,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e2e445dcd61c9846b97504890bee73b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2006398522792684684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897983388995447516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e155d468eccd714db50290e8de0aeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7897983388995447518

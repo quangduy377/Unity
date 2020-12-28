@@ -13,15 +13,20 @@ public class Enemy : MonoBehaviour
     private string targetTag;
 
     private bool moveable;
-    private bool findTarget;
 
     private NavMeshAgent agent;
 
-    private int randomId;
 
     private GameObject target;
 
-    public TextAsset file;
+    //public TextAsset file; SINGLETON
+    //SINGLETON
+    public string type;
+
+
+   
+    /// ////////////////////
+   
     public TextAsset teamloader;
     //remember we are enemy
     public HeroData enemy;
@@ -29,14 +34,26 @@ public class Enemy : MonoBehaviour
 
     private HeroData dataTarget;
 
-    private GoldLoader[] goldAmountText;
 
     private float timeInterval;
 
+    private Animator anim;
     private void Start()
     {
-        string data = file.text;        
-        enemy = JsonUtility.FromJson<HeroData>(data);
+        anim = GetComponent<Animator>();
+        
+        if (type.Equals("Mickey"))
+        {
+            enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
+            Debug.Log("Mickey respawn: "+enemy.level);
+        }
+        else if (type.Equals("Ralph"))
+        {
+            enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
+            Debug.Log("Ralph respawn: " + enemy.level);
+
+        }
+        ////////////////////
         moveable = true;
         identifyTags();
         //get all enemies to attack. REMEMBER we are enemies
@@ -45,9 +62,8 @@ public class Enemy : MonoBehaviour
         //findTargetAttack();
         AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
         agent.speed = enemy.moveSpeed;
-    }
 
-    private GameObject behindBuilding;
+    }
     void identifyTags()
     {
         //remember we are enemies
@@ -71,6 +87,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //we death
+        if (enemy.health <= 0)
+        {
+            anim.SetBool("dead", true);
+            Destroy(gameObject);
+            return;
+        }
         //always look for a target
         targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
         //if it is moving
@@ -105,7 +128,9 @@ public class Enemy : MonoBehaviour
             //and we need to add the gold we achieve by killing it
             if (dataTarget.health <= 0)
             {
-                Destroy(target);
+                //Destroy(target);
+                Debug.Log("we just kill an enemy, tempting to get data:");
+                Debug.Log("enemy hp: "+target.GetComponent<Hero>().getHeroData().health);
                 //now you need to move to find another opponent
                 moveable = !moveable;
                 //findTargetAttack();
@@ -113,28 +138,34 @@ public class Enemy : MonoBehaviour
                 //add gold collected
                 //addGoldCollected(dataTarget.goldOnDeath);
                 AddGold.addGold(dataTarget.goldOnDeath, "Enemy");
+
+                Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
+
                 Debug.Log("player DIE!!!");
+                anim.SetBool("enemyDead", true);
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
         //it is an impact, stop moving, and attack the enemy
-        if (collision.transform.tag.Equals(targetTag))
+        if (other.transform.tag.Equals(targetTag))
         {
             moveable = false;
             //get the information of the enemy
-            target = collision.gameObject;
+            target = other.gameObject;
 
             dataTarget = target.GetComponent<Hero>().getHeroData();
             //need to make them face to face literally, PENDINGGGG
+            anim.SetBool("attacking", true);
         }
         //if hit our ally, spread the ally out
-        else if(collision.transform.tag.Equals(usTag))
+        else if (other.transform.tag.Equals(usTag))
         {
-            float range = Random.Range(-1.0f, 1.0f);
-            collision.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x
-                , collision.gameObject.transform.position.y, collision.gameObject.transform.position.z + range);
+            float range = Random.Range(-0.5f, 0.5f);
+            other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x + range
+                , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
         }
     }
     public HeroData getHeroData()
@@ -145,6 +176,5 @@ public class Enemy : MonoBehaviour
     {
         return enemy.moveSpeed;
     }
-
     
 }

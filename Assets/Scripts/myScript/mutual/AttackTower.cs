@@ -14,7 +14,7 @@ public class AttackTower
         Debug.Log("inside static funct, towerHp" + towerHp);
         if (towerHp <= 0)
             return;
-        int towerArmor = tower.getTowerData().armor;
+        float towerArmor = tower.getTowerData().armor;
         float heroDamage = player.damage;
         Debug.Log("inside static funct, playerDamn" + heroDamage);
 
