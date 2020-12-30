@@ -3,31 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class test : MonoBehaviour
 {
-    public class Student
+    private void Start()
     {
-        public int age;
-        public string name;
+        GameObject ob = CreateText(gameObject.transform, 100, 100, "HelloWorld", 20, Color.red);
     }
-    void Start()
+    GameObject CreateText(Transform canvas_transform, float x, float y, string text_to_print, int font_size, Color text_color)
     {
-        Student t = new Student();
-        t.age = 10;
-        t.name = "Duy";
+        GameObject UItextGO = new GameObject("Text2");
+        UItextGO.transform.SetParent(canvas_transform);
 
-        Type type = typeof(Student);
-        PropertyInfo[] properties = type.GetProperties();
-        foreach (PropertyInfo property in properties)
-        {
-            Debug.Log("property name: " + property.Name);
-        }
-    }
+        RectTransform trans = UItextGO.AddComponent<RectTransform>();
+        trans.anchoredPosition = new Vector2(x, y);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Text text = UItextGO.AddComponent<Text>();
+        text.text = text_to_print;
+        text.fontSize = font_size;
+        text.color = text_color;
+
+        return UItextGO;
     }
 }

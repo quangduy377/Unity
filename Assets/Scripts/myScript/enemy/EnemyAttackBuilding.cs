@@ -11,8 +11,10 @@ public class EnemyAttackBuilding : MonoBehaviour
     private bool attack;
     private float timeInterval;
     private NavMeshAgent agent;
+    private Animator anim;
     void Start()
     {
+        anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         enemy = GetComponent<Enemy>().getHeroData();
         attack = false;
@@ -38,7 +40,8 @@ public class EnemyAttackBuilding : MonoBehaviour
         {
             //stop the enemy
             agent.isStopped = true;
-
+            //make its animation
+            Animation.runToAttack(ref anim);
             AttackTower.attackBuilding(ref timeInterval, 1 / enemy.attackSpeed, tower, enemy);
 
         }
@@ -58,18 +61,4 @@ public class EnemyAttackBuilding : MonoBehaviour
                 attack = true;
         }
     }
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        //detect if we hit the building
-        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
-        {
-            if (collision.transform.name == "TeamRight")
-                attack = true;
-        }
-        else if (PlayerPrefs.GetString("enemySide").Equals("RIGHT"))
-        {
-            if (collision.transform.name == "TeamLeft")
-                attack = true;
-        }
-    }*/
 }

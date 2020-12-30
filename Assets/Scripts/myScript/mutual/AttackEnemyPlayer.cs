@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class AttackEnemyPlayer
 {
@@ -29,7 +30,7 @@ public class AttackEnemyPlayer
         return UnityEngine.Random.Range(0, enemies.Length);
     }
 
-    public static void attack(ref float timeInterval, ref HeroData dataEnemy, HeroData dataHero, float attackPeriod)
+    public static void attack(ref float timeInterval, ref HeroData dataEnemy, HeroData dataHero, float attackPeriod, GameObject enemy)
     {
 
         timeInterval += Time.deltaTime;
@@ -45,7 +46,17 @@ public class AttackEnemyPlayer
             enemyHp -= playerDamage;
             enemyHp += enemyArmor;
             dataEnemy.health = enemyHp;
+            //should deduct the enemy Health
+            EnemyAllyManager.deductHealthBar(enemy, playerDamage - enemyArmor);
+            EnemyAllyManager.increasePowBar(enemy, playerDamage - enemyArmor);
             timeInterval = 0;
         }
+    }
+    
+    public static void Pow(ref HeroData dataEnemy, HeroData dataHero, GameObject enemy)
+    {
+        dataEnemy.health -= dataHero.damage*10;
+        EnemyAllyManager.deductHealthBar(enemy, dataHero.damage*10);
+        EnemyAllyManager.increasePowBar(enemy, dataHero.damage*10);
     }
 }

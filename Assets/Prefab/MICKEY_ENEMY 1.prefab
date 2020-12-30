@@ -218,6 +218,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: Mickey
   teamloader: {fileID: 4900000, guid: f0d0ba31962204d46a0ce5b2a29f99b7, type: 3}
+  healthBarSliderPrefab: {fileID: 464212413205194696, guid: b1d944a282321d64b83c7be78d527b86,
+    type: 3}
+  powBarSliderPrefab: {fileID: 5186688759264662664, guid: 4d7a298bdf5602841910493fc5219c5d,
+    type: 3}
+  enemySkill: {fileID: 7890521896814381848, guid: ffd7e80c91f5c1040949fbda23a8080e,
+    type: 3}
 --- !u!114 &3028879029316930559
 MonoBehaviour:
   m_ObjectHideFlags: 0

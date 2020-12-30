@@ -1324,6 +1324,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: Ralph
+  healthBarSliderPrefab: {fileID: 464212413205194696, guid: b1d944a282321d64b83c7be78d527b86,
+    type: 3}
+  powBarSliderPrefab: {fileID: 5186688759264662664, guid: 4d7a298bdf5602841910493fc5219c5d,
+    type: 3}
+  heroSkill: {fileID: 4061194507574545251, guid: 462602247ac2b114bb35c55421df85ea,
+    type: 3}
 --- !u!195 &5560518438966677521
 NavMeshAgent:
   m_ObjectHideFlags: 0

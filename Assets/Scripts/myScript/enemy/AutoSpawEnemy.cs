@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+//using Random = UnityEngine.Random;
 
 public class AutoSpawEnemy : MonoBehaviour
 {
@@ -16,7 +17,8 @@ public class AutoSpawEnemy : MonoBehaviour
     public GameObject ralphEnemyPrefab;
     void Start()
     {
-        timeCount = 1.0f;
+        
+        timeCount = 5.0f;
         currentTimeRemaining = timeCount;
     }
 

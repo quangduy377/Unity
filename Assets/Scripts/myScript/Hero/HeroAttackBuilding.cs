@@ -12,9 +12,10 @@ public class HeroAttackBuilding : MonoBehaviour
     private TowerHandler tower;
     private bool attack;
     private float timeInterval;
-
+    private Animator anim;
     void Start()
     {
+        anim = GetComponent<Animator>();
         player = GetComponent<Hero>().getHeroData();
         attack = false;
         timeInterval = 0;
@@ -46,6 +47,7 @@ public class HeroAttackBuilding : MonoBehaviour
             || (other.transform.name.Equals("TeamRight")&& PlayerPrefs.GetString("playerSide").Equals("LEFT")))
         {
             attack = true;
+            Animation.runToAttack(ref anim);
         }
     }
 }

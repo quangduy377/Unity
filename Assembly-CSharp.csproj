@@ -64,31 +64,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Run.cs" />
     <Compile Include="Assets\Scripts\Core\Utils\Singleton\ApiSingleton.cs" />
     <Compile Include="Assets\Scripts\Core\Utils\Singleton\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\HeroSelection\DragHero.cs" />
     <Compile Include="Assets\Scripts\Utils\Physics\MathfExtensions.cs" />
     <Compile Include="Assets\Scripts\Utils\Physics\PhysicsUtils.cs" />
-    <Compile Include="Assets\Scripts\myScript\GameLoader.cs" />
+    <Compile Include="Assets\Scripts\myScript\Animation.cs" />
+    <Compile Include="Assets\Scripts\myScript\BarAttached.cs" />
     <Compile Include="Assets\Scripts\myScript\Gold\GoldData.cs" />
     <Compile Include="Assets\Scripts\myScript\Gold\GoldLoader.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\Enhanced.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\Hero.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\HeroAttackBuilding.cs" />
     <Compile Include="Assets\Scripts\myScript\Hero\HeroData.cs" />
+    <Compile Include="Assets\Scripts\myScript\Hero\drag.cs" />
     <Compile Include="Assets\Scripts\myScript\HeroSelection\HeroSelection.cs" />
+    <Compile Include="Assets\Scripts\myScript\LevelAttached.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\LoadTeamSide.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\TeamConfig.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\GameOver.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\TowerData.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\TowerHandler.cs" />
-    <Compile Include="Assets\Scripts\myScript\drag.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\AutoSpawEnemy.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\EnemyAttackBuilding.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\AddGold.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\AttackEnemyPlayer.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\AttackTower.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\ComponentManager.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\EnemyAllyManager.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\GameLoader.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\HealthManager.cs" />
     <Compile Include="Assets\Scripts\myScript\test.cs" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_AlphaBlend.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Additive.shader" />

@@ -10,21 +10,38 @@ public class HeroSelection : MonoBehaviour
     public GameObject mickeyPrefab;
     public GameObject ralphPrefab;
 
+    /*public GameObject healthBar;
+    public GameObject powBar;*/
+
     private Vector3 respawn;
     private int rotation;
     public void Start()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
         if (PlayerPrefs.GetString("playerSide") == "LEFT")
         {
             //we need to find the left wall
             wall = GameObject.Find("LeftWall");
-            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.89f, 6.06f));
-            rotation = -90;
-            Debug.Log("player team is on the left");
+            //respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.89f, 6.06f));
+            //rotation = -90;
         }
         else if (PlayerPrefs.GetString("playerSide") == "RIGHT")
         {
             wall = GameObject.Find("RightWall");
+            //respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.31f, 3.79f));
+            //rotation = 90;
+        }
+    }
+
+    public void randomArea()
+    {
+        if (wall.name.Equals("LeftWall"))
+        {
+            respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.89f, 6.06f));
+            rotation = -90;
+        }
+        else if(wall.name.Equals("RightWall"))
+        {
             respawn = new Vector3(wall.transform.position.x, wall.transform.position.y, wall.transform.position.z + Random.Range(-3.31f, 3.79f));
             rotation = 90;
         }
@@ -34,7 +51,7 @@ public class HeroSelection : MonoBehaviour
         //we don't have enough money to buy
         if (!buySuccessfully(-PlayerPrefs.GetInt("MICKEY_goldToBuy")))
             return;
-
+        randomArea();
         GameObject mickeyClone = Instantiate(mickeyPrefab, respawn, transform.rotation) as GameObject;
         mickeyClone.transform.eulerAngles = new Vector3(mickeyClone.transform.eulerAngles.x, mickeyClone.transform.eulerAngles.y +rotation, mickeyClone.transform.eulerAngles.z);
         //assign back the name, so we make sure enemy can detect it and attack
@@ -47,6 +64,7 @@ public class HeroSelection : MonoBehaviour
         //we don't have enough money to buy
         if (!buySuccessfully(-PlayerPrefs.GetInt("RALPH_goldToBuy")))
             return;
+        randomArea();
         Debug.Log("Ralph selected");
         GameObject ralphClone = Instantiate(ralphPrefab, respawn, transform.rotation) as GameObject;
         ralphClone.transform.eulerAngles = new Vector3(ralphClone.transform.eulerAngles.x, ralphClone.transform.eulerAngles.y + rotation, ralphClone.transform.eulerAngles.z);
@@ -76,6 +94,12 @@ public class HeroSelection : MonoBehaviour
         }
         return false;
     }
+
+    /*public void instantiateBars()
+    {
+        Vector3 pos = Camera.main.WorldToScreenPoint(this.transform.position);
+
+    }*/
 }
 
 
