@@ -1,12 +1,13 @@
 {
   "type": "MICKEY",
-  "health": "100",
+  "health": "300",
   "damage": "10",
   "armor": "5",
-  "attackMode": "RANGED",
-  "attackSpeed": "5.0f",
+  "attackMode": "MELEE",
+  "attackSpeed": "2.0f",
   "moveSpeed": "2.0f",
   "goldOnDeath": "20",
   "goldToBuy": "20",
-  "level": "1"
+  "level": "1",
+  "ID": "-5"
 }

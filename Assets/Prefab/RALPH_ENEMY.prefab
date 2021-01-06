@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2196437681502810083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3430617156774180813}
+  m_Layer: 0
+  m_Name: BulletPit
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3430617156774180813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196437681502810083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.08, y: 1.16, z: 1.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6152354068196614795}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6152354068196916865
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614817}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body_chest_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614819}
   - component: {fileID: 6152354068202189701}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614821}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: b_cloth_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614823}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body_belly_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614825}
   - component: {fileID: 6152354068202189703}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: cherry_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614827}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: f_cloth_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614829}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body_pelvis_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614831}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: button_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614833}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HELPER01_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614835}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_arm_clavicle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614837}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head_face_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614839}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head_neck_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614841}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_arm_palm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +574,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614843}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_arm_upper_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614845}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_arm_fore_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614847}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_arm_forearm_twist_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614881}
   - component: {fileID: 6152354068202189711}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_open_hand_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +752,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614883}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: strap_front_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614885}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_leg_tight_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614887}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_leg_toe_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614893}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tie_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614895}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: world_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614785}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_leg_heel_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614787}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_leg_tight_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614789}
   - component: {fileID: 6152354068202189697}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_close_hand_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614791}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_leg_calf_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614793}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: model_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1126,8 @@ GameObject:
   - component: {fileID: -1442923563372195144}
   - component: {fileID: 3250459323343339535}
   - component: {fileID: -2566894804908025243}
-  m_Layer: 0
+  - component: {fileID: 470287149067545108}
+  m_Layer: 11
   m_Name: RALPH_ENEMY
   m_TagString: ENEMY
   m_Icon: {fileID: 0}
@@ -1116,6 +1147,8 @@ Transform:
   m_Children:
   - {fileID: 6152354068196614793}
   - {fileID: 6152354068196614895}
+  - {fileID: 3430617156774180813}
+  - {fileID: 1737300667743642065}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1165,8 +1198,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: -1.74, y: 2.49, z: 1.79}
-  m_Center: {x: 0, y: 1.1, z: 0.3}
+  m_Size: {x: 2, y: 2, z: 1.26}
+  m_Center: {x: 0, y: 1, z: 0.3}
 --- !u!195 &-1442923563372195144
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1209,6 +1242,9 @@ MonoBehaviour:
     type: 3}
   enemySkill: {fileID: 4061194507574545251, guid: 462602247ac2b114bb35c55421df85ea,
     type: 3}
+  allyLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &-2566894804908025243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,6 +1257,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2703954fc8012674c85c740d3f9c7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &470287149067545108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152354068196916971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb0c444d0013fd4bb9552d30b31d36a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: Ralph
+  enemySkill: {fileID: 4061194507574545251, guid: 462602247ac2b114bb35c55421df85ea,
+    type: 3}
 --- !u!1 &6152354068196916973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614797}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_leg_toe_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614799}
   - component: {fileID: 6152354068202189699}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: l_open_hand_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1345,7 +1396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614801}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_arm_forearm_twist_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1375,7 +1426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614803}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_arm_palm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1405,7 +1456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614805}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_arm_clavicle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,7 +1488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614807}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_arm_fore_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1469,7 +1520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614809}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_leg_calf_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,7 +1551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614811}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_leg_heel_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1531,7 +1582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6152354068196614813}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_arm_upper_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1563,7 +1614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152354068196614815}
   - component: {fileID: 6152354068202189709}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: r_close_hand_geo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1638,3 +1689,111 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.404252, y: 0.026536584, z: -0.022313409}
     m_Extent: {x: 0.25139856, y: 0.29079616, z: 0.26223275}
   m_DirtyAABB: 0
+--- !u!1 &8745550907242882569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737300667743642065}
+  - component: {fileID: 4196695395258150810}
+  - component: {fileID: 6992435899025444030}
+  - component: {fileID: 4842155197574586492}
+  - component: {fileID: 7205333253804794006}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1737300667743642065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745550907242882569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 3.3}
+  m_LocalScale: {x: 0.498, y: 1.8025, z: 7.0648}
+  m_Children: []
+  m_Father: {fileID: 6152354068196614795}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4196695395258150810
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745550907242882569}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6992435899025444030
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745550907242882569}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &4842155197574586492
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745550907242882569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7205333253804794006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745550907242882569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0010511caab7bd54a958d43a6b9081c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 6147264612471087810, guid: 31904cfd4b7ece644b4411ed8e061d5f, type: 3}
+  bulletPit: {fileID: 3430617156774180813}

@@ -55,8 +55,16 @@ public class GameOver : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("enemySide"));
         for (int i = 0; i < players.Length; i++)
+        {
+            Destroy(players[i].GetComponent<Hero>().getHealthBar().gameObject);
+            Destroy(players[i].GetComponent<Hero>().getPowBar().gameObject);
             Destroy(players[i]);
+        }
         for (int i = 0; i < enemies.Length; i++)
+        {
+            Destroy(enemies[i].GetComponent<Enemy>().getHealthBar().gameObject);
+            Destroy(enemies[i].GetComponent<Enemy>().getPowBar().gameObject);
             Destroy(enemies[i]);
+        }
     }
 }

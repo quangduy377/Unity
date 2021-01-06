@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerHandler : MonoBehaviour
 {
     private float currentHp;
     private TowerData towerData;
     public string team;
+
+    public GameObject healthBar;
     // Start is called before the first frame update
     void Start()
     {
-       
         if (team.Equals("RIGHT"))
         {
             towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.RightTower.text);
@@ -20,6 +22,14 @@ public class TowerHandler : MonoBehaviour
             towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.LeftTower.text);
         }
         currentHp = towerData.health;
+
+        healthBar.GetComponent<Slider>().maxValue = towerData.health;
+        healthBar.GetComponent<Slider>().minValue = 0.0f;
+        healthBar.GetComponent<Slider>().value = healthBar.GetComponent<Slider>().maxValue;
+
+        /*healthBar.maxValue = towerData.health;
+        healthBar.minValue = 0.0f;
+        healthBar.value = healthBar.maxValue;*/
     }
     // Update is called once per frame
     void Update()
@@ -27,6 +37,7 @@ public class TowerHandler : MonoBehaviour
         if (gameObject!=null && currentHp<=0)
         {
             Destroy(gameObject);
+            Destroy(healthBar);
         }
     }
     public float getCurrentHp()

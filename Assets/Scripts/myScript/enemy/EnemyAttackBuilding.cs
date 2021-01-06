@@ -36,14 +36,21 @@ public class EnemyAttackBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (enemy.attackMode.Equals("RANGED"))
+            return;
         if (attack)
         {
             //stop the enemy
             agent.isStopped = true;
             //make its animation
             Animation.runToAttack(ref anim);
-            AttackTower.attackBuilding(ref timeInterval, 1 / enemy.attackSpeed, tower, enemy);
-
+            Debug.Log("after anim set to attack building");
+            timeInterval += Time.deltaTime;
+            if (timeInterval >= (1 / enemy.attackSpeed))
+            {
+                AttackTower.attackBuilding(tower, enemy.damage);
+                timeInterval = 0.0f;
+            }
         }
     }
     //

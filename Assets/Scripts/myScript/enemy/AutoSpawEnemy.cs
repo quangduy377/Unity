@@ -17,18 +17,19 @@ public class AutoSpawEnemy : MonoBehaviour
     public GameObject ralphEnemyPrefab;
     void Start()
     {
-        
-        timeCount = 5.0f;
+        timeCount = 2.0f;
         currentTimeRemaining = timeCount;
     }
 
     // Update is called once per frame
+    private bool isSpawn = false;
     void Update()
     {
         currentTimeRemaining -= Time.deltaTime;
         //time to respawn
-        if (currentTimeRemaining <= 0)
+        if (currentTimeRemaining <= 0.0f)
         {
+            //isSpawn = true;
             SpawnEnemy();
             currentTimeRemaining = timeCount;
         }

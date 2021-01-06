@@ -6,6 +6,14 @@ using UnityEngine.UI;
 
 public class AttackEnemyPlayer
 {
+    public static void goToBuilding(GameObject player, GameObject targetBuilding)
+    {
+        Vector3 destination = new Vector3(targetBuilding.transform.position.x, player.transform.position.y, player.transform.position.z);
+        player.GetComponent<NavMeshAgent>().SetDestination(destination);
+    }
+
+    
+
     public static void findTargetAttack(GameObject player,GameObject targetBuilding, GameObject[] enemies, string tag)
     {
         int randomId = -10;
@@ -30,10 +38,9 @@ public class AttackEnemyPlayer
         return UnityEngine.Random.Range(0, enemies.Length);
     }
 
-    public static void attack(ref float timeInterval, ref HeroData dataEnemy, HeroData dataHero, float attackPeriod, GameObject enemy)
+    public static void attack(ref HeroData dataEnemy, HeroData dataHero, GameObject enemy)
     {
 
-        timeInterval += Time.deltaTime;
         float enemyHp = dataEnemy.health;
         if (enemyHp <= 0)
             return;
@@ -41,22 +48,33 @@ public class AttackEnemyPlayer
         //remember we are player
         float playerDamage = dataHero.damage;
         //now make an attack
-        if (timeInterval >= attackPeriod)
-        {
-            enemyHp -= playerDamage;
-            enemyHp += enemyArmor;
-            dataEnemy.health = enemyHp;
-            //should deduct the enemy Health
-            EnemyAllyManager.deductHealthBar(enemy, playerDamage - enemyArmor);
-            EnemyAllyManager.increasePowBar(enemy, playerDamage - enemyArmor);
-            timeInterval = 0;
-        }
+        enemyHp -= playerDamage;
+        enemyHp += enemyArmor;
+        dataEnemy.health = enemyHp;
+
+        Debug.Log(Time.frameCount + ": " + enemy.name + " enemy HP" + dataEnemy.health);
+        //should deduct the enemy Health
+        EnemyAllyManager.deductHealthBar(enemy, playerDamage - enemyArmor);
+        EnemyAllyManager.increasePowBar(enemy, playerDamage - enemyArmor);
     }
-    
+
     public static void Pow(ref HeroData dataEnemy, HeroData dataHero, GameObject enemy)
     {
-        dataEnemy.health -= dataHero.damage*10;
-        EnemyAllyManager.deductHealthBar(enemy, dataHero.damage*10);
-        EnemyAllyManager.increasePowBar(enemy, dataHero.damage*10);
+        PowData pow = JsonUtility.FromJson<PowData>(GameLoader.Instance.Pow.text);
+        float damageTime = pow.powTimeDamage;
+        float powAccumulatedTime = pow.powAccumulated;
+        dataEnemy.health -= dataHero.damage*damageTime;
+        EnemyAllyManager.deductHealthBar(enemy, dataHero.damage*damageTime);
+        EnemyAllyManager.increasePowBar(enemy, dataHero.damage*powAccumulatedTime);
+    }
+
+    public static void PowAOE(ref HeroData dataEnemy, HeroData dataHero, GameObject enemy)
+    {
+        PowData pow = JsonUtility.FromJson<PowData>(GameLoader.Instance.Pow.text);
+        float damageTime = pow.powTimeDamage;
+        float powAccumulatedTime = pow.powAccumulated;
+        dataEnemy.health -= dataHero.damage * damageTime;
+        EnemyAllyManager.deductHealthBar(enemy, dataHero.damage * damageTime);
+        EnemyAllyManager.increasePowBar(enemy, dataHero.damage * powAccumulatedTime);
     }
 }

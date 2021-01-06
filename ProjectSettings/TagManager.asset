@@ -20,9 +20,9 @@ TagManager:
   - 
   - Obstacle
   - Selection
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Bullet
   - 
   - 
   - 

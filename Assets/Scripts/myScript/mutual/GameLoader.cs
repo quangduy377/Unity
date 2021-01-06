@@ -13,6 +13,8 @@ public class GameLoader : MonoBehaviour
     public TextAsset RightTower;
     public TextAsset TeamSelection;
     public TextAsset EnhanceScale;
+    public TextAsset Pow;
+    public TextAsset bullet;
     private void Awake()
     {
         if (Instance == null)

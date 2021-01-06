@@ -48,6 +48,7 @@ public class HeroSelection : MonoBehaviour
     }
     public void MickeySelected()
     {
+        Debug.Log("just instantiated a mickey");
         //we don't have enough money to buy
         if (!buySuccessfully(-PlayerPrefs.GetInt("MICKEY_goldToBuy")))
             return;
@@ -58,6 +59,7 @@ public class HeroSelection : MonoBehaviour
         mickeyClone.transform.name = "ALLY";
         mickeyClone.transform.tag = PlayerPrefs.GetString("playerSide");
         Debug.Log("Mickey selected, with respawn place:"+mickeyClone.transform.position);
+
     }
     public void RalphSelected()
     {

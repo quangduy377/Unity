@@ -30,14 +30,21 @@ public class HeroAttackBuilding : MonoBehaviour
             tower = GameObject.Find("TeamLeft").GetComponent<TowerHandler>();
         }
     }
-
     // Update is called once per frame
     void Update()
     {
+        if (player.attackMode.Equals("RANGED"))
+            return;
         if (attack)
         {
+            timeInterval += Time.deltaTime;
             gameObject.GetComponent<NavMeshAgent>().isStopped = true;
-            AttackTower.attackBuilding(ref timeInterval, 1 / player.attackSpeed, tower, player);
+            Animation.runToAttack(ref anim);
+            if (timeInterval >= (1 / player.attackSpeed))
+            {
+                AttackTower.attackBuilding(tower, player.damage);
+                timeInterval = 0.0f;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

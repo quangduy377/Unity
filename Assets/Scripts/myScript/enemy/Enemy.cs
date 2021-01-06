@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     
-    private GameObject[] targetAllies;
+    //private GameObject[] targetAllies;
     private GameObject targetBuilding;
 
-    private string usTag;
-    private string targetTag;
+    /*private string usTag;
+    private string targetTag;*/
 
     private bool moveable;
 
@@ -24,8 +24,6 @@ public class Enemy : MonoBehaviour
     //SINGLETON
     public string type;
 
-
-   
     /// ////////////////////
    
     public TextAsset teamloader;
@@ -48,10 +46,17 @@ public class Enemy : MonoBehaviour
     private GameObject powerBar;
     //////////////////////////////////////////
     public GameObject enemySkill;
+
+    private bool attacking;
+    private bool removed;
+
+    private Collider[] encounteredAllies;
+    public LayerMask allyLayer;
     private void Start()
     {
+        attacking = false;
         anim = GetComponent<Animator>();
-
+        timeInterval = 0.0f;
         if (type.Equals("Mickey"))
         {
             enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
@@ -63,20 +68,39 @@ public class Enemy : MonoBehaviour
             Debug.Log("Ralph respawn: " + enemy.level);
 
         }
-        ////////////////////
         moveable = true;
-        identifyTags();
-        //get all enemies to attack. REMEMBER we are enemies
-        targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
+        
         agent = gameObject.GetComponent<NavMeshAgent>();
-        //findTargetAttack();
-        AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
-        agent.speed = enemy.moveSpeed;
 
-        //TESTING///
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        {
+            targetBuilding = GameObject.Find("TeamRight");
+
+        }
+        else
+        {
+            targetBuilding = GameObject.Find("TeamLeft");
+        }
+        agent.speed = enemy.moveSpeed;
+        AttackEnemyPlayer.goToBuilding(gameObject, targetBuilding);
         instantiateHealthPowBar();
-        EnemyAllyManager.addAlly(healthBar, powerBar, gameObject);
-        /////////////////
+        EnemyAllyManager.enemiesId++;
+        enemy.id = EnemyAllyManager.enemiesId;
+        Debug.Log("enemy ID " + enemy.id);
+        ///////////////////////
+        ///TESTING disable the cube, this is a melee type
+        if (!enemy.attackMode.Equals("RANGED"))
+        {
+            GameObject cube = GameObject.Find("Cube");
+            cube.SetActive(false);
+            Destroy(gameObject.GetComponent<RangedEnemy>());
+        }
+        //this is a ranged type
+        else
+        {
+            Destroy(gameObject.GetComponent<EnemyAttackBuilding>());
+        }
+        
     }
     //TESTING
     public void instantiateHealthPowBar()
@@ -106,128 +130,140 @@ public class Enemy : MonoBehaviour
         Vector3 vector = Camera.main.WorldToScreenPoint(this.transform.position);
         //Camera.main.
         Debug.Log("convert to screen point x:" + vector.x + ", y:" + vector.y + ", z:" + vector.z);
-
         healthBar.transform.position = new Vector3(vector.x, vector.y + 29.0f, vector.z);
         powerBar.transform.position = new Vector3(vector.x, vector.y + 25.0f, vector.z);
     }
-    /// ////////////////////////////////////
-
-    void identifyTags()
-    {
-        //remember we are enemies
-        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
-        {
-            usTag = "LEFT";
-            targetTag = "RIGHT";
-            Debug.Log("insdie ENEMY, enemies on the LEFT");
-            targetBuilding = GameObject.Find("TeamRight");
-
-        }
-        else
-        {
-            usTag = "RIGHT";
-            targetTag = "LEFT";
-            Debug.Log("insdie ENEMY, enemies on the RIGHT");
-            targetBuilding = GameObject.Find("TeamLeft");
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
+        encounteredAllies = Physics.OverlapBox(transform.position, new Vector3(2.0f, 2.0f, 2.0f), Quaternion.identity, allyLayer);
         barsFollowObject();//TESTING
-        //we death
         if (enemy.health <= 0)
         {
+            //we add gold for the player
+            AddGold.addGold(enemy.goldOnDeath, "Player");
+            //removed = true;
             anim.SetBool("dead", true);
-            Destroy(gameObject);
-            Destroy(healthBar);
-            Destroy(powerBar);
+            Animation.dead(ref anim);
+            removeAllComponents();
+            Debug.Log("REMOVED ENEMY");
             return;
         }
-        //always look for a target
-        targetAllies = GameObject.FindGameObjectsWithTag(PlayerPrefs.GetString("playerSide"));
+        if (enemy.attackMode.Equals("RANGED"))
+        {
+            Debug.Log("skipped enemy.cs");
+            return;
+        }
+        //we death
+        Debug.Log("inside Enemy.cs, enemy HP " + healthBar.GetComponent<Slider>().value);
+        Debug.Log("inside Enemy.cs, enemy POW " + powerBar.GetComponent<Slider>().value);
+
+        
         //if it is moving
         if (moveable)
         {   
             agent.isStopped = false;
-            //check if he reach the destination
-            if (agent.remainingDistance <= 0)
+            if (encounteredAllies.Length > 0)
             {
-                AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
+                Debug.Log("inside enemy.cs, encoutered ally name: "+encounteredAllies[0].gameObject.transform.name);
+
+                moveable = false;
+                int id = randomId(0, encounteredAllies.Length);
+
+                Debug.Log("randomID: " + id);
+                target = encounteredAllies[id].gameObject;
+                dataTarget = target.GetComponent<Hero>().getHeroData();
+                Animation.runToAttack(ref anim);
             }
         }
+        //attacking ally
         else
         {
-            //stop moving
             agent.isStopped = true;
             //we received information about the enemy, we can now attack them
-            if (dataTarget != null)
+            if (target != null)
             {
-                //attackPlayer(1 / enemy.attackSpeed);
-                AttackEnemyPlayer.attack(ref timeInterval, ref dataTarget, enemy, 1 / enemy.attackSpeed,target);
-                Debug.Log("Ally hpBar" + EnemyAllyManager.getHealthBar(target).GetComponent<Slider>().value);
-                /////////////////////////
-                if(powerBar.GetComponent<Slider>().value >= powerBar.GetComponent<Slider>().maxValue)
+                timeInterval += Time.deltaTime;
+                float attackTime = 1 / enemy.attackSpeed;
+                if (timeInterval >= attackTime)
                 {
-                    AttackEnemyPlayer.Pow(ref dataTarget, enemy, target);
-                    Instantiate(enemySkill, this.transform.position, this.transform.rotation);
-                    powerBar.GetComponent<Slider>().value = powerBar.GetComponent<Slider>().minValue;
+                    timeInterval = 0;
+                    AttackEnemyPlayer.attack(ref dataTarget, enemy, target);
+                }
+
+                if (dataTarget != null)
+                {
+                    if (dataTarget.health <= 0)
+                    {
+                        Debug.Log("we just kill an enemy, tempting to get data:");
+                        Debug.Log("enemies hp: " + target.GetComponent<Hero>().getHeroData().health);
+                        //now you need to move to find another opponent
+                        moveable = true;
+                        //findTargetAttack();
+                        //add gold collected
+                        //AddGold.addGold(dataTarget.goldOnDeath, "Enemy");
+
+                        Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
+                        Debug.Log("player DIE!!!");
+
+                        Animation.attackToRun(ref anim);
+                        agent.ResetPath();
+                        agent.SetDestination(targetBuilding.transform.position);
+                    }                    
                 }
             }
-            else
+            else 
             {
+                Debug.Log("hero is now null");
                 //that enemy no longer exists, should return
+                agent.ResetPath();
+                agent.SetDestination(targetBuilding.transform.position);
+                Animation.attackToRun(ref anim);
                 moveable = true;
+                return;
             }
-            //if the enemy health falls below zero, we exterminate it, and can move to find another enemy
-            //and we need to add the gold we achieve by killing it
-            if (dataTarget.health <= 0)
+            //time to pow
+            if (powerBar.GetComponent<Slider>().value >= powerBar.GetComponent<Slider>().maxValue)
             {
-                //Destroy(target);
-                Debug.Log("we just kill an enemy, tempting to get data:");
-                Debug.Log("enemies hp: "+target.GetComponent<Hero>().getHeroData().health);
-                //now you need to move to find another opponent
-                moveable = !moveable;
-                //findTargetAttack();
-                AttackEnemyPlayer.findTargetAttack(gameObject, targetBuilding, targetAllies, PlayerPrefs.GetString("playerSide"));
-                //add gold collected
-                //addGoldCollected(dataTarget.goldOnDeath);
-                AddGold.addGold(dataTarget.goldOnDeath, "Enemy");
+                Debug.Log("now enemy POW >100, noom");
+                //AttackEnemyPlayer.Pow(ref dataTarget, enemy, target);
+                Instantiate(enemySkill, this.transform.position, this.transform.rotation);
 
-                Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
-
-                Debug.Log("player DIE!!!");
-                anim.SetBool("enemyDead", true);
-
-                //TESTING
-                EnemyAllyManager.removeAlly(target);
-                /////////
+                if (encounteredAllies.Length > 0)
+                {
+                    Debug.Log("inside enemyPOW, with encountered: "+encounteredAllies.Length);
+                    for (int i = 0; i < encounteredAllies.Length; i++)
+                    {
+                        //deal special damage to this unit
+                        if (encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData().Equals(dataTarget))
+                        {
+                            AttackEnemyPlayer.Pow(ref dataTarget, enemy, encounteredAllies[i].gameObject);
+                        }
+                        //deal splash damage to around enemies
+                        else
+                        {
+                            HeroData enemy = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
+                            AttackEnemyPlayer.PowAOE(ref dataTarget, enemy, encounteredAllies[i].gameObject);
+                        }
+                    }
+                }
+                powerBar.GetComponent<Slider>().value = powerBar.GetComponent<Slider>().minValue;
             }
+           
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        //it is an impact, stop moving, and attack the enemy
-        if (other.transform.tag.Equals(targetTag))
+        //we need to spread out a little bit if we face our kind
+        if (other.transform.tag.Equals(PlayerPrefs.GetString("enemySide")))
         {
-            moveable = false;
-            //get the information of the enemy
-            target = other.gameObject;
-
-            dataTarget = target.GetComponent<Hero>().getHeroData();
-            //need to make them face to face literally, PENDINGGGG
-            anim.SetBool("attacking", true);
-        }
-        //if hit our ally, spread the ally out
-        else if (other.transform.tag.Equals(usTag))
-        {
-            float range = Random.Range(-0.5f, 0.5f);
+            float range = Random.Range(-0.2f, 0.2f);
             other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x + range
                 , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
         }
     }
+    //ally is moving away, we can't attack it anymore, we just skip it through;
+   
     public HeroData getHeroData()
     {
         return enemy;
@@ -236,6 +272,26 @@ public class Enemy : MonoBehaviour
     {
         return enemy.moveSpeed;
     }
-    
 
+    public GameObject getHealthBar()
+    {
+        return healthBar;
+    }
+    public GameObject getPowBar()
+    {
+        return powerBar;
+    }
+    public void removeAllComponents()
+    {
+        //delete healthBar
+        Destroy(healthBar);
+        //delete powBar
+        Destroy(powerBar);
+        //delete gameObject
+        Destroy(gameObject);
+    }
+    public int randomId(int min, int max)
+    {
+        return UnityEngine.Random.Range(min, max);
+    }
 }

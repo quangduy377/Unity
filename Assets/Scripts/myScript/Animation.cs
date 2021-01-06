@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Animation
 {
-    public static void runToMerge(ref Animator anim)
+    public static void fire(ref Animator anim)
     {
-        anim.SetBool("running", false);
-        anim.SetBool("merge", true);
-    }
-    public static void mergeToRun(ref Animator anim)
-    {
-        anim.SetBool("running", true);
-        anim.SetBool("merge", false);
+        anim.SetBool("firing", true);
     }
 
-    public static void runToAttack(ref Animator anim)
+    public static void fireToRun(ref Animator anim)
     {
-        anim.SetBool("running", false);
+        anim.SetBool("running", true);
+        anim.SetBool("firing", false);
+
+    }
+    public static void runToMerge(ref Animator anim)
+    {
+        anim.SetBool("merge", true);
         anim.SetBool("attacking", true);
     }
     public static void attackToRun(ref Animator anim)
@@ -25,9 +25,16 @@ public class Animation
         anim.SetBool("running", true);
         anim.SetBool("attacking", false);
     }
-    public static void attackToDead(ref Animator anim)
+    public static void runToAttack(ref Animator anim)
+    {
+        anim.SetBool("attacking", true);
+        anim.SetBool("merge", false);
+    }
+
+    public static void dead(ref Animator anim)
     {
         anim.SetBool("dead", true);
-        anim.SetBool("attack", false);
+        anim.SetBool("running", false);
+        anim.SetBool("attacking", false);
     }
 }
