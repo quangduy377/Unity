@@ -48,6 +48,8 @@ public class FireOnApproach : MonoBehaviour
         //now we can move
         if (attackingEnemy)
         {
+            //face toward enemy
+            stopAndRotate(enemy);
             if (enemy.GetComponent<Enemy>().getHeroData().health <= 0 || enemy == null)
             {
                 Animation.fireToRun(ref anim);
@@ -74,6 +76,37 @@ public class FireOnApproach : MonoBehaviour
             Debug.Log("detect border attack");
             attackingBuilding = true;
             Animation.fire(ref anim);
+        }
+    }
+    public void stopAndRotate(GameObject enemy)
+    {
+        float difference = hero.transform.position.z - enemy.transform.position.z;
+        //we are on the left
+        if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
+        {
+            //we are below
+            if (difference > 0)
+            {
+                hero.transform.eulerAngles = new Vector3(hero.transform.eulerAngles.x, -135.0f, hero.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                hero.transform.eulerAngles = new Vector3(hero.transform.eulerAngles.x, -45.0f, hero.transform.eulerAngles.z);
+            }
+        }
+        else
+        {
+            //we are below
+            if (difference > 0)
+            {
+                hero.transform.eulerAngles = new Vector3(hero.transform.eulerAngles.x, 135.0f, hero.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                hero.transform.eulerAngles = new Vector3(hero.transform.eulerAngles.x, 45.0f, hero.transform.eulerAngles.z);
+            }
         }
     }
 }

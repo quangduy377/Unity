@@ -34,11 +34,11 @@ public class Hero : MonoBehaviour
     private GameObject healthBar;
     private GameObject powerBar;
     //////////////////////////////////////////
-    
+
     //hero pow effect
     public GameObject heroSkill;
 
-    
+
     private bool attacking;
     private bool removed;
 
@@ -52,8 +52,11 @@ public class Hero : MonoBehaviour
     //public LayerMask playerLayer;
 
     private float rangedAttackPeriod;
+
+    private bool rotated;
     public void Start()
     {
+        rotated = false;
         Debug.Log("new instatiation");
         attacking = false;
         anim = GetComponent<Animator>();
@@ -62,11 +65,13 @@ public class Hero : MonoBehaviour
         {
             dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
             Debug.Log("Ally Mickey level:" + dataHero.level);
+            PlayerPrefs.SetInt("MICKEY_goldToBuy", dataHero.goldToBuy);
         }
-        else if(character.Equals("Ralph"))
+        else if (character.Equals("Ralph"))
         {
             dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
             Debug.Log("Ally Ralph level:" + dataHero.level);
+            PlayerPrefs.GetInt("RALPH_goldToBuy", dataHero.goldToBuy);
         }
         moveable = true;
 
@@ -81,8 +86,8 @@ public class Hero : MonoBehaviour
         else
         {
             targetBuilding = GameObject.Find("TeamLeft");
-        }        
-        
+        }
+
         agent.speed = dataHero.moveSpeed;
         AttackEnemyPlayer.goToBuilding(gameObject, targetBuilding);
         instantiateHealthPowBar();
@@ -140,8 +145,18 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        Debug.Log("inside hero.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity.magnitude);
+
+        Debug.Log("inside hero.cs, playerpref enemyattackingbuilding" + PlayerPrefs.GetInt("EnemyAttackingBuilding"));
         barsFollowObject();
-        encounteredEnemies = Physics.OverlapBox(transform.position, new Vector3(2.0f, 2.0f, 2.0f), Quaternion.identity, enemyLayer);
+        encounteredEnemies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, enemyLayer);
+        //testing, we have enemies to attack, stop fighting building 
+        if (encounteredEnemies.Length > 0)
+        {
+            agent.isStopped = true;
+            //GetComponent<HeroAttackBuilding>().enabled = false;
+        }
+
         if (dataHero.health <= 0)
         {
             Debug.Log("hero hp <0 ");
@@ -155,6 +170,7 @@ public class Hero : MonoBehaviour
             Debug.Log("REMOVED hero");
             return;
         }
+        //TESTING, this is attacking building, no attacking enemy
 
         //this file has nothing to do with ranged attack
         if (dataHero.attackMode.Equals("RANGED"))
@@ -163,26 +179,40 @@ public class Hero : MonoBehaviour
             return;
         }
         Debug.Log("hero HP:" + dataHero.health);
-        
+
         if (moveable)
         {
             agent.isStopped = false;
             if (encounteredEnemies.Length > 0)
             {
-                Debug.Log("inside hero.cs, encoutered enemy: "+ encounteredEnemies.Length);
-                moveable = false;
+                Debug.Log("inside hero.cs, encoutered enemy: " + encounteredEnemies.Length);
                 int id = randomId(0, encounteredEnemies.Length);
                 Debug.Log("inside hero.cs, randomID = " + id);
                 enemyObject = encounteredEnemies[id].gameObject;
                 dataEnemy = enemyObject.GetComponent<Enemy>().getHeroData();
+                if (dataEnemy == null)
+                {
+                    return;
+                }
+                moveable = false;
+                Debug.Log("got enemy, damage: " + dataEnemy.damage);
                 Animation.runToAttack(ref anim);
+          
+
             }
         }
         //attacking the enemy
         else
         {
-            if (enemyObject != null)
+            //TESTING, STOP THE OBJECT IMEDIATELY
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            //if (enemyObject != null)
+            if (dataEnemy != null && enemyObject != null)
             {
+
+                //face toward enemy
+                stopAndRotate(enemyObject);
+
                 agent.isStopped = true;
                 timeInterval += Time.deltaTime;
                 float interval = 1 / dataHero.attackSpeed;
@@ -192,21 +222,23 @@ public class Hero : MonoBehaviour
                     timeInterval = 0.0f;
                     AttackEnemyPlayer.attack(ref dataEnemy, dataHero, enemyObject);
                 }
-                if (dataEnemy != null)
+                //if (dataEnemy != null)
+                //{
+                if (dataEnemy.health <= 0)
                 {
-                    if (dataEnemy.health <= 0)
-                    {
-                        Debug.Log("attacking enemy: 0hp left");
-                        //now you need to move to find another opponent
-                        moveable = true;
-                        //add gold collected
-                        //change animation
-                        Animation.attackToRun(ref anim);
-                        //now get to the tower
-                        agent.ResetPath();
-                        agent.SetDestination(targetBuilding.transform.position);
-                    }
+                    Debug.Log("attacking enemy: 0hp left");
+                    //now you need to move to find another opponent
+                    moveable = true;
+                    //add gold collected
+                    //change animation
+                    Animation.attackToRun(ref anim);
+                    //now get to the tower
+                    agent.ResetPath();
+                    agent.SetDestination(targetBuilding.transform.position);
+                    //TESTING, now set active attacking building
+                    GetComponent<HeroAttackBuilding>().enabled = true;
                 }
+                //}
             }
             else
             {
@@ -215,7 +247,9 @@ public class Hero : MonoBehaviour
                 agent.SetDestination(targetBuilding.transform.position);
                 Animation.attackToRun(ref anim);
                 moveable = true;
-                return;
+                //TESTING
+                GetComponent<HeroAttackBuilding>().enabled = true;
+                //return;
             }
             //time to pow
             if (powerBar.GetComponent<Slider>().value >= powerBar.GetComponent<Slider>().maxValue)
@@ -240,7 +274,7 @@ public class Hero : MonoBehaviour
                 //reassign the value of powBar
                 powerBar.GetComponent<Slider>().value = powerBar.GetComponent<Slider>().minValue;
             }
-            
+
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -249,7 +283,7 @@ public class Hero : MonoBehaviour
         if (other.transform.tag.Equals(PlayerPrefs.GetString("playerSide")))
         {
             Debug.Log("detect ally!!, playerPref" + PlayerPrefs.GetInt("combine"));
-            
+
             //must be the same type
             if ((PlayerPrefs.GetInt("combine")) == 1 && (gameObject.GetComponent<Hero>().getHeroData().type.Equals(other.GetComponent<Hero>().getHeroData().type)))
             {
@@ -258,7 +292,7 @@ public class Hero : MonoBehaviour
                 int levelHero = gameObject.GetComponent<Hero>().getHeroData().level;
                 int levelDraggedHero = other.GetComponent<Hero>().getHeroData().level;
                 //only the same level can be combined
-                if ( levelDraggedHero==levelHero )
+                if (levelDraggedHero == levelHero)
                 {
                     //first we must combine the 2 hp together
                     dataHero.health += other.gameObject.GetComponent<Hero>().getHeroData().health;
@@ -299,7 +333,7 @@ public class Hero : MonoBehaviour
         //remember to increase level
         dataHero.level++;
         //increase the size of it
-        gameObject.transform.localScale = dataHero.level*size;
+        gameObject.transform.localScale = dataHero.level * size;
 
         //increase the size and max value of healthBar and powerBar;
         healthBar.transform.localScale = dataHero.level * size;
@@ -307,7 +341,7 @@ public class Hero : MonoBehaviour
         healthBar.GetComponent<Slider>().maxValue = dataHero.health;
         healthBar.GetComponent<Slider>().value = dataHero.health;
 
-        powerBar.GetComponent<Slider>().maxValue = dataHero.health/2;
+        powerBar.GetComponent<Slider>().maxValue = dataHero.health / 2;
         powerBar.GetComponent<Slider>().value = 0.0f;
 
 
@@ -329,9 +363,41 @@ public class Hero : MonoBehaviour
         //delete gameObject
         Destroy(gameObject);
     }
-    
+
     public int randomId(int min, int max)
     {
         return UnityEngine.Random.Range(min, max);
+    }
+
+    public void stopAndRotate(GameObject enemy)
+    {
+        float difference = this.transform.position.z - enemy.transform.position.z;
+        //we are on the left
+        if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
+        {
+            //we are below
+            if (difference > 0)
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+            }
+        }
+        else
+        {
+            //we are below
+            if (difference > 0)
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+            }
+        }
     }
 }

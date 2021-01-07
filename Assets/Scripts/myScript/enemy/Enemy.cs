@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    
+
     //private GameObject[] targetAllies;
     private GameObject targetBuilding;
 
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
     public string type;
 
     /// ////////////////////
-   
+
     public TextAsset teamloader;
     //remember we are enemy
     public HeroData enemy;
@@ -52,8 +52,11 @@ public class Enemy : MonoBehaviour
 
     private Collider[] encounteredAllies;
     public LayerMask allyLayer;
-    private void Start()
+
+    private bool rotated;
+    private void Awake()
     {
+        rotated = false;
         attacking = false;
         anim = GetComponent<Animator>();
         timeInterval = 0.0f;
@@ -61,21 +64,21 @@ public class Enemy : MonoBehaviour
         {
             enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
             Debug.Log("Mickey respawn: " + enemy.level);
+            PlayerPrefs.SetInt("MICKEY_goldToBuy", enemy.goldToBuy);
         }
         else if (type.Equals("Ralph"))
         {
             enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
             Debug.Log("Ralph respawn: " + enemy.level);
-
+            PlayerPrefs.SetInt("RALPH_goldToBuy", enemy.goldToBuy);
         }
         moveable = true;
-        
+
         agent = gameObject.GetComponent<NavMeshAgent>();
 
         if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
         {
             targetBuilding = GameObject.Find("TeamRight");
-
         }
         else
         {
@@ -100,7 +103,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<EnemyAttackBuilding>());
         }
-        
+
     }
     //TESTING
     public void instantiateHealthPowBar()
@@ -136,8 +139,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        encounteredAllies = Physics.OverlapBox(transform.position, new Vector3(2.0f, 2.0f, 2.0f), Quaternion.identity, allyLayer);
-        barsFollowObject();//TESTING
+        Debug.Log("inside enemy.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity);
+        encounteredAllies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, allyLayer);
+        Debug.Log("encountered allies length: " + encounteredAllies.Length);
+        //testing, we have allies to attack, stop fighting building 
+        if (encounteredAllies.Length > 0)
+        {
+            //stop the enemy immediately
+            agent.isStopped = true;
+            //GetComponent<EnemyAttackBuilding>().enabled = false;
+            Debug.Log("enemy detect enemy to fight instead of building");
+        }
+
+        ////////////////////////////////////////////////////
+        barsFollowObject();
         if (enemy.health <= 0)
         {
             //we add gold for the player
@@ -149,6 +164,10 @@ public class Enemy : MonoBehaviour
             Debug.Log("REMOVED ENEMY");
             return;
         }
+        //TESTING, this is attacking building, no attacking hero
+
+        //////
+
         if (enemy.attackMode.Equals("RANGED"))
         {
             Debug.Log("skipped enemy.cs");
@@ -158,31 +177,48 @@ public class Enemy : MonoBehaviour
         Debug.Log("inside Enemy.cs, enemy HP " + healthBar.GetComponent<Slider>().value);
         Debug.Log("inside Enemy.cs, enemy POW " + powerBar.GetComponent<Slider>().value);
 
-        
+
         //if it is moving
         if (moveable)
-        {   
+        {
+            Debug.Log("enemy is moving");
             agent.isStopped = false;
+            Debug.Log("agent enemy: " + agent.isStopped);
             if (encounteredAllies.Length > 0)
             {
-                Debug.Log("inside enemy.cs, encoutered ally name: "+encounteredAllies[0].gameObject.transform.name);
-
-                moveable = false;
+                Debug.Log("11111 inside enemy.cs, encoutered ally name: " + encounteredAllies[0].gameObject.transform.name);
                 int id = randomId(0, encounteredAllies.Length);
-
-                Debug.Log("randomID: " + id);
+                Debug.Log("11111 randomID: " + id);
                 target = encounteredAllies[id].gameObject;
+                //Debug.Log("11111 got the target tag: " + target.transform.name);
+                //Debug.Log(target);
+                //Debug.Log("11111 inside enemy.cs: target" + target.GetComponent<Hero>());
                 dataTarget = target.GetComponent<Hero>().getHeroData();
+                if (dataTarget == null)
+                {
+                    Debug.Log("datatarget is null");
+                    return;
+                }
+                moveable = false;
+                
+                
                 Animation.runToAttack(ref anim);
             }
         }
         //attacking ally
         else
         {
+            //TESTING, STOP THE OBJECT IMEDIATELY
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            Debug.Log("enemy is attacking ally");
             agent.isStopped = true;
             //we received information about the enemy, we can now attack them
-            if (target != null)
+            if (target != null && dataTarget != null)
             {
+                //face toward player
+                stopAndRotate(target);
+
                 timeInterval += Time.deltaTime;
                 float attackTime = 1 / enemy.attackSpeed;
                 if (timeInterval >= attackTime)
@@ -191,28 +227,27 @@ public class Enemy : MonoBehaviour
                     AttackEnemyPlayer.attack(ref dataTarget, enemy, target);
                 }
 
-                if (dataTarget != null)
+                //if (dataTarget != null)
+                //{
+                if (dataTarget.health <= 0)
                 {
-                    if (dataTarget.health <= 0)
-                    {
-                        Debug.Log("we just kill an enemy, tempting to get data:");
-                        Debug.Log("enemies hp: " + target.GetComponent<Hero>().getHeroData().health);
-                        //now you need to move to find another opponent
-                        moveable = true;
-                        //findTargetAttack();
-                        //add gold collected
-                        //AddGold.addGold(dataTarget.goldOnDeath, "Enemy");
+                    Debug.Log("we just kill an enemy, tempting to get data:");
+                    Debug.Log("enemies hp: " + target.GetComponent<Hero>().getHeroData().health);
+                    //now you need to move to find another opponent
+                    moveable = true;
 
-                        Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
-                        Debug.Log("player DIE!!!");
+                    Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
+                    Debug.Log("player DIE!!!");
 
-                        Animation.attackToRun(ref anim);
-                        agent.ResetPath();
-                        agent.SetDestination(targetBuilding.transform.position);
-                    }                    
+                    Animation.attackToRun(ref anim);
+                    agent.ResetPath();
+                    agent.SetDestination(targetBuilding.transform.position);
+                    //TESTING, now set active attacking building
+                    GetComponent<EnemyAttackBuilding>().enabled = true;
                 }
+                //}
             }
-            else 
+            else
             {
                 Debug.Log("hero is now null");
                 //that enemy no longer exists, should return
@@ -220,7 +255,9 @@ public class Enemy : MonoBehaviour
                 agent.SetDestination(targetBuilding.transform.position);
                 Animation.attackToRun(ref anim);
                 moveable = true;
-                return;
+                //TESTING
+                GetComponent<EnemyAttackBuilding>().enabled = true;
+                //return;
             }
             //time to pow
             if (powerBar.GetComponent<Slider>().value >= powerBar.GetComponent<Slider>().maxValue)
@@ -231,7 +268,7 @@ public class Enemy : MonoBehaviour
 
                 if (encounteredAllies.Length > 0)
                 {
-                    Debug.Log("inside enemyPOW, with encountered: "+encounteredAllies.Length);
+                    Debug.Log("inside enemyPOW, with encountered: " + encounteredAllies.Length);
                     for (int i = 0; i < encounteredAllies.Length; i++)
                     {
                         //deal special damage to this unit
@@ -249,7 +286,6 @@ public class Enemy : MonoBehaviour
                 }
                 powerBar.GetComponent<Slider>().value = powerBar.GetComponent<Slider>().minValue;
             }
-           
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -263,7 +299,7 @@ public class Enemy : MonoBehaviour
         }
     }
     //ally is moving away, we can't attack it anymore, we just skip it through;
-   
+
     public HeroData getHeroData()
     {
         return enemy;
@@ -293,5 +329,138 @@ public class Enemy : MonoBehaviour
     public int randomId(int min, int max)
     {
         return UnityEngine.Random.Range(min, max);
+    }
+
+    /*public void stopAndRotate(GameObject player)
+    {
+        float sameSide = this.transform.position.z * player.transform.position.z;
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        {
+            //they are on the same side
+            if (sameSide > 0)
+            {
+                float difference = Mathf.Abs(this.transform.position.z) - Mathf.Abs(player.transform.position.z);
+                if (this.transform.position.z < 0)
+                {
+                    //we are above, VERIFIED
+                    if (difference > 0)
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                    }
+                    //we are below, VERIFIED
+                    else
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                    }
+                }
+                else
+                {
+                    //we are below
+                    if (difference > 0)
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                    }
+                    //we are above
+                    else
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                    }
+                }
+            }
+            //we are on different side
+            else
+            {
+                //we are below
+                if (this.transform.position.z > 0)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are above
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+            }
+        }
+        //we are on the right
+        else
+        {
+            //they are on the same side
+            if (sameSide > 0)
+            {
+                float difference = Mathf.Abs(this.transform.position.z) - Mathf.Abs(player.transform.position.z);
+                if (this.transform.position.z < 0)
+                {
+                    //we are above
+                    if (difference > 0)
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                    }
+                    //we are below
+                    else
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                    }
+                }
+                else
+                {
+                    //we are below
+                    if (difference > 0)
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                    }
+                    //we are above
+                    else
+                    {
+                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                    }
+                }
+            }
+            //we are on different side
+            else
+            {
+                //we are below
+                if (this.transform.position.z > 0)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
+                //we are above
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+            }
+        }
+    }*/
+    public void stopAndRotate(GameObject player)
+    {
+        float difference = this.transform.position.z - player.transform.position.z;
+        //we are on the left
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        {
+            //we are below
+            if (difference > 0)
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+            }
+        }
+        else
+        {
+            //we are below
+            if (difference > 0)
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+            }
+        }
     }
 }

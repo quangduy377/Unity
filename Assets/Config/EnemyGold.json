@@ -1,5 +1,5 @@
 {
   "type": "Enemy",
-  "basicGold": "200",
+  "basicGold": "100",
   "goldOnSecond": "1"
 }

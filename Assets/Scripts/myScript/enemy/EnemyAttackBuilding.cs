@@ -36,12 +36,16 @@ public class EnemyAttackBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("in update, enemy attacking building");
+
         if (enemy.attackMode.Equals("RANGED"))
             return;
         if (attack)
         {
+            Debug.Log("enemy attacking building");
             //stop the enemy
             agent.isStopped = true;
+            Debug.Log("agent enemy: " + agent.isStopped);
             //make its animation
             Animation.runToAttack(ref anim);
             Debug.Log("after anim set to attack building");

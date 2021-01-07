@@ -19,6 +19,7 @@ public class FireOnApproachEnemy : MonoBehaviour
 
     private Animator anim;
 
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +50,8 @@ public class FireOnApproachEnemy : MonoBehaviour
         //now we can move
         if (attackingAlly)
         {
+            //face toward hero
+            stopAndRotate(ally);
             if (ally.GetComponent<Hero>().getHeroData().health <= 0 || ally == null)
             {
                 Animation.fireToRun(ref anim);
@@ -74,6 +77,37 @@ public class FireOnApproachEnemy : MonoBehaviour
             Debug.Log("detect border attack");
             attackingBuilding = true;
             Animation.fire(ref anim);
+        }
+    }
+    public void stopAndRotate(GameObject player)
+    {
+        float difference = enemy.transform.position.z - player.transform.position.z;
+        //we are on the left
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        {
+            //we are below
+            if (difference > 0)
+            {
+                enemy.transform.eulerAngles = new Vector3(enemy.transform.eulerAngles.x, -135.0f, enemy.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                enemy.transform.eulerAngles = new Vector3(enemy.transform.eulerAngles.x, -45.0f, enemy.transform.eulerAngles.z);
+            }
+        }
+        else
+        {
+            //we are below
+            if (difference > 0)
+            {
+                enemy.transform.eulerAngles = new Vector3(enemy.transform.eulerAngles.x, 135.0f, enemy.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                enemy.transform.eulerAngles = new Vector3(enemy.transform.eulerAngles.x, 45.0f, enemy.transform.eulerAngles.z);
+            }
         }
     }
 }

@@ -52,6 +52,8 @@ public class Bullet : MonoBehaviour
         }
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(bulletSpeed, gameObject.GetComponent<Rigidbody>().velocity.y
             , gameObject.GetComponent<Rigidbody>().velocity.z);
+        
+
         if (enemy != null && attackEnemy)
         {
             Debug.Log("enemy current HP:" + enemy.GetComponent<Enemy>().getHeroData().health);

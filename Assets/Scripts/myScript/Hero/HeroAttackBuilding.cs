@@ -33,10 +33,13 @@ public class HeroAttackBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (player.attackMode.Equals("RANGED"))
             return;
         if (attack)
         {
+            //testing
+            //
             timeInterval += Time.deltaTime;
             gameObject.GetComponent<NavMeshAgent>().isStopped = true;
             Animation.runToAttack(ref anim);

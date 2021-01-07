@@ -26,10 +26,6 @@ public class TowerHandler : MonoBehaviour
         healthBar.GetComponent<Slider>().maxValue = towerData.health;
         healthBar.GetComponent<Slider>().minValue = 0.0f;
         healthBar.GetComponent<Slider>().value = healthBar.GetComponent<Slider>().maxValue;
-
-        /*healthBar.maxValue = towerData.health;
-        healthBar.minValue = 0.0f;
-        healthBar.value = healthBar.maxValue;*/
     }
     // Update is called once per frame
     void Update()
