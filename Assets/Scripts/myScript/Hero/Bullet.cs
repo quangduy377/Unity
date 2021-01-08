@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour
 {
     public float bulletSpeed;
     public float bulletPeriod;
+    //public GameObject bulletPit;
+    public GameObject bulletParticle;
+
+
     private float currentBulletPeriod;
 
     private GameObject enemy;
@@ -21,6 +25,8 @@ public class Bullet : MonoBehaviour
     private float damage;
     void Start()
     {
+        //instantiate the particle
+        Instantiate(bulletParticle, this.transform.position, this.transform.rotation);
         damage = JsonUtility.FromJson<BulletData>(GameLoader.Instance.bullet.text).damage;
         Debug.Log("ranged damage:" + damage);
         attackBuilding = false;
@@ -53,7 +59,6 @@ public class Bullet : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().velocity = new Vector3(bulletSpeed, gameObject.GetComponent<Rigidbody>().velocity.y
             , gameObject.GetComponent<Rigidbody>().velocity.z);
         
-
         if (enemy != null && attackEnemy)
         {
             Debug.Log("enemy current HP:" + enemy.GetComponent<Enemy>().getHeroData().health);

@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     public float bulletPeriod;
     private float currentBulletPeriod;
 
+    public GameObject bulletParticle;
 
     private GameObject ally;
     private GameObject building;
@@ -22,6 +23,8 @@ public class EnemyBullet : MonoBehaviour
     private float damage;
     void Start()
     {
+        //instantiate the particle
+        Instantiate(bulletParticle, this.transform.position, this.transform.rotation);
         damage = JsonUtility.FromJson<BulletData>(GameLoader.Instance.bullet.text).damage;
         Debug.Log("ranged damage:" + damage);
         attackBuilding = false;

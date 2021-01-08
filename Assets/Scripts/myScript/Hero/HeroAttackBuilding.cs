@@ -13,6 +13,9 @@ public class HeroAttackBuilding : MonoBehaviour
     private bool attack;
     private float timeInterval;
     private Animator anim;
+
+    public GameObject fightingParticle;
+    public Transform emitParticle;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -45,6 +48,9 @@ public class HeroAttackBuilding : MonoBehaviour
             Animation.runToAttack(ref anim);
             if (timeInterval >= (1 / player.attackSpeed))
             {
+                //instantiate the fighting effect
+                Instantiate(fightingParticle, emitParticle.position, Quaternion.identity);
+
                 AttackTower.attackBuilding(tower, player.damage);
                 timeInterval = 0.0f;
             }

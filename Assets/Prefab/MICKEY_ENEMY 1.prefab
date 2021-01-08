@@ -230,6 +230,9 @@ MonoBehaviour:
   allyLayer:
     serializedVersion: 2
     m_Bits: 1024
+  fightingParticle: {fileID: 4048326259129061770, guid: 5acc846c03f6aff4a984eafae5e0f410,
+    type: 3}
+  emitParticle: {fileID: 8936234865676942198}
 --- !u!114 &3028879029316930559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2703954fc8012674c85c740d3f9c7c19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fightingParticle: {fileID: 4048326259129061770, guid: 5acc846c03f6aff4a984eafae5e0f410,
+    type: 3}
+  emitParticle: {fileID: 8936234865676942198}
 --- !u!114 &-1752705121848331975
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour
     public LayerMask allyLayer;
 
     private bool rotated;
+
+    public GameObject fightingParticle;
+    public Transform emitParticle;
     private void Awake()
     {
         rotated = false;
@@ -210,12 +213,12 @@ public class Enemy : MonoBehaviour
         {
             //TESTING, STOP THE OBJECT IMEDIATELY
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-
             Debug.Log("enemy is attacking ally");
             agent.isStopped = true;
             //we received information about the enemy, we can now attack them
             if (target != null && dataTarget != null)
             {
+                
                 //face toward player
                 stopAndRotate(target);
 
@@ -223,6 +226,10 @@ public class Enemy : MonoBehaviour
                 float attackTime = 1 / enemy.attackSpeed;
                 if (timeInterval >= attackTime)
                 {
+                    Vector3 rot = Quaternion.identity.eulerAngles;
+                    rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
+                    //TESTING PARTICLE
+                    Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
                     timeInterval = 0;
                     AttackEnemyPlayer.attack(ref dataTarget, enemy, target);
                 }
@@ -264,7 +271,7 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("now enemy POW >100, noom");
                 //AttackEnemyPlayer.Pow(ref dataTarget, enemy, target);
-                Instantiate(enemySkill, this.transform.position, this.transform.rotation);
+                Instantiate(enemySkill, emitParticle.position, emitParticle.transform.rotation);
 
                 if (encounteredAllies.Length > 0)
                 {
@@ -330,108 +337,6 @@ public class Enemy : MonoBehaviour
     {
         return UnityEngine.Random.Range(min, max);
     }
-
-    /*public void stopAndRotate(GameObject player)
-    {
-        float sameSide = this.transform.position.z * player.transform.position.z;
-        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
-        {
-            //they are on the same side
-            if (sameSide > 0)
-            {
-                float difference = Mathf.Abs(this.transform.position.z) - Mathf.Abs(player.transform.position.z);
-                if (this.transform.position.z < 0)
-                {
-                    //we are above, VERIFIED
-                    if (difference > 0)
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
-                    }
-                    //we are below, VERIFIED
-                    else
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
-                    }
-                }
-                else
-                {
-                    //we are below
-                    if (difference > 0)
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
-                    }
-                    //we are above
-                    else
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
-                    }
-                }
-            }
-            //we are on different side
-            else
-            {
-                //we are below
-                if (this.transform.position.z > 0)
-                {
-                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
-                }
-                //we are above
-                else
-                {
-                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
-                }
-            }
-        }
-        //we are on the right
-        else
-        {
-            //they are on the same side
-            if (sameSide > 0)
-            {
-                float difference = Mathf.Abs(this.transform.position.z) - Mathf.Abs(player.transform.position.z);
-                if (this.transform.position.z < 0)
-                {
-                    //we are above
-                    if (difference > 0)
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
-                    }
-                    //we are below
-                    else
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
-                    }
-                }
-                else
-                {
-                    //we are below
-                    if (difference > 0)
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
-                    }
-                    //we are above
-                    else
-                    {
-                        this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
-                    }
-                }
-            }
-            //we are on different side
-            else
-            {
-                //we are below
-                if (this.transform.position.z > 0)
-                {
-                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
-                }
-                //we are above
-                else
-                {
-                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
-                }
-            }
-        }
-    }*/
     public void stopAndRotate(GameObject player)
     {
         float difference = this.transform.position.z - player.transform.position.z;

@@ -54,6 +54,9 @@ public class Hero : MonoBehaviour
     private float rangedAttackPeriod;
 
     private bool rotated;
+
+    public GameObject fightingParticle;
+    public Transform emitParticle;
     public void Start()
     {
         rotated = false;
@@ -209,7 +212,7 @@ public class Hero : MonoBehaviour
             //if (enemyObject != null)
             if (dataEnemy != null && enemyObject != null)
             {
-
+                
                 //face toward enemy
                 stopAndRotate(enemyObject);
 
@@ -218,6 +221,10 @@ public class Hero : MonoBehaviour
                 float interval = 1 / dataHero.attackSpeed;
                 if (timeInterval >= interval)
                 {
+                    Vector3 rot = Quaternion.identity.eulerAngles;
+                    rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
+                    //TESTING PARTICLE
+                    Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
                     Debug.Log("attacking enemy");
                     timeInterval = 0.0f;
                     AttackEnemyPlayer.attack(ref dataEnemy, dataHero, enemyObject);

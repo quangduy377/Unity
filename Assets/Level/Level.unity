@@ -1361,6 +1361,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 198450926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &207648176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207648177}
+  m_Layer: 0
+  m_Name: FirePit
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &207648177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207648176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.53, y: 1.632, z: -0.182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 754556595}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &208002551
 GameObject:
   m_ObjectHideFlags: 0
@@ -4144,7 +4174,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 7.65, z: 9.99}
-  m_Center: {x: 0.19, y: 3.64, z: 1.06}
+  m_Center: {x: 0.19, y: 3.64, z: 2}
 --- !u!114 &580154470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4159,6 +4189,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: RIGHT
   healthBar: {fileID: 1172406613}
+--- !u!114 &580154471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580154465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69340df258bbb264fa186ecda2357c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fire: {fileID: 2502237166793588811, guid: ea22ec230dfb89844923030994bfb90c, type: 3}
+  Smoke: {fileID: 1897687200913091947, guid: f0a7dbdc10dc66c42aea0004f657a86b, type: 3}
+  firePit: {fileID: 956773555}
 --- !u!1 &580715578
 GameObject:
   m_ObjectHideFlags: 0
@@ -6355,6 +6400,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 937357839}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &956773554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 956773555}
+  m_Layer: 0
+  m_Name: FirePit
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &956773555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956773554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.43, y: 1.8, z: 5.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 49607977}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &970455440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15176,7 +15251,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 8.35, z: 10}
-  m_Center: {x: 0.2, y: 3.83, z: 0.08}
+  m_Center: {x: -0.5, y: 3.83, z: 0.08}
 --- !u!114 &2029788963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15191,6 +15266,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: LEFT
   healthBar: {fileID: 749830494}
+--- !u!114 &2029788964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029788958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69340df258bbb264fa186ecda2357c61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fire: {fileID: 2502237166793588811, guid: ea22ec230dfb89844923030994bfb90c, type: 3}
+  Smoke: {fileID: 1897687200913091947, guid: f0a7dbdc10dc66c42aea0004f657a86b, type: 3}
+  firePit: {fileID: 207648177}
 --- !u!1001 &2038909797
 PrefabInstance:
   m_ObjectHideFlags: 0

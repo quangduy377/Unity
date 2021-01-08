@@ -12,6 +12,10 @@ public class EnemyAttackBuilding : MonoBehaviour
     private float timeInterval;
     private NavMeshAgent agent;
     private Animator anim;
+
+    public GameObject fightingParticle;
+    public Transform emitParticle;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -52,6 +56,9 @@ public class EnemyAttackBuilding : MonoBehaviour
             timeInterval += Time.deltaTime;
             if (timeInterval >= (1 / enemy.attackSpeed))
             {
+                //instantiate the fighting effect
+                Instantiate(fightingParticle, emitParticle.position, Quaternion.identity);
+
                 AttackTower.attackBuilding(tower, enemy.damage);
                 timeInterval = 0.0f;
             }

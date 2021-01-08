@@ -17,7 +17,7 @@ public class AutoSpawEnemy : MonoBehaviour
     public GameObject ralphEnemyPrefab;
     void Start()
     {
-        timeCount = 2222.0f;
+        timeCount = 2.0f;
         currentTimeRemaining = timeCount;
     }
 
@@ -27,9 +27,9 @@ public class AutoSpawEnemy : MonoBehaviour
     {
         currentTimeRemaining -= Time.deltaTime;
         //time to respawn
-        if (currentTimeRemaining <= 0.0f && !isSpawn)
+        if (currentTimeRemaining <= 0.0f)
         {
-            isSpawn = true;
+            //isSpawn = true;
             SpawnEnemy();
             currentTimeRemaining = timeCount;
         }

@@ -130,3 +130,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 5
   bulletPeriod: 1.5
+  bulletParticle: {fileID: 108639380122626745, guid: 9eae49a7a8c3405428c6e008092fd672,
+    type: 3}

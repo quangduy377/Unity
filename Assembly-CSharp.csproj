@@ -85,8 +85,10 @@
     <Compile Include="Assets\Scripts\myScript\HeroSelection\HeroSelection.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\LoadTeamSide.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\TeamConfig.cs" />
+    <Compile Include="Assets\Scripts\myScript\Tower\FireManager.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\GameOver.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\TowerData.cs" />
+    <Compile Include="Assets\Scripts\myScript\Tower\TowerEffect.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\TowerHandler.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\AutoSpawEnemy.cs" />
     <Compile Include="Assets\Scripts\myScript\enemy\Enemy.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Assets\Scripts\myScript\mutual\BarsManager.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\BulletData.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\ComponentManager.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\DestroyParticle.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\EnemyAllyManager.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\FacedTargets.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\GameLoader.cs" />

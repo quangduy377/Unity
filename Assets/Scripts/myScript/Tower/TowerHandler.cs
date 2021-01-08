@@ -10,11 +10,14 @@ public class TowerHandler : MonoBehaviour
     public string team;
 
     public GameObject healthBar;
-    // Start is called before the first frame update
+    /// ///////////////////////NEW
+
+
+
     void Start()
     {
         if (team.Equals("RIGHT"))
-        {
+        {    
             towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.RightTower.text);
         }
         else
@@ -22,14 +25,15 @@ public class TowerHandler : MonoBehaviour
             towerData = JsonUtility.FromJson<TowerData>(GameLoader.Instance.LeftTower.text);
         }
         currentHp = towerData.health;
-
         healthBar.GetComponent<Slider>().maxValue = towerData.health;
         healthBar.GetComponent<Slider>().minValue = 0.0f;
         healthBar.GetComponent<Slider>().value = healthBar.GetComponent<Slider>().maxValue;
+
     }
     // Update is called once per frame
     void Update()
     {
+        //only set the fire when it is attacked   
         if (gameObject!=null && currentHp<=0)
         {
             Destroy(gameObject);
