@@ -38,9 +38,8 @@ public class Hero : MonoBehaviour
     //hero pow effect
     public GameObject heroSkill;
 
-
-    private bool attacking;
-    private bool removed;
+    //private bool attacking;
+    //private bool removed;
 
     private Collider[] encounteredEnemies;
     public LayerMask enemyLayer;
@@ -61,7 +60,7 @@ public class Hero : MonoBehaviour
     {
         rotated = false;
         Debug.Log("new instatiation");
-        attacking = false;
+        //attacking = false;
         anim = GetComponent<Animator>();
         size = new Vector3(0.75f, 0.75f, 0.75f);
         if (character.Equals("Mickey"))
@@ -77,7 +76,6 @@ public class Hero : MonoBehaviour
             PlayerPrefs.GetInt("RALPH_goldToBuy", dataHero.goldToBuy);
         }
         moveable = true;
-
         timeInterval = 0.0f;
         agent = GetComponent<NavMeshAgent>();
         //we are on the left
@@ -90,10 +88,9 @@ public class Hero : MonoBehaviour
         {
             targetBuilding = GameObject.Find("TeamLeft");
         }
-
         agent.speed = dataHero.moveSpeed;
         AttackEnemyPlayer.goToBuilding(gameObject, targetBuilding);
-        instantiateHealthPowBar();
+        instantiateHealthPowBar(); 
         EnemyAllyManager.alliesId++;
         dataHero.id = EnemyAllyManager.alliesId;
         Debug.Log("hero ID " + dataHero.id);
@@ -109,6 +106,9 @@ public class Hero : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<HeroAttackBuilding>());
         }
+        //TESTING POW
+        //healthBar = GetComponent<InstantiateHealthPowBar>().getHealthBar();
+        //powerBar = GetComponent<InstantiateHealthPowBar>().getPowBar();
     }
     //TESTING
     public void instantiateHealthPowBar()
@@ -148,18 +148,13 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        Debug.Log("inside hero.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity.magnitude);
+        //Debug.Log("inside hero.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity.magnitude);
 
-        Debug.Log("inside hero.cs, playerpref enemyattackingbuilding" + PlayerPrefs.GetInt("EnemyAttackingBuilding"));
+        //Debug.Log("inside hero.cs, playerpref enemyattackingbuilding" + PlayerPrefs.GetInt("EnemyAttackingBuilding"));
         barsFollowObject();
         encounteredEnemies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, enemyLayer);
-        //testing, we have enemies to attack, stop fighting building 
-        if (encounteredEnemies.Length > 0)
-        {
-            agent.isStopped = true;
-            //GetComponent<HeroAttackBuilding>().enabled = false;
-        }
 
+        Debug.Log("hero id: "+dataHero.id+" current HP: " + dataHero.health);
         if (dataHero.health <= 0)
         {
             Debug.Log("hero hp <0 ");
@@ -173,13 +168,18 @@ public class Hero : MonoBehaviour
             Debug.Log("REMOVED hero");
             return;
         }
-        //TESTING, this is attacking building, no attacking enemy
 
         //this file has nothing to do with ranged attack
         if (dataHero.attackMode.Equals("RANGED"))
         {
             Debug.Log("skipped Hero.cs");
             return;
+        }
+        //testing, we have enemies to attack, stop fighting building 
+        if (encounteredEnemies.Length > 0)
+        {
+            agent.isStopped = true;
+            //GetComponent<HeroAttackBuilding>().enabled = false;
         }
         Debug.Log("hero HP:" + dataHero.health);
 
@@ -267,15 +267,21 @@ public class Hero : MonoBehaviour
                 for (int i = 0; i < encounteredEnemies.Length; i++)
                 {
                     //deal special damage to this unit
-                    if (encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData().Equals(dataEnemy))
+                    if (encounteredEnemies[i].gameObject==enemyObject)
                     {
                         AttackEnemyPlayer.Pow(ref dataEnemy, dataHero, encounteredEnemies[i].gameObject);
                     }
                     //deal splash damage to around enemies
                     else
                     {
-                        HeroData enemy = encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData();
-                        AttackEnemyPlayer.PowAOE(ref enemy, dataHero, encounteredEnemies[i].gameObject);
+                        //don't deal damage to our allies !!!
+                        if (encounteredEnemies[i].gameObject.tag.Equals(PlayerPrefs.GetString("playerSide")))
+                            continue;
+                        //TESTING
+                        //HeroData enemy = encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData();
+                        //AttackEnemyPlayer.PowAOE(ref enemy, dataHero, encounteredEnemies[i].gameObject);
+                        HeroData aroundEnemy = encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData();
+                        AttackEnemyPlayer.PowAOE(ref aroundEnemy, dataHero, encounteredEnemies[i].gameObject);
                     }
                 }
                 //reassign the value of powBar
@@ -305,8 +311,11 @@ public class Hero : MonoBehaviour
                     dataHero.health += other.gameObject.GetComponent<Hero>().getHeroData().health;
                     increaseAttributes();
                     Destroy(other.gameObject);
+                    //TESTING POW
                     Destroy(other.gameObject.GetComponent<Hero>().getHealthBar());
                     Destroy(other.gameObject.GetComponent<Hero>().getPowBar());
+                    //Destroy(other.gameObject.GetComponent<InstantiateHealthPowBar>().getHealthBar());
+                    //Destroy(other.gameObject.GetComponent<InstantiateHealthPowBar>().getPowBar());
                     PlayerPrefs.SetInt("combine", 0);
                     Animation.runToMerge(ref anim);
                 }
@@ -350,8 +359,6 @@ public class Hero : MonoBehaviour
 
         powerBar.GetComponent<Slider>().maxValue = dataHero.health / 2;
         powerBar.GetComponent<Slider>().value = 0.0f;
-
-
     }
     public GameObject getHealthBar()
     {
@@ -385,12 +392,31 @@ public class Hero : MonoBehaviour
             //we are below
             if (difference > 0)
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if(this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
             }
             //we are above
             else
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
             }
         }
         else
@@ -398,12 +424,32 @@ public class Hero : MonoBehaviour
             //we are below
             if (difference > 0)
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
             }
             //we are above
             else
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
             }
         }
     }

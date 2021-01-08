@@ -107,6 +107,7 @@
     <Compile Include="Assets\Scripts\myScript\mutual\FacedTargets.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\GameLoader.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\HealthManager.cs" />
+    <Compile Include="Assets\Scripts\myScript\mutual\InstantiateHealthPowBar.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\PowData.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\RemoveAllOfOne.cs" />
     <Compile Include="Assets\Scripts\myScript\test.cs" />

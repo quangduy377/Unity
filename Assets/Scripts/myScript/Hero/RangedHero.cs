@@ -18,8 +18,11 @@ public class RangedHero : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();
         heroData = gameObject.GetComponent<Hero>().getHeroData();
+        //testing pow
         healthbar = gameObject.GetComponent<Hero>().getHealthBar().GetComponent<Slider>();
         powbar = gameObject.GetComponent<Hero>().getPowBar().GetComponent<Slider>();
+        //healthbar = gameObject.GetComponent<InstantiateHealthPowBar>().getHealthBar().GetComponent<Slider>();
+        //powbar = gameObject.GetComponent<InstantiateHealthPowBar>().getPowBar().GetComponent<Slider>();
     }
 
     // only usable for ranged hero

@@ -106,6 +106,9 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<EnemyAttackBuilding>());
         }
+        //TESTING POW
+        //healthBar = GetComponent<InstantiateHealthPowBar>().getHealthBar();
+        //powerBar = GetComponent<InstantiateHealthPowBar>().getPowBar();
 
     }
     //TESTING
@@ -145,16 +148,6 @@ public class Enemy : MonoBehaviour
         Debug.Log("inside enemy.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity);
         encounteredAllies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, allyLayer);
         Debug.Log("encountered allies length: " + encounteredAllies.Length);
-        //testing, we have allies to attack, stop fighting building 
-        if (encounteredAllies.Length > 0)
-        {
-            //stop the enemy immediately
-            agent.isStopped = true;
-            //GetComponent<EnemyAttackBuilding>().enabled = false;
-            Debug.Log("enemy detect enemy to fight instead of building");
-        }
-
-        ////////////////////////////////////////////////////
         barsFollowObject();
         if (enemy.health <= 0)
         {
@@ -175,6 +168,21 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("skipped enemy.cs");
             return;
+        }
+        //testing, we have allies to attack, stop fighting building 
+        if (encounteredAllies.Length > 0)
+        {
+            Debug.Log("meet "+encounteredAllies.Length);
+            if (encounteredAllies.Length == 2)
+            {
+                Debug.Log("hero id encountered: " + encounteredAllies[0].gameObject.GetComponent<Hero>().getHeroData().id);
+                Debug.Log("hero id encountered: " + encounteredAllies[1].gameObject.GetComponent<Hero>().getHeroData().id);
+            }
+            //Debug.Log("meet ");
+            //stop the enemy immediately
+            agent.isStopped = true;
+            //GetComponent<EnemyAttackBuilding>().enabled = false;
+            Debug.Log("enemy detect enemy to fight instead of building");
         }
         //we death
         Debug.Log("inside Enemy.cs, enemy HP " + healthBar.GetComponent<Slider>().value);
@@ -278,16 +286,24 @@ public class Enemy : MonoBehaviour
                     Debug.Log("inside enemyPOW, with encountered: " + encounteredAllies.Length);
                     for (int i = 0; i < encounteredAllies.Length; i++)
                     {
-                        //deal special damage to this unit
-                        if (encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData().Equals(dataTarget))
+                        //deal special damage to this unit, TESTING USING ==
+
+                        //if (encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData().Equals(dataTarget))
+                        if(encounteredAllies[i].gameObject==target)
                         {
                             AttackEnemyPlayer.Pow(ref dataTarget, enemy, encounteredAllies[i].gameObject);
                         }
                         //deal splash damage to around enemies
                         else
                         {
-                            HeroData enemy = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
-                            AttackEnemyPlayer.PowAOE(ref dataTarget, enemy, encounteredAllies[i].gameObject);
+                            //don't deal damage to our enemies !!!
+                            if (encounteredAllies[i].gameObject.tag.Equals(PlayerPrefs.GetString("enemySide")))
+                                continue;
+                            //TESTING
+                            //HeroData enemy = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
+                            //AttackEnemyPlayer.PowAOE(ref dataTarget, enemy, encounteredAllies[i].gameObject);
+                            HeroData aroundTarget = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
+                            AttackEnemyPlayer.PowAOE(ref aroundTarget, enemy, encounteredAllies[i].gameObject);
                         }
                     }
                 }
@@ -311,10 +327,10 @@ public class Enemy : MonoBehaviour
     {
         return enemy;
     }
-    public float getMovespeed()
+    /*public float getMovespeed()
     {
         return enemy.moveSpeed;
-    }
+    }*/
 
     public GameObject getHealthBar()
     {
@@ -341,17 +357,36 @@ public class Enemy : MonoBehaviour
     {
         float difference = this.transform.position.z - player.transform.position.z;
         //we are on the left
-        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
+        if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
         {
             //we are below
             if (difference > 0)
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > player.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
             }
             //we are above
             else
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > player.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
             }
         }
         else
@@ -359,12 +394,32 @@ public class Enemy : MonoBehaviour
             //we are below
             if (difference > 0)
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > player.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
             }
             //we are above
             else
             {
-                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                //we are left compared to enemy
+                if (this.transform.position.x > player.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
             }
         }
     }

@@ -49,7 +49,9 @@ public class HeroAttackBuilding : MonoBehaviour
             if (timeInterval >= (1 / player.attackSpeed))
             {
                 //instantiate the fighting effect
-                Instantiate(fightingParticle, emitParticle.position, Quaternion.identity);
+                //Vector3 rot = Quaternion.identity.eulerAngles;
+                //rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
+                //Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
 
                 AttackTower.attackBuilding(tower, player.damage);
                 timeInterval = 0.0f;

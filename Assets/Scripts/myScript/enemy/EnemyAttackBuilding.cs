@@ -56,9 +56,11 @@ public class EnemyAttackBuilding : MonoBehaviour
             timeInterval += Time.deltaTime;
             if (timeInterval >= (1 / enemy.attackSpeed))
             {
-                //instantiate the fighting effect
-                Instantiate(fightingParticle, emitParticle.position, Quaternion.identity);
 
+                //instantiate the fighting effect
+                //Vector3 rot = Quaternion.identity.eulerAngles;
+                //rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
+                //Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
                 AttackTower.attackBuilding(tower, enemy.damage);
                 timeInterval = 0.0f;
             }

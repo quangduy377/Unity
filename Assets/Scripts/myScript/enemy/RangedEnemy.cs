@@ -18,8 +18,11 @@ public class RangedEnemy : MonoBehaviour
     {
         anim = gameObject.GetComponent<Animator>();
         enemy = gameObject.GetComponent<Enemy>().getHeroData();
+        //testing pow
         healthbar = gameObject.GetComponent<Enemy>().getHealthBar().GetComponent<Slider>();
         powbar = gameObject.GetComponent<Enemy>().getPowBar().GetComponent<Slider>();
+        //healthbar = gameObject.GetComponent<InstantiateHealthPowBar>().getHealthBar().GetComponent<Slider>();
+        //powbar = gameObject.GetComponent<InstantiateHealthPowBar>().getPowBar().GetComponent<Slider>();
     }
 
     // only usable for ranged enemy
