@@ -96,12 +96,6 @@ public class HeroSelection : MonoBehaviour
         }
         return false;
     }
-
-    /*public void instantiateBars()
-    {
-        Vector3 pos = Camera.main.WorldToScreenPoint(this.transform.position);
-
-    }*/
 }
 
 

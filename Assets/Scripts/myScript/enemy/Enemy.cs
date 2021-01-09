@@ -66,13 +66,11 @@ public class Enemy : MonoBehaviour
         if (type.Equals("Mickey"))
         {
             enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
-            Debug.Log("Mickey respawn: " + enemy.level);
             PlayerPrefs.SetInt("MICKEY_goldToBuy", enemy.goldToBuy);
         }
         else if (type.Equals("Ralph"))
         {
             enemy = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
-            Debug.Log("Ralph respawn: " + enemy.level);
             PlayerPrefs.SetInt("RALPH_goldToBuy", enemy.goldToBuy);
         }
         moveable = true;
@@ -92,24 +90,20 @@ public class Enemy : MonoBehaviour
         instantiateHealthPowBar();
         EnemyAllyManager.enemiesId++;
         enemy.id = EnemyAllyManager.enemiesId;
-        Debug.Log("enemy ID " + enemy.id);
         ///////////////////////
         ///TESTING disable the cube, this is a melee type
-        if (!enemy.attackMode.Equals("RANGED"))
+        /*if (!enemy.attackMode.Equals("RANGED"))
         {
             GameObject cube = GameObject.Find("Cube");
-            cube.SetActive(false);
+            //cube.SetActive(false);
+            Destroy(cube);
             Destroy(gameObject.GetComponent<RangedEnemy>());
         }
         //this is a ranged type
         else
         {
             Destroy(gameObject.GetComponent<EnemyAttackBuilding>());
-        }
-        //TESTING POW
-        //healthBar = GetComponent<InstantiateHealthPowBar>().getHealthBar();
-        //powerBar = GetComponent<InstantiateHealthPowBar>().getPowBar();
-
+        }*/
     }
     //TESTING
     public void instantiateHealthPowBar()
@@ -138,16 +132,13 @@ public class Enemy : MonoBehaviour
     {
         Vector3 vector = Camera.main.WorldToScreenPoint(this.transform.position);
         //Camera.main.
-        Debug.Log("convert to screen point x:" + vector.x + ", y:" + vector.y + ", z:" + vector.z);
         healthBar.transform.position = new Vector3(vector.x, vector.y + 29.0f, vector.z);
         powerBar.transform.position = new Vector3(vector.x, vector.y + 25.0f, vector.z);
     }
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("inside enemy.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity);
         encounteredAllies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, allyLayer);
-        Debug.Log("encountered allies length: " + encounteredAllies.Length);
         barsFollowObject();
         if (enemy.health <= 0)
         {
@@ -157,7 +148,6 @@ public class Enemy : MonoBehaviour
             anim.SetBool("dead", true);
             Animation.dead(ref anim);
             removeAllComponents();
-            Debug.Log("REMOVED ENEMY");
             return;
         }
         //TESTING, this is attacking building, no attacking hero
@@ -166,53 +156,29 @@ public class Enemy : MonoBehaviour
 
         if (enemy.attackMode.Equals("RANGED"))
         {
-            Debug.Log("skipped enemy.cs");
             return;
         }
         //testing, we have allies to attack, stop fighting building 
         if (encounteredAllies.Length > 0)
         {
-            Debug.Log("meet "+encounteredAllies.Length);
-            if (encounteredAllies.Length == 2)
-            {
-                Debug.Log("hero id encountered: " + encounteredAllies[0].gameObject.GetComponent<Hero>().getHeroData().id);
-                Debug.Log("hero id encountered: " + encounteredAllies[1].gameObject.GetComponent<Hero>().getHeroData().id);
-            }
-            //Debug.Log("meet ");
             //stop the enemy immediately
             agent.isStopped = true;
-            //GetComponent<EnemyAttackBuilding>().enabled = false;
-            Debug.Log("enemy detect enemy to fight instead of building");
         }
-        //we death
-        Debug.Log("inside Enemy.cs, enemy HP " + healthBar.GetComponent<Slider>().value);
-        Debug.Log("inside Enemy.cs, enemy POW " + powerBar.GetComponent<Slider>().value);
-
-
+       
         //if it is moving
         if (moveable)
         {
-            Debug.Log("enemy is moving");
             agent.isStopped = false;
-            Debug.Log("agent enemy: " + agent.isStopped);
             if (encounteredAllies.Length > 0)
             {
-                Debug.Log("11111 inside enemy.cs, encoutered ally name: " + encounteredAllies[0].gameObject.transform.name);
                 int id = randomId(0, encounteredAllies.Length);
-                Debug.Log("11111 randomID: " + id);
                 target = encounteredAllies[id].gameObject;
-                //Debug.Log("11111 got the target tag: " + target.transform.name);
-                //Debug.Log(target);
-                //Debug.Log("11111 inside enemy.cs: target" + target.GetComponent<Hero>());
                 dataTarget = target.GetComponent<Hero>().getHeroData();
                 if (dataTarget == null)
                 {
-                    Debug.Log("datatarget is null");
                     return;
                 }
                 moveable = false;
-                
-                
                 Animation.runToAttack(ref anim);
             }
         }
@@ -221,7 +187,6 @@ public class Enemy : MonoBehaviour
         {
             //TESTING, STOP THE OBJECT IMEDIATELY
             GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Debug.Log("enemy is attacking ally");
             agent.isStopped = true;
             //we received information about the enemy, we can now attack them
             if (target != null && dataTarget != null)
@@ -245,15 +210,9 @@ public class Enemy : MonoBehaviour
                 //if (dataTarget != null)
                 //{
                 if (dataTarget.health <= 0)
-                {
-                    Debug.Log("we just kill an enemy, tempting to get data:");
-                    Debug.Log("enemies hp: " + target.GetComponent<Hero>().getHeroData().health);
-                    //now you need to move to find another opponent
+                {             
+                  //now you need to move to find another opponent
                     moveable = true;
-
-                    Debug.Log("enemy just add " + dataTarget.goldOnDeath + " gold");
-                    Debug.Log("player DIE!!!");
-
                     Animation.attackToRun(ref anim);
                     agent.ResetPath();
                     agent.SetDestination(targetBuilding.transform.position);
@@ -264,7 +223,6 @@ public class Enemy : MonoBehaviour
             }
             else
             {
-                Debug.Log("hero is now null");
                 //that enemy no longer exists, should return
                 agent.ResetPath();
                 agent.SetDestination(targetBuilding.transform.position);
@@ -277,18 +235,13 @@ public class Enemy : MonoBehaviour
             //time to pow
             if (powerBar.GetComponent<Slider>().value >= powerBar.GetComponent<Slider>().maxValue)
             {
-                Debug.Log("now enemy POW >100, noom");
                 //AttackEnemyPlayer.Pow(ref dataTarget, enemy, target);
                 Instantiate(enemySkill, emitParticle.position, emitParticle.transform.rotation);
-
                 if (encounteredAllies.Length > 0)
                 {
-                    Debug.Log("inside enemyPOW, with encountered: " + encounteredAllies.Length);
                     for (int i = 0; i < encounteredAllies.Length; i++)
                     {
                         //deal special damage to this unit, TESTING USING ==
-
-                        //if (encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData().Equals(dataTarget))
                         if(encounteredAllies[i].gameObject==target)
                         {
                             AttackEnemyPlayer.Pow(ref dataTarget, enemy, encounteredAllies[i].gameObject);
@@ -299,9 +252,6 @@ public class Enemy : MonoBehaviour
                             //don't deal damage to our enemies !!!
                             if (encounteredAllies[i].gameObject.tag.Equals(PlayerPrefs.GetString("enemySide")))
                                 continue;
-                            //TESTING
-                            //HeroData enemy = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
-                            //AttackEnemyPlayer.PowAOE(ref dataTarget, enemy, encounteredAllies[i].gameObject);
                             HeroData aroundTarget = encounteredAllies[i].gameObject.GetComponent<Hero>().getHeroData();
                             AttackEnemyPlayer.PowAOE(ref aroundTarget, enemy, encounteredAllies[i].gameObject);
                         }
@@ -327,10 +277,7 @@ public class Enemy : MonoBehaviour
     {
         return enemy;
     }
-    /*public float getMovespeed()
-    {
-        return enemy.moveSpeed;
-    }*/
+    
 
     public GameObject getHealthBar()
     {
@@ -357,7 +304,7 @@ public class Enemy : MonoBehaviour
     {
         float difference = this.transform.position.z - player.transform.position.z;
         //we are on the left
-        if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
+        if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
         {
             //we are below
             if (difference > 0)

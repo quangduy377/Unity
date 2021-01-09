@@ -30,7 +30,6 @@ public class RangedEnemy : MonoBehaviour
     {
         if (!enemy.attackMode.Equals("RANGED"))
             return;
-        Debug.Log("inside ranged enemy, enemy hp: " + enemy.health);
         if (enemy.health <= 0)
         {
             Animation.dead(ref anim);

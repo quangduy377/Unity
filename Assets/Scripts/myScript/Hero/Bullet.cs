@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour
         //instantiate the particle
         Instantiate(bulletParticle, this.transform.position, this.transform.rotation);
         damage = JsonUtility.FromJson<BulletData>(GameLoader.Instance.bullet.text).damage;
-        Debug.Log("ranged damage:" + damage);
         attackBuilding = false;
         attackEnemy = false;
         if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
@@ -61,13 +60,10 @@ public class Bullet : MonoBehaviour
         
         if (enemy != null && attackEnemy)
         {
-            Debug.Log("enemy current HP:" + enemy.GetComponent<Enemy>().getHeroData().health);
             enemy.GetComponent<Enemy>().getHeroData().health -= damage;
             EnemyAllyManager.deductHealthBar(enemy, damage);
             EnemyAllyManager.increasePowBar(enemy, damage);
             Destroy(gameObject);
-            Debug.Log("after delete Allybullet");
-
         }
         if (building!=null && attackBuilding)
         {
@@ -82,11 +78,9 @@ public class Bullet : MonoBehaviour
         {
             attackEnemy = true;
             enemy = other.gameObject;
-            Debug.Log("cube hit the enemy");
         }
         else if (other.transform.name.Equals(targetBuilding))
         {
-            Debug.Log("inside bullet, hit the building");
             attackBuilding = true;
             building = other.gameObject;
         }

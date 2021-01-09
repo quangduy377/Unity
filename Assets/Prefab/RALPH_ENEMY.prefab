@@ -1127,6 +1127,7 @@ GameObject:
   - component: {fileID: 3250459323343339535}
   - component: {fileID: -2566894804908025243}
   - component: {fileID: 470287149067545108}
+  - component: {fileID: 3203091003432220671}
   m_Layer: 11
   m_Name: RALPH_ENEMY
   m_TagString: ENEMY
@@ -1278,6 +1279,19 @@ MonoBehaviour:
   character: Ralph
   enemySkill: {fileID: 4061194507574545251, guid: 462602247ac2b114bb35c55421df85ea,
     type: 3}
+--- !u!114 &3203091003432220671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152354068196916971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11235cac728c6814e864a48ce219de42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeForFire: {fileID: 8745550907242882569}
 --- !u!1 &6152354068196916973
 GameObject:
   m_ObjectHideFlags: 0

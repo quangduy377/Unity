@@ -21,8 +21,6 @@ public class RangedHero : MonoBehaviour
         //testing pow
         healthbar = gameObject.GetComponent<Hero>().getHealthBar().GetComponent<Slider>();
         powbar = gameObject.GetComponent<Hero>().getPowBar().GetComponent<Slider>();
-        //healthbar = gameObject.GetComponent<InstantiateHealthPowBar>().getHealthBar().GetComponent<Slider>();
-        //powbar = gameObject.GetComponent<InstantiateHealthPowBar>().getPowBar().GetComponent<Slider>();
     }
 
     // only usable for ranged hero
@@ -30,11 +28,10 @@ public class RangedHero : MonoBehaviour
     {
         if (!heroData.attackMode.Equals("RANGED"))
             return;
-        Debug.Log("inside ranged mode, hero hp:" + heroData.health);
+        Debug.Log("inside rangedHero");
         if (heroData.health <= 0)
         {
             Animation.dead(ref anim);
-            Debug.Log("hero health less than 0, in rangedHero.cs");
             Destroy(healthbar.gameObject);
             Destroy(powbar.gameObject);
             Destroy(gameObject);

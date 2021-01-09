@@ -44,7 +44,7 @@ public class Hero : MonoBehaviour
     private Collider[] encounteredEnemies;
     public LayerMask enemyLayer;
 
-    private Collider[] toBeMergedAlly;
+    //private Collider[] toBeMergedAlly;
     public LayerMask playerLayer;
 
 
@@ -59,20 +59,17 @@ public class Hero : MonoBehaviour
     public void Start()
     {
         rotated = false;
-        Debug.Log("new instatiation");
         //attacking = false;
         anim = GetComponent<Animator>();
         size = new Vector3(0.75f, 0.75f, 0.75f);
         if (character.Equals("Mickey"))
         {
             dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Mickey.text);
-            Debug.Log("Ally Mickey level:" + dataHero.level);
             PlayerPrefs.SetInt("MICKEY_goldToBuy", dataHero.goldToBuy);
         }
         else if (character.Equals("Ralph"))
         {
             dataHero = JsonUtility.FromJson<HeroData>(GameLoader.Instance.Ralph.text);
-            Debug.Log("Ally Ralph level:" + dataHero.level);
             PlayerPrefs.GetInt("RALPH_goldToBuy", dataHero.goldToBuy);
         }
         moveable = true;
@@ -90,25 +87,25 @@ public class Hero : MonoBehaviour
         }
         agent.speed = dataHero.moveSpeed;
         AttackEnemyPlayer.goToBuilding(gameObject, targetBuilding);
-        instantiateHealthPowBar(); 
+        instantiateHealthPowBar();
         EnemyAllyManager.alliesId++;
         dataHero.id = EnemyAllyManager.alliesId;
-        Debug.Log("hero ID " + dataHero.id);
         //TESTING DISABLE THE CUBE
-        if (!dataHero.attackMode.Equals("RANGED"))
+        /*if (!dataHero.attackMode.Equals("RANGED"))
         {
+            Debug.Log("inside hero.cs, destroy cube");
             GameObject cube = GameObject.Find("Cube");
-            cube.SetActive(false);
+            //cube.SetActive(false);
+            Destroy(cube);
             Destroy(gameObject.GetComponent<RangedHero>());
-        }
+        }*/
         //this is a ranged type
-        else
+        /*if(dataHero.attackMode.Equals("RANGED"))
         {
+            Debug.Log("inside hero.cs, this is ranged mode");
+
             Destroy(gameObject.GetComponent<HeroAttackBuilding>());
-        }
-        //TESTING POW
-        //healthBar = GetComponent<InstantiateHealthPowBar>().getHealthBar();
-        //powerBar = GetComponent<InstantiateHealthPowBar>().getPowBar();
+        }*/
     }
     //TESTING
     public void instantiateHealthPowBar()
@@ -140,7 +137,6 @@ public class Hero : MonoBehaviour
     {
         Vector3 vector = Camera.main.WorldToScreenPoint(this.transform.position);
         //Camera.main.
-        Debug.Log("convert to screen point x:" + vector.x + ", y:" + vector.y + ", z:" + vector.z);
         healthBar.transform.position = new Vector3(vector.x, vector.y + 29.0f, vector.z);
         powerBar.transform.position = new Vector3(vector.x, vector.y + 25.0f, vector.z);
     }
@@ -148,31 +144,25 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        //Debug.Log("inside hero.cs, rigidbody.velo = " + GetComponent<Rigidbody>().velocity.magnitude);
 
-        //Debug.Log("inside hero.cs, playerpref enemyattackingbuilding" + PlayerPrefs.GetInt("EnemyAttackingBuilding"));
         barsFollowObject();
         encounteredEnemies = Physics.OverlapBox(transform.position, new Vector3(3.0f, 3.0f, 3.0f), Quaternion.identity, enemyLayer);
 
-        Debug.Log("hero id: "+dataHero.id+" current HP: " + dataHero.health);
         if (dataHero.health <= 0)
         {
-            Debug.Log("hero hp <0 ");
             //add gold for enemy
             AddGold.addGold(dataHero.goldOnDeath, "Enemy");
             //removed = true;
-            Debug.Log("dataHero <0");
             //we are death, make it real
             Animation.dead(ref anim);
             removeAllComponents();
-            Debug.Log("REMOVED hero");
             return;
         }
 
         //this file has nothing to do with ranged attack
         if (dataHero.attackMode.Equals("RANGED"))
         {
-            Debug.Log("skipped Hero.cs");
+            Debug.Log("inside hero.cs, in RANGED");
             return;
         }
         //testing, we have enemies to attack, stop fighting building 
@@ -181,16 +171,13 @@ public class Hero : MonoBehaviour
             agent.isStopped = true;
             //GetComponent<HeroAttackBuilding>().enabled = false;
         }
-        Debug.Log("hero HP:" + dataHero.health);
 
         if (moveable)
         {
             agent.isStopped = false;
             if (encounteredEnemies.Length > 0)
             {
-                Debug.Log("inside hero.cs, encoutered enemy: " + encounteredEnemies.Length);
                 int id = randomId(0, encounteredEnemies.Length);
-                Debug.Log("inside hero.cs, randomID = " + id);
                 enemyObject = encounteredEnemies[id].gameObject;
                 dataEnemy = enemyObject.GetComponent<Enemy>().getHeroData();
                 if (dataEnemy == null)
@@ -198,10 +185,7 @@ public class Hero : MonoBehaviour
                     return;
                 }
                 moveable = false;
-                Debug.Log("got enemy, damage: " + dataEnemy.damage);
                 Animation.runToAttack(ref anim);
-          
-
             }
         }
         //attacking the enemy
@@ -212,7 +196,7 @@ public class Hero : MonoBehaviour
             //if (enemyObject != null)
             if (dataEnemy != null && enemyObject != null)
             {
-                
+
                 //face toward enemy
                 stopAndRotate(enemyObject);
 
@@ -225,7 +209,6 @@ public class Hero : MonoBehaviour
                     rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
                     //TESTING PARTICLE
                     Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
-                    Debug.Log("attacking enemy");
                     timeInterval = 0.0f;
                     AttackEnemyPlayer.attack(ref dataEnemy, dataHero, enemyObject);
                 }
@@ -233,7 +216,6 @@ public class Hero : MonoBehaviour
                 //{
                 if (dataEnemy.health <= 0)
                 {
-                    Debug.Log("attacking enemy: 0hp left");
                     //now you need to move to find another opponent
                     moveable = true;
                     //add gold collected
@@ -249,7 +231,6 @@ public class Hero : MonoBehaviour
             }
             else
             {
-                Debug.Log("enemy is now null");
                 agent.ResetPath();
                 agent.SetDestination(targetBuilding.transform.position);
                 Animation.attackToRun(ref anim);
@@ -267,7 +248,7 @@ public class Hero : MonoBehaviour
                 for (int i = 0; i < encounteredEnemies.Length; i++)
                 {
                     //deal special damage to this unit
-                    if (encounteredEnemies[i].gameObject==enemyObject)
+                    if (encounteredEnemies[i].gameObject == enemyObject)
                     {
                         AttackEnemyPlayer.Pow(ref dataEnemy, dataHero, encounteredEnemies[i].gameObject);
                     }
@@ -277,9 +258,7 @@ public class Hero : MonoBehaviour
                         //don't deal damage to our allies !!!
                         if (encounteredEnemies[i].gameObject.tag.Equals(PlayerPrefs.GetString("playerSide")))
                             continue;
-                        //TESTING
-                        //HeroData enemy = encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData();
-                        //AttackEnemyPlayer.PowAOE(ref enemy, dataHero, encounteredEnemies[i].gameObject);
+                   
                         HeroData aroundEnemy = encounteredEnemies[i].gameObject.GetComponent<Enemy>().getHeroData();
                         AttackEnemyPlayer.PowAOE(ref aroundEnemy, dataHero, encounteredEnemies[i].gameObject);
                     }
@@ -295,37 +274,9 @@ public class Hero : MonoBehaviour
         //we need to have allies spread out
         if (other.transform.tag.Equals(PlayerPrefs.GetString("playerSide")))
         {
-            Debug.Log("detect ally!!, playerPref" + PlayerPrefs.GetInt("combine"));
-
-            //must be the same type
-            if ((PlayerPrefs.GetInt("combine")) == 1 && (gameObject.GetComponent<Hero>().getHeroData().type.Equals(other.GetComponent<Hero>().getHeroData().type)))
-            {
-                Debug.Log("about to merge");
-                Debug.Log("same type");
-                int levelHero = gameObject.GetComponent<Hero>().getHeroData().level;
-                int levelDraggedHero = other.GetComponent<Hero>().getHeroData().level;
-                //only the same level can be combined
-                if (levelDraggedHero == levelHero)
-                {
-                    //first we must combine the 2 hp together
-                    dataHero.health += other.gameObject.GetComponent<Hero>().getHeroData().health;
-                    increaseAttributes();
-                    Destroy(other.gameObject);
-                    //TESTING POW
-                    Destroy(other.gameObject.GetComponent<Hero>().getHealthBar());
-                    Destroy(other.gameObject.GetComponent<Hero>().getPowBar());
-                    //Destroy(other.gameObject.GetComponent<InstantiateHealthPowBar>().getHealthBar());
-                    //Destroy(other.gameObject.GetComponent<InstantiateHealthPowBar>().getPowBar());
-                    PlayerPrefs.SetInt("combine", 0);
-                    Animation.runToMerge(ref anim);
-                }
-            }
-            else
-            {
-                float range = UnityEngine.Random.Range(-0.25f, 0.25f);
-                other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x + range
-                    , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
-            }
+            float range = UnityEngine.Random.Range(-0.25f, 0.25f);
+            other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x + range
+                , other.gameObject.transform.position.y, other.gameObject.transform.position.z + range);
         }
     }
     public HeroData getHeroData()
@@ -356,7 +307,6 @@ public class Hero : MonoBehaviour
         powerBar.transform.localScale = dataHero.level * size;
         healthBar.GetComponent<Slider>().maxValue = dataHero.health;
         healthBar.GetComponent<Slider>().value = dataHero.health;
-
         powerBar.GetComponent<Slider>().maxValue = dataHero.health / 2;
         powerBar.GetComponent<Slider>().value = 0.0f;
     }
@@ -393,7 +343,7 @@ public class Hero : MonoBehaviour
             if (difference > 0)
             {
                 //we are left compared to enemy
-                if(this.transform.position.x > enemy.transform.position.x)
+                if (this.transform.position.x > enemy.transform.position.x)
                 {
                     this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
                 }

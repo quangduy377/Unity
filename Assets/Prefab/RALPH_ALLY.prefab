@@ -1271,6 +1271,7 @@ GameObject:
   - component: {fileID: -223038708535924665}
   - component: {fileID: -2006398522792684684}
   - component: {fileID: -4379229707471484274}
+  - component: {fileID: 5670708188949989083}
   m_Layer: 10
   m_Name: RALPH_ALLY
   m_TagString: ALLY
@@ -1424,7 +1425,7 @@ MonoBehaviour:
   cloneType: {fileID: 100046, guid: 92000ce6ba974f6488d83fd8382122af, type: 3}
   allyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &-4379229707471484274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,6 +1441,19 @@ MonoBehaviour:
   character: Ralph
   heroSkill: {fileID: 4061194507574545251, guid: 462602247ac2b114bb35c55421df85ea,
     type: 3}
+--- !u!114 &5670708188949989083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7897983388995447516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11235cac728c6814e864a48ce219de42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cubeForFire: {fileID: 8047939469973385821}
 --- !u!1 &7897983388995447518
 GameObject:
   m_ObjectHideFlags: 0

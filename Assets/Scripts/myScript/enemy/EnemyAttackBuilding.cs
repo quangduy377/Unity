@@ -28,7 +28,6 @@ public class EnemyAttackBuilding : MonoBehaviour
         {
             //that means we need to find a right building
             tower = GameObject.Find("TeamRight").GetComponent<TowerHandler>();
-            Debug.Log("the tower has " + tower.getCurrentHp());
         }
         //find the left building
         else
@@ -40,27 +39,18 @@ public class EnemyAttackBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("in update, enemy attacking building");
 
         if (enemy.attackMode.Equals("RANGED"))
             return;
         if (attack)
         {
-            Debug.Log("enemy attacking building");
             //stop the enemy
             agent.isStopped = true;
-            Debug.Log("agent enemy: " + agent.isStopped);
             //make its animation
             Animation.runToAttack(ref anim);
-            Debug.Log("after anim set to attack building");
             timeInterval += Time.deltaTime;
             if (timeInterval >= (1 / enemy.attackSpeed))
             {
-
-                //instantiate the fighting effect
-                //Vector3 rot = Quaternion.identity.eulerAngles;
-                //rot = new Vector3(rot.x - 90.0f, rot.y, rot.z);
-                //Instantiate(fightingParticle, emitParticle.position, Quaternion.Euler(rot));
                 AttackTower.attackBuilding(tower, enemy.damage);
                 timeInterval = 0.0f;
             }

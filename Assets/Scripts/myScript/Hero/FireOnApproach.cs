@@ -36,6 +36,7 @@ public class FireOnApproach : MonoBehaviour
             return;*/
         if (!attackingBuilding && !attackingEnemy)
             return;
+        Debug.Log("attacking enemy in fireOnApproach");
         //we are able to fire
         hero.GetComponent<NavMeshAgent>().isStopped = true;
         timeInterval -= Time.deltaTime;
@@ -49,7 +50,7 @@ public class FireOnApproach : MonoBehaviour
         if (attackingEnemy)
         {
             //face toward enemy
-            stopAndRotate(enemy);
+            //stopAndRotate(enemy);
             if (enemy.GetComponent<Enemy>().getHeroData().health <= 0 || enemy == null)
             {
                 Animation.fireToRun(ref anim);
@@ -64,7 +65,6 @@ public class FireOnApproach : MonoBehaviour
        
         if (other.transform.tag.Equals(PlayerPrefs.GetString("enemySide")))
         {
-            Debug.Log("inside fireApproach, faced enemy");
             attackingEnemy = true;
             enemy = other.gameObject;
             Animation.fire(ref anim);
@@ -73,14 +73,13 @@ public class FireOnApproach : MonoBehaviour
         else if ((other.transform.name.Equals("BorderAttackRight")&&PlayerPrefs.GetString("playerSide").Equals("LEFT"))
             || other.transform.name.Equals("BorderAttackLeft") && PlayerPrefs.GetString("playerSide").Equals("RIGHT"))
         {
-            Debug.Log("detect border attack");
             attackingBuilding = true;
             Animation.fire(ref anim);
         }
     }
     public void stopAndRotate(GameObject enemy)
     {
-        float difference = hero.transform.position.z - enemy.transform.position.z;
+        /*float difference = hero.transform.position.z - enemy.transform.position.z;
         //we are on the left
         if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
         {
@@ -106,6 +105,73 @@ public class FireOnApproach : MonoBehaviour
             else
             {
                 hero.transform.eulerAngles = new Vector3(hero.transform.eulerAngles.x, 45.0f, hero.transform.eulerAngles.z);
+            }
+        }*/
+        float difference = this.transform.position.z - enemy.transform.position.z;
+        //we are on the left
+        if (PlayerPrefs.GetString("playerSide").Equals("LEFT"))
+        {
+            //we are below
+            if (difference > 0)
+            {
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
+            }
+            //we are above
+            else
+            {
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+            }
+        }
+        else
+        {
+            //we are below
+            if (difference > 0)
+            {
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -135.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 135.0f, this.transform.eulerAngles.z);
+            }
+            //we are above
+            else
+            {
+                //we are left compared to enemy
+                if (this.transform.position.x > enemy.transform.position.x)
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, -45.0f, this.transform.eulerAngles.z);
+                }
+                //we are right 
+                else
+                {
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
+                }
+                //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, 45.0f, this.transform.eulerAngles.z);
             }
         }
     }

@@ -7,6 +7,7 @@ public class EnemyAllyManager
 {
     public static int alliesId = 0;
     public static int enemiesId = 0;
+    
     public static void deductHealthBar(GameObject gameObj, float damage)
     {
         GameObject healthBar;

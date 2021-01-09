@@ -26,7 +26,6 @@ public class EnemyBullet : MonoBehaviour
         //instantiate the particle
         Instantiate(bulletParticle, this.transform.position, this.transform.rotation);
         damage = JsonUtility.FromJson<BulletData>(GameLoader.Instance.bullet.text).damage;
-        Debug.Log("ranged damage:" + damage);
         attackBuilding = false;
         attackAlly = false;
         if (PlayerPrefs.GetString("enemySide").Equals("LEFT"))
@@ -57,19 +56,14 @@ public class EnemyBullet : MonoBehaviour
             , gameObject.GetComponent<Rigidbody>().velocity.z);
         if (ally != null && attackAlly)
         {
-            Debug.Log("player hp hitted by enemybullet" + ally.GetComponent<Hero>().getHeroData().health);
             ally.GetComponent<Hero>().getHeroData().health -= damage;
-            Debug.Log("after deduct health from enemybullet");
             EnemyAllyManager.deductHealthBar(ally, damage);
             EnemyAllyManager.increasePowBar(ally, damage);
-            Debug.Log("after deduct healthBar and POWBAR from enemybullet");
             Destroy(gameObject);
-            Debug.Log("after delete Enemybullet");
         }
         if (building != null && attackBuilding)
         {
             AttackTower.attackBuilding(building.GetComponent<TowerHandler>(), damage);
-            Debug.Log("hitted by enemy bullet, building hp: " + building.GetComponent<TowerHandler>().getCurrentHp());
             Destroy(gameObject);
         }
     }
@@ -80,11 +74,9 @@ public class EnemyBullet : MonoBehaviour
         {
             attackAlly = true;
             ally = other.gameObject;
-            Debug.Log("cube hit ally");
         }
         else if (other.transform.name.Equals(targetBuilding))
         {
-            Debug.Log("inside enemy bullet, hit the building");
             attackBuilding = true;
             building = other.gameObject;
         }

@@ -27,7 +27,7 @@ public class AutoSpawEnemy : MonoBehaviour
     {
         currentTimeRemaining -= Time.deltaTime;
         //time to respawn
-        if (currentTimeRemaining <= 0.0f)
+        if (currentTimeRemaining <= 0.0f && !isSpawn)
         {
             //isSpawn = true;
             SpawnEnemy();
@@ -36,7 +36,6 @@ public class AutoSpawEnemy : MonoBehaviour
     }
     void SpawnEnemy()
     {
-        Debug.Log("Repawn from the " + PlayerPrefs.GetString("enemySide"));
         int idHero = (int)Random.Range(0, 2);
         //we are ENEMIES....
         if (PlayerPrefs.GetString("enemySide") == "LEFT")
@@ -54,11 +53,10 @@ public class AutoSpawEnemy : MonoBehaviour
             rotation = 90;
         }
         //MICKEY
-        if (idHero == 0)
+        /*if (idHero == 0)
         {
             if (!buySuccessfully(-PlayerPrefs.GetInt("MICKEY_goldToBuy")))
                 return;
-            Debug.Log("Mickey selected");
             GameObject mickeyClone = Instantiate(mickeyEnemyPrefab, respawn, transform.rotation) as GameObject;
             mickeyClone.GetComponent<NavMeshAgent>().speed = 5.0f;
 
@@ -66,10 +64,9 @@ public class AutoSpawEnemy : MonoBehaviour
             //assign back the name, so we make sure enemy can detect it and attack
             mickeyClone.transform.name = "ENEMY";
             mickeyClone.transform.tag = PlayerPrefs.GetString("enemySide");
-            Debug.Log("respawed Mickey");         
         }
         else
-        {
+        {*/
             if (!buySuccessfully(-PlayerPrefs.GetInt("RALPH_goldToBuy")))
                 return;
             GameObject ralphClone = Instantiate(ralphEnemyPrefab, respawn, transform.rotation) as GameObject;
@@ -78,8 +75,7 @@ public class AutoSpawEnemy : MonoBehaviour
             //since we bought a RALPh, we must deduct the money we have in the pocket
             ralphClone.transform.name = "ENEMY";
             ralphClone.tag = PlayerPrefs.GetString("enemySide");
-            Debug.Log("respawed RALPH");
-        }
+        //}
     }
     public bool buySuccessfully(int money)
     {

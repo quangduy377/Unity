@@ -8,9 +8,11 @@ public class DestroyParticle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        particle = GetComponent<ParticleSystem>();
+        while (particle==null)
+        {
+            particle = GetComponent<ParticleSystem>();
+        }
     }
-
     // Update is called once per frame
     void Update()
     {

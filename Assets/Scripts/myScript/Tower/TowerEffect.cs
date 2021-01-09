@@ -18,9 +18,11 @@ public class TowerEffect : MonoBehaviour
     private float towerHp;
     private float towerCurrentHp;
     // Start is called before the first frame update
-    IEnumerator Start()
+    void Start()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
+        while (GetComponent<TowerHandler>().getTowerData()==null)
+        {}
         towerHp = GetComponent<TowerHandler>().getTowerData().health;
         //devide the health into 4 sections
         firstFragment = towerHp / 4;

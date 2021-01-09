@@ -10,9 +10,6 @@ public class TowerHandler : MonoBehaviour
     public string team;
 
     public GameObject healthBar;
-    /// ///////////////////////NEW
-
-
 
     void Start()
     {

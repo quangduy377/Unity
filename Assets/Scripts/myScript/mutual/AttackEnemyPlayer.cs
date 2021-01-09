@@ -11,9 +11,6 @@ public class AttackEnemyPlayer
         Vector3 destination = new Vector3(targetBuilding.transform.position.x, player.transform.position.y, player.transform.position.z);
         player.GetComponent<NavMeshAgent>().SetDestination(destination);
     }
-
-    
-
     public static void findTargetAttack(GameObject player,GameObject targetBuilding, GameObject[] enemies, string tag)
     {
         int randomId = -10;

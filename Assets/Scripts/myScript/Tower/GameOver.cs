@@ -59,9 +59,6 @@ public class GameOver : MonoBehaviour
             //TESTING powbar
             Destroy(players[i].GetComponent<Hero>().getHealthBar().gameObject);
             Destroy(players[i].GetComponent<Hero>().getPowBar().gameObject);
-
-            //Destroy(players[i].GetComponent<InstantiateHealthPowBar>().getHealthBar().gameObject);
-            //Destroy(players[i].GetComponent<InstantiateHealthPowBar>().getPowBar().gameObject);
             Destroy(players[i]);
         }
         for (int i = 0; i < enemies.Length; i++)
@@ -69,8 +66,6 @@ public class GameOver : MonoBehaviour
             //TESTING powbar
             Destroy(enemies[i].GetComponent<Enemy>().getHealthBar().gameObject);
             Destroy(enemies[i].GetComponent<Enemy>().getPowBar().gameObject);
-            //Destroy(enemies[i].GetComponent<InstantiateHealthPowBar>().getHealthBar().gameObject);
-            //Destroy(enemies[i].GetComponent<InstantiateHealthPowBar>().getPowBar().gameObject);
             Destroy(enemies[i]);
         }
     }
