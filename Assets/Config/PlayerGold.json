@@ -1,5 +1,5 @@
 {
-  "basicGold":"100",
-  "goldOnSecond":"5",
-  "type": "PLAYER"
+  "type": "Player",
+  "basicGold": "1000",
+  "goldOnSecond": "1"
 }
