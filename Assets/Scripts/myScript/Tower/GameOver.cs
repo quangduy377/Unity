@@ -11,6 +11,18 @@ public class GameOver : MonoBehaviour
 
     private TowerHandler[] towers;
     private bool destroyAll;
+
+    //particle effects
+    public GameObject fireWork_1;
+    public GameObject fireWork_2;
+    public GameObject fireWork_3;
+
+    public Transform placeHolderFW_1;
+    public Transform placeHolderFW_2;
+    public Transform placeHolderFW_3;
+    public GameObject weather;
+
+    public bool allFire = false;
     void Start()
     {
         destroyAll = false;
@@ -26,12 +38,22 @@ public class GameOver : MonoBehaviour
         {
             text.GetComponent<Text>().text = "YOU LOST";
             removeAllObject();
+            //automatically move to the menu screen after 4 seconds
+            StartCoroutine(loadMenu());
         }
         //enemy lost
         else if(Lost(PlayerPrefs.GetString("enemySide")))
         {
             text.GetComponent<Text>().text = "YOU WON";
+            image.SetActive(false);
+            if (!allFire)
+            {
+                allFire = true;
+                Destroy(weather);
+                StartCoroutine(fireWork(fireWork_1, placeHolderFW_1, fireWork_2, placeHolderFW_2, fireWork_3, placeHolderFW_3));
+            }
             removeAllObject();
+            StartCoroutine(loadMenu());
         }
     }
     bool Lost(string team)
@@ -68,5 +90,23 @@ public class GameOver : MonoBehaviour
             Destroy(enemies[i].GetComponent<Enemy>().getPowBar().gameObject);
             Destroy(enemies[i]);
         }
+    }
+
+    IEnumerator loadMenu()
+    {
+        yield return new WaitForSeconds(4.0f);
+        Application.LoadLevel("intro");
+    }
+
+    IEnumerator fireWork(GameObject fireWork_1, Transform placeHolder1,
+        GameObject fireWork_2, Transform placeHolder2,
+        GameObject fireWork_3, Transform placeHolder3)
+    {
+        Instantiate(fireWork_1,placeHolder1.position,Quaternion.identity);
+        yield return new WaitForSeconds(1.0f);
+        Instantiate(fireWork_2, placeHolder2.position, Quaternion.identity);
+        yield return new WaitForSeconds(1.0f);
+        Instantiate(fireWork_3, placeHolder3.position, Quaternion.identity);
+
     }
 }

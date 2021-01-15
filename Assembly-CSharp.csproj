@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ReadyText.cs" />
     <Compile Include="Assets\Run.cs" />
     <Compile Include="Assets\Scripts\Core\Utils\Singleton\ApiSingleton.cs" />
     <Compile Include="Assets\Scripts\Core\Utils\Singleton\MonoSingleton.cs" />
@@ -83,6 +84,8 @@
     <Compile Include="Assets\Scripts\myScript\Hero\drag.cs" />
     <Compile Include="Assets\Scripts\myScript\HeroData.cs" />
     <Compile Include="Assets\Scripts\myScript\HeroSelection\HeroSelection.cs" />
+    <Compile Include="Assets\Scripts\myScript\LoadScene\Pause.cs" />
+    <Compile Include="Assets\Scripts\myScript\LoadScene\SceneManager.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\LoadTeamSide.cs" />
     <Compile Include="Assets\Scripts\myScript\Team Config\TeamConfig.cs" />
     <Compile Include="Assets\Scripts\myScript\Tower\FireManager.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Assets\Scripts\myScript\mutual\PowData.cs" />
     <Compile Include="Assets\Scripts\myScript\mutual\RemoveScripts.cs" />
     <Compile Include="Assets\Scripts\myScript\test.cs" />
+    <Compile Include="Assets\Weather.cs" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_AlphaBlend.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Additive.shader" />
     <None Include="Assets\Media\ArtistFolder\LFS\Shaders\PARTICLE_Multiply.shader" />

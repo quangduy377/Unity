@@ -3,7 +3,7 @@
   "health": "300",
   "damage": "20",
   "armor": "5",
-  "attackMode": "MELEE",
+  "attackMode": "RANGED",
   "attackSpeed": "2.0f",
   "moveSpeed": "2.0f",
   "goldOnDeath": "20",
