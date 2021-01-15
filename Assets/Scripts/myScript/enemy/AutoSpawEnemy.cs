@@ -17,7 +17,7 @@ public class AutoSpawEnemy : MonoBehaviour
     public GameObject ralphEnemyPrefab;
     void Start()
     {
-        timeCount = 2000.0f;
+        timeCount = 2.0f;
         currentTimeRemaining = timeCount;
     }
 
